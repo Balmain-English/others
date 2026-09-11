@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B1 English Grammar Self-Assessment</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg-slate: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --success: #16a34a;
+      --success-bg: #f0fdf4;
+      --error: #dc2626;
+      --error-bg: #fef2f2;
+      --accent: #d97706;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-slate);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 780px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 36px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 28px;
+      font-size: 0.98rem;
+    }
+
+    .instruction-box {
+      background-color: #eff6ff;
+      border-left: 4px solid var(--primary);
+      padding: 20px;
+      border-radius: 6px;
+      margin: 24px 0;
+    }
+
+    .instruction-box h2 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #1e40af;
+      font-weight: 600;
+    }
+
+    .instruction-box ul {
+      list-style-type: disc;
+      margin-left: 20px;
+      line-height: 1.65;
+      font-size: 0.95rem;
+      color: #1e3a8a;
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .question-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .sentence-text {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #0f172a;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .choice-btn {
+      background: white;
+      border: 2px solid var(--border-color);
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-main);
+    }
+
+    .choice-btn:hover {
+      border-color: var(--primary);
+      background-color: #f0f7ff;
+    }
+
+    .choice-btn.selected-correct {
+      background-color: var(--success-bg);
+      border-color: var(--success);
+      color: #14532d;
+    }
+
+    .choice-btn.selected-incorrect {
+      background-color: var(--error-bg);
+      border-color: var(--error);
+      color: #7f1d1d;
+    }
+
+    .wager-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border-color);
+      font-size: 0.9rem;
+    }
+
+    .wager-label {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .wager-options {
+      display: flex;
+      gap: 8px;
+    }
+
+    .wager-btn {
+      background: white;
+      border: 1px solid var(--border-color);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: all 0.15s ease;
+    }
+
+    .wager-btn:hover {
+      border-color: var(--text-main);
+    }
+
+    .wager-btn.selected {
+      background-color: var(--text-main);
+      color: white;
+      border-color: var(--text-main);
+    }
+
+    .results-band {
+      text-align: center;
+      padding: 28px;
+      border-radius: 10px;
+      margin-bottom: 28px;
+    }
+
+    .feedback-item {
+      padding: 18px;
+      border-radius: 8px;
+      border-left: 4px solid var(--border-color);
+      margin-bottom: 14px;
+      background: #f8fafc;
+    }
+
+    .feedback-item.correct {
+      border-left-color: var(--success);
+      background-color: var(--success-bg);
+    }
+
+    .feedback-item.wrong {
+      border-left-color: var(--error);
+      background-color: var(--error-bg);
+    }
+
+    .hidden { display: none !important; }
+
+    .error-msg {
+      color: var(--error);
+      text-align: center;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .card { padding: 20px; }
+      .options-grid { grid-template-columns: 1fr; }
+      .wager-section { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- LANDING PAGE SCREEN -->
+  <div id="landing-screen" class="card">
+    <h1>B1 English Grammar Self-Assessment</h1>
+    <p class="subtitle">Evaluate your understanding of intermediate B1 English grammar in daily life and work situations.</p>
+
+    <div class="instruction-box">
+      <h2>Assessment Structure & Rules</h2>
+      <ul>
+        <li>You will review <strong>20 sentences</strong> (40% work context and 60% daily life context).</li>
+        <li>Determine whether each sentence is <strong>Grammatically Correct</strong> or contains a <strong>Grammar Error</strong>.</li>
+        <li>Choose a confidence wager for each item based on your certainty:
+          <ul>
+            <li><strong>1 Point:</strong> Low certainty or educated guess.</li>
+            <li><strong>2 Points:</strong> Moderate certainty.</li>
+            <li><strong>3 Points:</strong> High certainty.</li>
+          </ul>
+        </li>
+        <li><strong>Scoring:</strong> Correct answers add your wagered points (+1 to +3). Incorrect answers deduct your wagered points (-1 to -3).</li>
+      </ul>
+    </div>
+
+    <button class="btn" onclick="startTest()">Start Assessment Now</button>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="quiz-screen" class="hidden">
+    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="font-size: 1.3rem; font-weight: 700;">B1 Grammar Challenge</h2>
+      <span id="progress-indicator" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">20 Questions</span>
+    </div>
+
+    <div id="questions-container"></div>
+    <div id="validation-error" class="error-msg hidden">Please evaluate all 20 sentences before submitting.</div>
+    <button class="btn" onclick="submitQuiz()">Submit Assessment</button>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div id="results-screen" class="hidden">
+    <div class="card">
+      <h1>Performance Summary</h1>
+      <p class="subtitle">Review your score and read the detailed grammar explanations below.</p>
+      
+      <div id="score-band" class="results-band">
+        <h2 id="final-score-display" style="font-size: 2.5rem; margin-bottom: 6px; font-weight: 800;">0 Points</h2>
+        <h3 id="band-title" style="margin-bottom: 10px; font-size: 1.25rem;">Band Title</h3>
+        <p id="band-desc" style="font-size: 0.98rem; line-height: 1.6;"></p>
+      </div>
+
+      <button class="btn" onclick="restartTest()" style="margin-bottom: 28px;">Take Assessment Again (Random 20 Set)</button>
+
+      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 6px;">Detailed Sentence Feedback</h3>
+      <p class="subtitle" style="text-align: left; margin-bottom: 20px;">Explanations for all evaluated items are provided below.</p>
+      <div id="feedback-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// 120 RIGOROUSLY VALIDATED B1 GRAMMAR QUESTIONS (STRICTLY B1 VOCABULARY | 40% WORK [48 ITEMS], 60% DAILY [72 ITEMS])
+const questionPool = [
+  // 1. Nouns, Quantifiers & Uncountable Nouns (5 Work / 7 Daily)
+  { text: "I need to buy some new furniture for our office meeting room.", correct: true, explanation: "Correct. 'Furniture' is an uncountable noun and does not take plural -s.", category: "work" },
+  { text: "Can you give me some advices about applying for the manager position?", correct: false, explanation: "Incorrect. 'Advice' is uncountable; use 'some advice' or 'a piece of advice'.", category: "work" },
+  { text: "There is too much traffic on my way to work every morning.", correct: true, explanation: "Correct. 'Traffic' is uncountable, requiring singular 'is' and 'much'.", category: "work" },
+  { text: "She has much responsibilities in her new job at the company.", correct: false, explanation: "Incorrect. 'Responsibilities' is countable plural; use 'many' or 'a lot of'.", category: "work" },
+  { text: "He gave me a useful piece of information about the new contract.", correct: true, explanation: "Correct usage of 'piece of information' for an uncountable noun.", category: "work" },
+  { text: "I am going to buy some furnitures for my bedroom.", correct: false, explanation: "Incorrect. Use 'some furniture' without plural 's'.", category: "daily" },
+  { text: "Can you give me some advice about studying for the driving test?", correct: true, explanation: "Correct. 'Advice' is correctly used as an uncountable noun.", category: "daily" },
+  { text: "There is many people waiting at the bus stop.", correct: false, explanation: "Incorrect. 'People' is a plural countable noun; use 'There are many people'.", category: "daily" },
+  { text: "There are many people waiting in line for the cinema.", correct: true, explanation: "Correct plural agreement with countable noun 'people'.", category: "daily" },
+  { text: "How many luggage are you taking on your holiday?", correct: false, explanation: "Incorrect. 'Luggage' is uncountable; ask 'How much luggage' or 'How many bags'.", category: "daily" },
+  { text: "I don't have much time to finish my shopping today.", correct: true, explanation: "Correct quantifier 'much' with uncountable noun 'time'.", category: "daily" },
+  { text: "We need a lot of information before we book the hotel.", correct: true, explanation: "Correct usage of 'a lot of' with uncountable noun 'information'.", category: "daily" },
+
+  // 2. Verb Patterns: Gerunds vs. Infinitives (5 Work / 7 Daily)
+  { text: "I enjoy working on team projects with my colleagues.", correct: true, explanation: "Correct. The verb 'enjoy' is followed by a gerund (-ing).", category: "work" },
+  { text: "I am looking forward to meeting the new client tomorrow.", correct: true, explanation: "Correct. The phrase 'look forward to' takes a gerund (-ing).", category: "work" },
+  { text: "My boss made me stay late to complete the sales report.", correct: true, explanation: "Correct. Causative 'make' is followed by a base verb ('made me stay').", category: "work" },
+  { text: "She made me to wait for twenty minutes before the job interview.", correct: false, explanation: "Incorrect. Do not use 'to' after 'make' in active causative ('made me wait').", category: "work" },
+  { text: "The company agreed to increase the staff salaries next year.", correct: true, explanation: "Correct. 'Agree' is followed by an infinitive with 'to'.", category: "work" },
+  { text: "I enjoy to read books in my bedroom before sleeping.", correct: false, explanation: "Incorrect. 'Enjoy' takes a gerund ('enjoy reading'), not an infinitive.", category: "daily" },
+  { text: "I am looking forward to see my friends at the weekend.", correct: false, explanation: "Incorrect. 'Look forward to' requires a gerund ('looking forward to seeing').", category: "daily" },
+  { text: "He avoids driving during bad weather whenever possible.", correct: true, explanation: "Correct. The verb 'avoid' is followed by a gerund (-ing).", category: "daily" },
+  { text: "He avoided to answer my direct question about the party.", correct: false, explanation: "Incorrect. 'Avoid' takes a gerund ('avoided answering').", category: "daily" },
+  { text: "He refused to accept the invitation to the dinner.", correct: true, explanation: "Correct. 'Refuse' is followed by an infinitive with 'to'.", category: "daily" },
+  { text: "I suggested watching a comedy film at the cinema.", correct: true, explanation: "Correct verb pattern: 'suggest' + gerund (-ing).", category: "daily" },
+  { text: "She promised to call me as soon as she arrives home.", correct: true, explanation: "Correct. 'Promise' takes an infinitive with 'to'.", category: "daily" },
+
+  // 3. Adjectives & Prepositional Collocations (5 Work / 7 Daily)
+  { text: "She is very good at explaining difficult ideas to customers.", correct: true, explanation: "Correct. Pattern is 'good at' followed by an -ing verb.", category: "work" },
+  { text: "My supervisor explained me the new safety rules.", correct: false, explanation: "Incorrect. Say 'explained the new safety rules to me'.", category: "work" },
+  { text: "Our success depends on the quality of our services.", correct: true, explanation: "Correct verb + preposition collocation ('depend on').", category: "work" },
+  { text: "He is interested in taking a course in computer skills.", correct: true, explanation: "Correct prepositional pattern ('interested in' + gerund).", category: "work" },
+  { text: "He apologized for arriving late to the team meeting.", correct: true, explanation: "Correct pattern: 'apologize for' + gerund.", category: "work" },
+  { text: "She is very good in playing the guitar.", correct: false, explanation: "Incorrect. Express ability using 'good at' ('good at playing').", category: "daily" },
+  { text: "My teacher explained the grammar rule to the students.", correct: true, explanation: "Correct syntax: 'explain something to someone'.", category: "daily" },
+  { text: "I am interesting in learning how to cook Italian food.", correct: false, explanation: "Incorrect adjective. Use 'interested in' to express feeling.", category: "daily" },
+  { text: "We arrived at the train station ten minutes before departure.", correct: true, explanation: "Correct preposition ('arrive at' a building or location).", category: "daily" },
+  { text: "They arrived to the airport two hours before the flight.", correct: false, explanation: "Incorrect preposition. Use 'arrived at the airport'.", category: "daily" },
+  { text: "My parents are proud of my younger sister's success.", correct: true, explanation: "Correct adjective + preposition pattern ('proud of').", category: "daily" },
+  { text: "This smartphone is similar to the model I bought last year.", correct: true, explanation: "Correct preposition ('similar to').", category: "daily" },
+
+  // 4. -ed/-ing Adjectives & Comparatives/Superlatives (5 Work / 7 Daily)
+  { text: "I felt very bored during the long presentation yesterday.", correct: true, explanation: "Correct. '-ed' adjectives describe feelings experienced by a person.", category: "work" },
+  { text: "The new office software is much easier to use than the old program.", correct: true, explanation: "Correct comparative form with modifier 'much'.", category: "work" },
+  { text: "Our company results were worse than expected last month.", correct: true, explanation: "Correct irregular comparative of 'bad' ('worse').", category: "work" },
+  { text: "He works much more faster than the other team members.", correct: false, explanation: "Incorrect double comparative. Say 'much faster'.", category: "work" },
+  { text: "The new manager is as experienced as the previous manager.", correct: true, explanation: "Correct equality comparison ('as... as').", category: "work" },
+  { text: "I am boring when I stay at home all day with nothing to do.", correct: false, explanation: "Incorrect context. To describe how you feel, say 'I am bored'.", category: "daily" },
+  { text: "The film about nature on television last night was fascinating.", correct: true, explanation: "Correct. '-ing' adjectives describe the characteristic of a thing/event.", category: "daily" },
+  { text: "His explanation of the route was very confused and hard to follow.", correct: false, explanation: "Incorrect. To describe a confusing explanation, use 'confusing'.", category: "daily" },
+  { text: "This hotel room is more cheaper than the holiday apartment.", correct: false, explanation: "Incorrect double comparative. Use 'cheaper' or 'much cheaper'.", category: "daily" },
+  { text: "My exam results were badder than my brother's results.", correct: false, explanation: "Incorrect irregular comparative. The comparative of 'bad' is 'worse'.", category: "daily" },
+  { text: "This is the most comfortable sofa in the living room.", correct: true, explanation: "Correct superlative form for long adjectives.", category: "daily" },
+  { text: "My current apartment is less noisy than my previous apartment.", correct: true, explanation: "Correct comparative of lower degree ('less... than').", category: "daily" },
+
+  // 5. Present Perfect vs. Past Simple & Continuous (5 Work / 7 Daily)
+  { text: "I have worked for this company since 2018.", correct: true, explanation: "Correct Present Perfect for an action starting in the past and continuing now.", category: "work" },
+  { text: "We sent the updated project plan two days ago.", correct: true, explanation: "Correct Simple Past used with time marker 'ago'.", category: "work" },
+  { text: "She has already checked all the customer emails this morning.", correct: true, explanation: "Correct usage of Present Perfect with 'already'.", category: "work" },
+  { text: "Did you ever manage a team in your previous job?", correct: false, explanation: "Incorrect tense for unspecified life experience. Ask 'Have you ever managed...'", category: "work" },
+  { text: "We have finished the quarterly audit two days ago.", correct: false, explanation: "Incorrect. Time marker 'ago' requires Simple Past ('We finished').", category: "work" },
+  { text: "I have been living in this town since five years.", correct: false, explanation: "Incorrect preposition of time. Use 'for five years' with durations.", category: "daily" },
+  { text: "I went to Spain for a family holiday last summer.", correct: true, explanation: "Correct Simple Past with a specified past time ('last summer').", category: "daily" },
+  { text: "I have visited my grandparents last Sunday.", correct: false, explanation: "Incorrect. Specific past time ('last Sunday') requires Simple Past ('I visited').", category: "daily" },
+  { text: "He didn't see the warning sign on the street.", correct: true, explanation: "Correct Simple Past negative auxiliary ('didn't see').", category: "daily" },
+  { text: "I didn't saw my friends at the shopping mall yesterday.", correct: false, explanation: "Incorrect base verb after auxiliary 'didn't' ('didn't see').", category: "daily" },
+  { text: "While I was studying for my exam, the phone rang.", correct: true, explanation: "Correct combination of Past Continuous and Simple Past.", category: "daily" },
+  { text: "They were watching television when the power went off.", correct: true, explanation: "Correct usage of Past Continuous interrupted by Simple Past.", category: "daily" },
+
+  // 6. Modals & Semi-Modals (5 Work / 7 Daily)
+  { text: "You must wear an identification badge inside the building.", correct: true, explanation: "Correct modal verb structure ('must wear').", category: "work" },
+  { text: "You don't have to attend the training if you are busy with clients.", correct: true, explanation: "Correct expression of lack of obligation.", category: "work" },
+  { text: "You should to check the contract details before sending it.", correct: false, explanation: "Incorrect. Modal 'should' takes a bare infinitive ('should check').", category: "work" },
+  { text: "Employees mustn't share their computer passwords with anyone.", correct: true, explanation: "Correct expression of prohibition.", category: "work" },
+  { text: "You had better contact the IT department immediately.", correct: true, explanation: "Correct usage of 'had better' + bare infinitive.", category: "work" },
+  { text: "I must to complete my homework before I watch television.", correct: false, explanation: "Incorrect. Modal verb 'must' is followed directly by a base verb without 'to'.", category: "daily" },
+  { text: "You should drink more water after exercising in the heat.", correct: true, explanation: "Correct advisory modal form ('should drink').", category: "daily" },
+  { text: "We don't need to buy entry tickets because the museum is free today.", correct: true, explanation: "Correct expression of lack of necessity.", category: "daily" },
+  { text: "He can't drive a car because he doesn't have a driver's license.", correct: true, explanation: "Correct modal expression of inability.", category: "daily" },
+  { text: "She doesn't can come to the party tonight.", correct: false, explanation: "Incorrect structure. Negative of 'can' is 'cannot' or 'can't'.", category: "daily" },
+  { text: "May I borrow your pen for a moment?", correct: true, explanation: "Correct polite permission request with 'May'.", category: "daily" },
+  { text: "You ought to discuss this issue with your doctor.", correct: true, explanation: "Correct semi-modal structure ('ought to').", category: "daily" },
+
+  // 7. Conditionals (First, Second, Zero) (5 Work / 7 Daily)
+  { text: "If we reduce the price, more clients will order our products.", correct: true, explanation: "Correct First Conditional (If + present simple, will + base verb).", category: "work" },
+  { text: "If I would have a bigger budget, I would hire another assistant.", correct: false, explanation: "Incorrect. Do not use 'would' in the condition clause ('If I had...').", category: "work" },
+  { text: "If she study regularly, she will pass the qualification exam.", correct: false, explanation: "Incorrect third-person agreement in 'if' clause ('If she studies...').", category: "work" },
+  { text: "If I were in your position, I would talk to the manager directly.", correct: true, explanation: "Correct Second Conditional for giving advice.", category: "work" },
+  { text: "Unless you sign the agreement today, we cannot start the project.", correct: true, explanation: "Correct usage of 'unless' (meaning 'if you do not').", category: "work" },
+  { text: "If the train arrives on time, we will reach the museum by noon.", correct: true, explanation: "Correct First Conditional syntax.", category: "daily" },
+  { text: "What would you do if you lost your passport in another country?", correct: true, explanation: "Correct Second Conditional structure for hypothetical situations.", category: "daily" },
+  { text: "If it will rain tomorrow, we will stay at home.", correct: false, explanation: "Incorrect future tense in conditional clause ('If it rains...').", category: "daily" },
+  { text: "If they offered me a free ticket, I would accept it happily.", correct: true, explanation: "Correct Second Conditional sentence.", category: "daily" },
+  { text: "When you heat water to 100 degrees, it boils.", correct: true, explanation: "Correct Zero Conditional for general scientific facts.", category: "daily" },
+  { text: "If I knew her email address, I would write to her now.", correct: true, explanation: "Correct Second Conditional structure.", category: "daily" },
+  { text: "If we don't leave now, we miss the last bus home.", correct: false, explanation: "Incorrect main clause tense. Use 'we will miss'.", category: "daily" },
+
+  // 8. Passive Voice (5 Work / 7 Daily)
+  { text: "The company financial report is checked by an independent accountant.", correct: true, explanation: "Correct Present Simple passive ('is checked').", category: "work" },
+  { text: "The new computer system was test by our IT team yesterday.", correct: false, explanation: "Incorrect passive form. Use past participle ('was tested').", category: "work" },
+  { text: "Important announcements are sent to all staff members by email.", correct: true, explanation: "Correct Present Simple passive construction.", category: "work" },
+  { text: "The business letter was wrote by our senior manager.", correct: false, explanation: "Incorrect irregular past participle. Use 'was written'.", category: "work" },
+  { text: "All company vehicles are inspected every year for safety.", correct: true, explanation: "Correct Present Simple passive.", category: "work" },
+  { text: "The old bridge was built by a famous engineer in 1920.", correct: true, explanation: "Correct Past Simple passive ('was built').", category: "daily" },
+  { text: "The calculation error was discover during the math lesson.", correct: false, explanation: "Incorrect passive form. Requires past participle ('was discovered').", category: "daily" },
+  { text: "English is spoken in many international hotels worldwide.", correct: true, explanation: "Correct Present Simple passive statement.", category: "daily" },
+  { text: "The main door was locked by the owner at ten o'clock.", correct: true, explanation: "Correct Past Simple passive.", category: "daily" },
+  { text: "These delicious cakes are baked every morning by my grandmother.", correct: true, explanation: "Correct Present Simple passive sentence.", category: "daily" },
+  { text: "The stolen bicycle was find by the police yesterday.", correct: false, explanation: "Incorrect past participle. Use 'was found'.", category: "daily" },
+  { text: "This famous book was written by a local author.", correct: true, explanation: "Correct Past Simple passive construction.", category: "daily" },
+
+  // 9. Relative Clauses (5 Work / 7 Daily)
+  { text: "The technician who repaired my office computer was very efficient.", correct: true, explanation: "Correct relative pronoun 'who' referring to a person.", category: "work" },
+  { text: "The job applicant which interviewed earlier had excellent qualifications.", correct: false, explanation: "Incorrect relative pronoun. Use 'who' or 'that' for human candidates.", category: "work" },
+  { text: "This is the building where our head office is located.", correct: true, explanation: "Correct relative adverb 'where' for places.", category: "work" },
+  { text: "The manager whose team reached the goal received a bonus.", correct: true, explanation: "Correct possessive relative pronoun 'whose'.", category: "work" },
+  { text: "The strategy, that was suggested by the consultant, helped the firm.", correct: false, explanation: "Incorrect pronoun. Non-defining relative clauses require 'which'.", category: "work" },
+  { text: "The laptop who I borrowed from my friend has a broken screen.", correct: false, explanation: "Incorrect relative pronoun. Use 'which' or 'that' for objects.", category: "daily" },
+  { text: "The book that you gave me for my birthday was very interesting.", correct: true, explanation: "Correct relative pronoun 'that' for things.", category: "daily" },
+  { text: "I visited the town where my mother was born.", correct: true, explanation: "Correct relative adverb 'where' for locations.", category: "daily" },
+  { text: "The man whose car was stolen called the police immediately.", correct: true, explanation: "Correct usage of possessive 'whose'.", category: "daily" },
+  { text: "The hotel in where we stayed during our trip was very clean.", correct: false, explanation: "Incorrect combination. Use 'in which' or simply 'where'.", category: "daily" },
+  { text: "She recommended a restaurant that serves fresh local dishes.", correct: true, explanation: "Correct relative clause referring to a place or thing.", category: "daily" },
+  { text: "The neighbor who lives next door is very helpful.", correct: true, explanation: "Correct relative pronoun 'who' for people.", category: "daily" },
+
+  // 10. Reported Speech, Indirect Questions & Connectors (3 Work / 9 Daily)
+  { text: "He told me that the meeting had been moved to three o'clock.", correct: true, explanation: "Correct reported speech structure with tense backshift.", category: "work" },
+  { text: "He told to me that he would be absent from the project presentation.", correct: false, explanation: "Incorrect syntax. Verb 'tell' takes a direct object without 'to' ('told me').", category: "work" },
+  { text: "Although the schedule was tight, we completed the project on time.", correct: true, explanation: "Correct usage of subordinate conjunction 'Although'.", category: "work" },
+  { text: "Could you tell me what time the train station opens?", correct: true, explanation: "Correct indirect question word order (subject before verb).", category: "daily" },
+  { text: "She asked me where was the main entrance to the cinema.", correct: false, explanation: "Incorrect indirect question order ('where the main entrance was').", category: "daily" },
+  { text: "She asked if I had completed my homework assignment.", correct: true, explanation: "Correct reported question using 'if'.", category: "daily" },
+  { text: "Do you know where does the language teacher live?", correct: false, explanation: "Incorrect word order in indirect question ('where the teacher lives').", category: "daily" },
+  { text: "They said that they were satisfied with their hotel accommodation.", correct: true, explanation: "Correct reported speech sentence.", category: "daily" },
+  { text: "Despite of the heavy rain, we went for a walk in the countryside.", correct: false, explanation: "Incorrect preposition combination. Use 'Despite' or 'In spite of'.", category: "daily" },
+  { text: "In spite of his lack of practice, he passed his driving test easily.", correct: true, explanation: "Correct usage of 'In spite of' + noun phrase.", category: "daily" },
+  { text: "We hired a taxi in order to arrive at the concert on time.", correct: true, explanation: "Correct purpose connector ('in order to').", category: "daily" },
+  { text: "Because the weather was bad, so we canceled the picnic.", correct: false, explanation: "Incorrect double connector. Remove 'so' when starting with 'Because'.", category: "daily" }
+];
+
+let selectedQuestions = [];
+let userAnswers = {};
+
+function fisherYatesShuffle(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+function startTest() {
+  document.getElementById('landing-screen').classList.add('hidden');
+  document.getElementById('quiz-screen').classList.remove('hidden');
+  
+  // Select strictly 8 work questions (40%) and 12 daily questions (60%) from pool
+  const workPool = fisherYatesShuffle(questionPool.filter(q => q.category === 'work')).slice(0, 8);
+  const dailyPool = fisherYatesShuffle(questionPool.filter(q => q.category === 'daily')).slice(0, 12);
+  
+  selectedQuestions = fisherYatesShuffle([...workPool, ...dailyPool]);
+  userAnswers = {};
+
+  renderQuestions();
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questions-container');
+  container.innerHTML = '';
+
+  selectedQuestions.forEach((q, index) => {
+    userAnswers[index] = { choice: null, wager: 1 };
+
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.innerHTML = `
+      <div class="question-header">
+        <span>SENTENCE EVALUATION ${index + 1} OF 20</span>
+        <span style="color: var(--primary);">${q.category === 'work' ? 'Work Context' : 'Daily Life Context'}</span>
+      </div>
+      <div class="sentence-text">"${q.text}"</div>
+      
+      <div class="options-grid">
+        <button type="button" class="choice-btn" id="btn-corr-${index}" onclick="selectChoice(${index}, true)">
+          ✓ Grammatically Correct
+        </button>
+        <button type="button" class="choice-btn" id="btn-incorr-${index}" onclick="selectChoice(${index}, false)">
+          ✗ Contains Error
+        </button>
+      </div>
+
+      <div class="wager-section">
+        <span class="wager-label">Confidence Wager:</span>
+        <div class="wager-options">
+          <button type="button" class="wager-btn selected" id="wager-${index}-1" onclick="selectWager(${index}, 1)">1 Pt (Low)</button>
+          <button type="button" class="wager-btn" id="wager-${index}-2" onclick="selectWager(${index}, 2)">2 Pts (Med)</button>
+          <button type="button" class="wager-btn" id="wager-${index}-3" onclick="selectWager(${index}, 3)">3 Pts (High)</button>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function selectChoice(qIndex, choice) {
+  userAnswers[qIndex].choice = choice;
+  
+  const corrBtn = document.getElementById(`btn-corr-${qIndex}`);
+  const incorrBtn = document.getElementById(`btn-incorr-${qIndex}`);
+
+  corrBtn.className = 'choice-btn' + (choice === true ? ' selected-correct' : '');
+  incorrBtn.className = 'choice-btn' + (choice === false ? ' selected-incorrect' : '');
+
+  document.getElementById('validation-error').classList.add('hidden');
+}
+
+function selectWager(qIndex, wager) {
+  userAnswers[qIndex].wager = wager;
+
+  [1, 2, 3].forEach(w => {
+    const btn = document.getElementById(`wager-${qIndex}-${w}`);
+    if (w === wager) {
+      btn.classList.add('selected');
+    } else {
+      btn.classList.remove('selected');
+    }
+  });
+}
+
+function submitQuiz() {
+  const allAnswered = Object.values(userAnswers).every(a => a.choice !== null);
+  if (!allAnswered) {
+    document.getElementById('validation-error').classList.remove('hidden');
+    return;
+  }
+
+  calculateResults();
+}
+
+function calculateResults() {
+  let score = 0;
+  const feedbackList = document.getElementById('feedback-list');
+  feedbackList.innerHTML = '';
+
+  selectedQuestions.forEach((q, i) => {
+    const userChoice = userAnswers[i].choice;
+    const wager = userAnswers[i].wager;
+    const isCorrect = userChoice === q.correct;
+
+    if (isCorrect) {
+      score += wager;
+    } else {
+      score -= wager;
+    }
+
+    const item = document.createElement('div');
+    item.className = `feedback-item ${isCorrect ? 'correct' : 'wrong'}`;
+    item.innerHTML = `
+      <div style="font-weight: 700; margin-bottom: 6px; display: flex; justify-content: space-between;">
+        <span>${i + 1}. "${q.text}"</span>
+        <span>${isCorrect ? `+${wager}` : `-${wager}`} Pts</span>
+      </div>
+      <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 6px;">
+        Your Answer: <strong>${userChoice ? 'Grammatically Correct' : 'Contains Error'}</strong> | 
+        Actual Status: <strong>${q.correct ? 'Grammatically Correct' : 'Contains Error'}</strong>
+      </div>
+      <div style="font-size: 0.92rem; font-weight: 500; color: #334155;">
+        ${q.explanation}
+      </div>
+    `;
+    feedbackList.appendChild(item);
+  });
+
+  const bandElement = document.getElementById('score-band');
+  const titleElement = document.getElementById('band-title');
+  const descElement = document.getElementById('band-desc');
+  document.getElementById('final-score-display').textContent = `${score} / 60 Points`;
+
+  if (score >= 40) {
+    bandElement.style.backgroundColor = '#dcfce7';
+    bandElement.style.color = '#14532d';
+    titleElement.textContent = 'Band 4: Excellent B1 Mastery & High Confidence Control';
+    descElement.textContent = 'Outstanding result! You demonstrate strong control over intermediate B1 grammar structures (gerunds vs infinitives, reported speech, conditionals, passive voice) with accurate confidence calibration.';
+  } else if (score >= 15) {
+    bandElement.style.backgroundColor = '#dbeafe';
+    bandElement.style.color = '#1e40af';
+    titleElement.textContent = 'Band 3: Good Functional Competency';
+    descElement.textContent = 'Good work! You have a solid grasp of core B1 grammar rules. Review the detailed feedback below to refine your knowledge on tricky prepositions, connectors, and indirect word order.';
+  } else if (score >= 0) {
+    bandElement.style.backgroundColor = '#fef3c7';
+    bandElement.style.color = '#92400e';
+    titleElement.textContent = 'Band 2: Developing B1 Proficiency';
+    descElement.textContent = 'You recognize many intermediate structures, but inconsistent rule application or overconfidence on incorrect choices lowered your total score. Review the target explanations below.';
+  } else {
+    bandElement.style.backgroundColor = '#fee2e2';
+    bandElement.style.color = '#991b1b';
+    titleElement.textContent = 'Band 1: Emerging Level';
+    descElement.textContent = 'Your score indicates difficulty with intermediate grammar patterns or over-wagering on incorrect choices. We recommend reviewing core B1 rules before re-testing.';
+  }
+
+  document.getElementById('quiz-screen').classList.add('hidden');
+  document.getElementById('results-screen').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+function restartTest() {
+  document.getElementById('results-screen').classList.add('hidden');
+  startTest();
+}
+</script>
+
+</body>
+</html>

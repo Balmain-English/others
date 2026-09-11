@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B2 English Grammar Self-Assessment</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg-slate: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --success: #16a34a;
+      --success-bg: #f0fdf4;
+      --error: #dc2626;
+      --error-bg: #fef2f2;
+      --accent: #d97706;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-slate);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 780px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 36px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 28px;
+      font-size: 0.98rem;
+    }
+
+    .instruction-box {
+      background-color: #eff6ff;
+      border-left: 4px solid var(--primary);
+      padding: 20px;
+      border-radius: 6px;
+      margin: 24px 0;
+    }
+
+    .instruction-box h2 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #1e40af;
+      font-weight: 600;
+    }
+
+    .instruction-box ul {
+      list-style-type: disc;
+      margin-left: 20px;
+      line-height: 1.65;
+      font-size: 0.95rem;
+      color: #1e3a8a;
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .question-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .sentence-text {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #0f172a;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .choice-btn {
+      background: white;
+      border: 2px solid var(--border-color);
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-main);
+    }
+
+    .choice-btn:hover {
+      border-color: var(--primary);
+      background-color: #f0f7ff;
+    }
+
+    .choice-btn.selected-correct {
+      background-color: var(--success-bg);
+      border-color: var(--success);
+      color: #14532d;
+    }
+
+    .choice-btn.selected-incorrect {
+      background-color: var(--error-bg);
+      border-color: var(--error);
+      color: #7f1d1d;
+    }
+
+    .wager-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border-color);
+      font-size: 0.9rem;
+    }
+
+    .wager-label {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .wager-options {
+      display: flex;
+      gap: 8px;
+    }
+
+    .wager-btn {
+      background: white;
+      border: 1px solid var(--border-color);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: all 0.15s ease;
+    }
+
+    .wager-btn:hover {
+      border-color: var(--text-main);
+    }
+
+    .wager-btn.selected {
+      background-color: var(--text-main);
+      color: white;
+      border-color: var(--text-main);
+    }
+
+    .results-band {
+      text-align: center;
+      padding: 28px;
+      border-radius: 10px;
+      margin-bottom: 28px;
+    }
+
+    .feedback-item {
+      padding: 18px;
+      border-radius: 8px;
+      border-left: 4px solid var(--border-color);
+      margin-bottom: 14px;
+      background: #f8fafc;
+    }
+
+    .feedback-item.correct {
+      border-left-color: var(--success);
+      background-color: var(--success-bg);
+    }
+
+    .feedback-item.wrong {
+      border-left-color: var(--error);
+      background-color: var(--error-bg);
+    }
+
+    .hidden { display: none !important; }
+
+    .error-msg {
+      color: var(--error);
+      text-align: center;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .card { padding: 20px; }
+      .options-grid { grid-template-columns: 1fr; }
+      .wager-section { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- LANDING PAGE SCREEN -->
+  <div id="landing-screen" class="card">
+    <h1>B2 Upper-Intermediate Grammar Assessment</h1>
+    <p class="subtitle">Evaluate your command of complex English structures and calibration confidence.</p>
+
+    <div class="instruction-box">
+      <h2>Assessment Format & Rules</h2>
+      <ul>
+        <li>You will review <strong>20 upper-intermediate sentences</strong> (40% work context and 60% daily life context).</li>
+        <li>Determine whether each sentence is <strong>Grammatically Correct</strong> or contains a <strong>Grammar Error</strong>.</li>
+        <li>Select a confidence wager for each item based on your certainty:
+          <ul>
+            <li><strong>1 Point:</strong> Low certainty or educated guess.</li>
+            <li><strong>2 Points:</strong> Moderate certainty.</li>
+            <li><strong>3 Points:</strong> High certainty.</li>
+          </ul>
+        </li>
+        <li><strong>Scoring Mechanism:</strong> Correct evaluations earn your wagered points (+1 to +3). Incorrect evaluations deduct your wagered points (-1 to -3).</li>
+      </ul>
+    </div>
+
+    <button class="btn" onclick="startTest()">Start Assessment Now</button>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="quiz-screen" class="hidden">
+    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="font-size: 1.3rem; font-weight: 700;">B2 Grammar Challenge</h2>
+      <span id="progress-indicator" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">20 Questions</span>
+    </div>
+
+    <div id="questions-container"></div>
+    <div id="validation-error" class="error-msg hidden">Please evaluate all 20 sentences before submitting.</div>
+    <button class="btn" onclick="submitQuiz()">Submit Assessment</button>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div id="results-screen" class="hidden">
+    <div class="card">
+      <h1>Performance Summary</h1>
+      <p class="subtitle">Explore your score breakdown and diagnostic explanations below.</p>
+      
+      <div id="score-band" class="results-band">
+        <h2 id="final-score-display" style="font-size: 2.5rem; margin-bottom: 6px; font-weight: 800;">0 Points</h2>
+        <h3 id="band-title" style="margin-bottom: 10px; font-size: 1.25rem;">Band Title</h3>
+        <p id="band-desc" style="font-size: 0.98rem; line-height: 1.6;"></p>
+      </div>
+
+      <button class="btn" onclick="restartTest()" style="margin-bottom: 28px;">Retake Assessment (New Question Set)</button>
+
+      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 6px;">Detailed Sentence Feedback</h3>
+      <p class="subtitle" style="text-align: left; margin-bottom: 20px;">Review grammar explanations for all evaluated items below.</p>
+      <div id="feedback-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// 120 RIGOROUSLY VALIDATED B2 GRAMMAR QUESTIONS (STRICTLY B2 VOCABULARY | 40% WORK [48 ITEMS], 60% DAILY [72 ITEMS])
+const questionPool = [
+  // 1. Mixed Conditionals & Unreal Past (4 Work / 6 Daily)
+  { text: "If we had invested in new software last year, our team would be more efficient now.", correct: true, explanation: "Correct mixed conditional (past condition with present outcome).", category: "work" },
+  { text: "If the manager was attending yesterday's meeting, he would know about the project changes.", correct: false, explanation: "Incorrect. Past unreal condition requires Past Perfect ('had attended').", category: "work" },
+  { text: "I would rather you didn't share the draft report with external clients yet.", correct: true, explanation: "Correct usage of 'would rather' followed by Past Simple for present/future preference.", category: "work" },
+  { text: "I wish our supervisor would gave us more time to complete the financial review.", correct: false, explanation: "Incorrect verb form after 'would' ('would give').", category: "work" },
+  { text: "If I had saved more money during summer, I would go on vacation with my friends now.", correct: true, explanation: "Correct mixed conditional construction.", category: "daily" },
+  { text: "I wish I bought that apartment when the prices were lower last year.", correct: false, explanation: "Incorrect. Past regret requires Past Perfect after 'wish' ('had bought').", category: "daily" },
+  { text: "If only we had checked the weather forecast, we wouldn't be standing in the rain now.", correct: true, explanation: "Correct mixed conditional with 'if only'.", category: "daily" },
+  { text: "I would rather you stay at home tonight instead of driving in the storm.", correct: false, explanation: "Incorrect. Use Past Simple ('stayed') when expressing preference for another person.", category: "daily" },
+  { text: "If he had taken his medicine yesterday, he would feel much better today.", correct: true, explanation: "Correct mixed conditional statement.", category: "daily" },
+  { text: "If I would have known you were in town, I would have invited you to dinner.", correct: false, explanation: "Incorrect. Do not use 'would have' in the 'if' clause ('If I had known').", category: "daily" },
+
+  // 2. Modals of Deduction & Past Modals (4 Work / 6 Daily)
+  { text: "The client hasn't replied to our proposal, so they must have chosen another provider.", correct: true, explanation: "Correct past modal deduction ('must have chosen').", category: "work" },
+  { text: "We should have submit the project application before the deadline passed.", correct: false, explanation: "Incorrect past participle. Use 'should have submitted'.", category: "work" },
+  { text: "She couldn't have finished the annual audit so quickly without assistance.", correct: true, explanation: "Correct negative deduction about the past.", category: "work" },
+  { text: "The manager must have forget to send the calendar invite for the meeting.", correct: false, explanation: "Incorrect past participle. Use 'must have forgotten'.", category: "work" },
+  { text: "He must have missed the bus because he is usually very punctual.", correct: true, explanation: "Correct logical deduction regarding a past event.", category: "daily" },
+  { text: "You should have call me when your flight was delayed.", correct: false, explanation: "Incorrect participle. Use 'should have called'.", category: "daily" },
+  { text: "She might have left her jacket at the restaurant last night.", correct: true, explanation: "Correct modal expressing past possibility.", category: "daily" },
+  { text: "They couldn't have buy that house without taking a loan from the bank.", correct: false, explanation: "Incorrect participle form ('couldn't have bought').", category: "daily" },
+  { text: "I ought to have checked the train schedule before leaving home.", correct: true, explanation: "Correct past advisory modal ('ought to have checked').", category: "daily" },
+  { text: "He may have forgot his keys on the kitchen table.", correct: false, explanation: "Incorrect past participle ('may have forgotten').", category: "daily" },
+
+  // 3. Inversion & Emphatic Structures (4 Work / 6 Daily)
+  { text: "Hardly had the meeting started when the system administrator announced a server reboot.", correct: true, explanation: "Correct negative inversion structure ('Hardly had + subject + past participle... when').", category: "work" },
+  { text: "Not only the company reduced its costs, but it also increased production.", correct: false, explanation: "Incorrect. Initial 'Not only' requires inverted auxiliary ('Not only did the company reduce').", category: "work" },
+  { text: "Seldom have we received such positive feedback from our corporate clients.", correct: true, explanation: "Correct emphatic inversion with 'Seldom'.", category: "work" },
+  { text: "Rarely the management team makes such a sudden strategic decision.", correct: false, explanation: "Incorrect syntax. Initial 'Rarely' requires inversion ('Rarely does the management team make').", category: "work" },
+  { text: "Never have I seen such a remarkable performance at the local theater.", correct: true, explanation: "Correct negative inversion for emphasis.", category: "daily" },
+  { text: "Barely we had sat down at the restaurant when the fire alarm sounded.", correct: false, explanation: "Incorrect word order. Use 'Barely had we sat down'.", category: "daily" },
+  { text: "Little did he realize that his life was about to change completely.", correct: true, explanation: "Correct inversion with 'Little did + subject + verb'.", category: "daily" },
+  { text: "Only after arriving at the station I remembered my passport was at home.", correct: false, explanation: "Incorrect. 'Only after' clause requires inversion in main clause ('did I remember').", category: "daily" },
+  { text: "No sooner had she finished her degree than she received a great job offer.", correct: true, explanation: "Correct inverted structure ('No sooner had... than').", category: "daily" },
+  { text: "Under no circumstances children should be left unattended near the pool.", correct: false, explanation: "Incorrect inversion. Use 'should children be left'.", category: "daily" },
+
+  // 4. Passive Voice across Complex Tenses (4 Work / 6 Daily)
+  { text: "The new employment guidelines are currently being reviewed by the legal department.", correct: true, explanation: "Correct Present Continuous passive.", category: "work" },
+  { text: "All confidential documents must be destroy after five years of storage.", correct: false, explanation: "Incorrect modal passive form. Use 'must be destroyed'.", category: "work" },
+  { text: "The quarterly budget will have been approved before the next fiscal period begins.", correct: true, explanation: "Correct Future Perfect passive structure.", category: "work" },
+  { text: "Several important issues were raised during the conference yesterday.", correct: true, explanation: "Correct Past Simple passive sentence.", category: "work" },
+  { text: "The historic castle is currently being renovated by a team of skilled craftsmen.", correct: true, explanation: "Correct continuous passive structure.", category: "daily" },
+  { text: "My car was being repairing when the mechanic discovered another problem.", correct: false, explanation: "Incorrect passive verb form. Use past participle ('was being repaired').", category: "daily" },
+  { text: "The flight was delayed because of unexpected maintenance checks.", correct: true, explanation: "Correct passive voice construction.", category: "daily" },
+  { text: "All tickets for the music festival had been sold out within an hour.", correct: true, explanation: "Correct Past Perfect passive.", category: "daily" },
+  { text: "The street is cleaning every morning by the municipal workers.", correct: false, explanation: "Incorrect passive form for habit. Use Present Simple passive ('is cleaned').", category: "daily" },
+  { text: "Your application will be processed as soon as we receive your documents.", correct: true, explanation: "Correct future passive sentence.", category: "daily" },
+
+  // 5. Relative Clauses & Relative Pronouns (4 Work / 6 Daily)
+  { text: "The project manager, whose proposal won the contract, will lead the team.", correct: true, explanation: "Correct non-defining relative clause with possessive 'whose'.", category: "work" },
+  { text: "This is the agreement in that all safety terms are clearly defined.", correct: false, explanation: "Incorrect pronoun after preposition. Use 'in which', not 'in that'.", category: "work" },
+  { text: "The company for which she works specializes in environmental solutions.", correct: true, explanation: "Correct relative clause with preposition + relative pronoun.", category: "work" },
+  { text: "The candidate who's qualifications were most impressive was hired.", correct: false, explanation: "Incorrect spelling/homophone. Use possessive relative pronoun 'whose'.", category: "work" },
+  { text: "The hotel in which we stayed during our trip offered magnificent views.", correct: true, explanation: "Correct preposition + relative pronoun construction.", category: "daily" },
+  { text: "My neighbor, that lives on the third floor, is an experienced photographer.", correct: false, explanation: "Incorrect pronoun. Non-defining relative clauses for people require 'who'.", category: "daily" },
+  { text: "The author whose latest novel won an award will visit our local library.", correct: true, explanation: "Correct relative possessive clause.", category: "daily" },
+  { text: "The restaurant where we had dinner last night had excellent service.", correct: true, explanation: "Correct relative adverb 'where' for location.", category: "daily" },
+  { text: "The city to where we traveled last summer was rich in historical monuments.", correct: false, explanation: "Incorrect preposition usage. Say 'to which we traveled' or 'where we traveled'.", category: "daily" },
+  { text: "She introduced me to her cousin, who works as an architect in London.", correct: true, explanation: "Correct non-defining relative clause.", category: "daily" },
+
+  // 6. Verb Patterns: Gerunds & Infinitives (4 Work / 6 Daily)
+  { text: "The director regretted to inform the staff that the annual bonus would be delayed.", correct: true, explanation: "Correct. 'Regret to inform' is used to announce bad news formally.", category: "work" },
+  { text: "We must avoid to make careless errors in the financial summary.", correct: false, explanation: "Incorrect. Verb 'avoid' is followed by a gerund ('avoid making').", category: "work" },
+  { text: "The manager remembered to lock the office before leaving for the weekend.", correct: true, explanation: "Correct. 'Remember to do' means performing a necessary task.", category: "work" },
+  { text: "She considers to apply for the senior consultant position.", correct: false, explanation: "Incorrect. Verb 'consider' takes a gerund ('considers applying').", category: "work" },
+  { text: "I clearly remember locking the front door before we left for vacation.", correct: true, explanation: "Correct. 'Remember doing' refers to a past memory.", category: "daily" },
+  { text: "He stopped to smoke two years ago and feels much healthier now.", correct: false, explanation: "Incorrect context. Ceasing an activity requires a gerund ('stopped smoking').", category: "daily" },
+  { text: "They tried to open the window, but the mechanism was completely stuck.", correct: true, explanation: "Correct usage of 'try to do' (attempting a difficult action).", category: "daily" },
+  { text: "She suggested to rent a bicycle to explore the coastal path.", correct: false, explanation: "Incorrect. Verb 'suggest' takes a gerund ('suggested renting').", category: "daily" },
+  { text: "I regret missing your birthday party because I was traveling abroad.", correct: true, explanation: "Correct usage of 'regret doing' for past actions.", category: "daily" },
+  { text: "He managed to convince his parents to let him study art at university.", correct: true, explanation: "Correct infinitive pattern after 'manage'.", category: "daily" },
+
+  // 7. Reported Speech & Reporting Verbs (4 Work / 6 Daily)
+  { text: "The supervisor warned us not to share internal password credentials.", correct: true, explanation: "Correct reported imperative ('warned us not to share').", category: "work" },
+  { text: "The representative explained us that the service fees would increase next month.", correct: false, explanation: "Incorrect syntax. Verb 'explain' requires preposition 'to us' ('explained to us').", category: "work" },
+  { text: "She recommended holding the workshop in a larger conference room.", correct: true, explanation: "Correct reporting verb pattern ('recommend' + gerund).", category: "work" },
+  { text: "He denied to have leaked any confidential documents to the press.", correct: false, explanation: "Incorrect verb pattern. 'Deny' takes a gerund ('denied leaking').", category: "work" },
+  { text: "The landlord reminded us to pay the rent before the first day of the month.", correct: true, explanation: "Correct reporting verb structure ('remind + object + infinitive').", category: "daily" },
+  { text: "My friend suggested to take a taxi to the airport.", correct: false, explanation: "Incorrect. 'Suggest' takes a gerund ('suggested taking').", category: "daily" },
+  { text: "She promised that she would call me as soon as her plane landed.", correct: true, explanation: "Correct reported speech with tense backshift.", category: "daily" },
+  { text: "He insisted on paying for the whole family meal at the restaurant.", correct: true, explanation: "Correct reporting prepositional pattern ('insist on' + gerund).", category: "daily" },
+  { text: "They accused him to break the kitchen window with a football.", correct: false, explanation: "Incorrect pattern. Use 'accused him of breaking'.", category: "daily" },
+  { text: "The tour guide offered to show us the historic district on foot.", correct: true, explanation: "Correct infinitive pattern after 'offer'.", category: "daily" },
+
+  // 8. Advanced Connectors & Subordinating Conjunctions (4 Work / 6 Daily)
+  { text: "Provided that the budget is approved, we will launch the initiative in October.", correct: true, explanation: "Correct conditional connector ('Provided that').", category: "work" },
+  { text: "Despite of the economic downturn, the company expanded its workforce.", correct: false, explanation: "Incorrect combination. Use 'Despite' or 'In spite of'.", category: "work" },
+  { text: "Whereas the old system was slow, the updated software operates efficiently.", correct: true, explanation: "Correct contrast connector ('Whereas').", category: "work" },
+  { text: "The project was successful in spite of we faced severe time constraints.", correct: false, explanation: "Incorrect structure. 'In spite of' must be followed by a noun phrase or gerund.", category: "work" },
+  { text: "In spite of the heavy snowfall, all flights departed according to schedule.", correct: true, explanation: "Correct usage of 'In spite of' + noun phrase.", category: "daily" },
+  { text: "Even although he worked hard, he couldn't complete the marathon.", correct: false, explanation: "Incorrect combination. Use 'Even though' or 'Although'.", category: "daily" },
+  { text: "I will bring an umbrella in case it rains during our afternoon walk.", correct: true, explanation: "Correct connector 'in case' for precaution.", category: "daily" },
+  { text: "Due to the storm was approaching, the outdoor festival was canceled.", correct: false, explanation: "Incorrect clause connector. Use 'Because the storm was approaching'.", category: "daily" },
+  { text: "Unless you reserve your tickets in advance, you won't get good seats.", correct: true, explanation: "Correct conditional connector 'Unless'.", category: "daily" },
+  { text: "Although she was exhausted, but she stayed up to finish her assignment.", correct: false, explanation: "Incorrect double conjunction. Omit 'but' when using 'Although'.", category: "daily" },
+
+  // 9. Participle Clauses (4 Work / 6 Daily)
+  { text: "Having completed the financial analysis, the analyst submitted her conclusions.", correct: true, explanation: "Correct perfect participle clause ('Having completed').", category: "work" },
+  { text: "Located in the heart of the business district, the new office is easily accessible.", correct: true, explanation: "Correct past participle clause describing location.", category: "work" },
+  { text: "Finishing the report, the computer suddenly crashed and lost all data.", correct: false, explanation: "Dangling participle error. The computer did not finish the report.", category: "work" },
+  { text: "Having been informed about the policy change, the employees raised several concerns.", correct: true, explanation: "Correct passive perfect participle clause.", category: "work" },
+  { text: "Having packed her bags the night before, she was ready for her morning flight.", correct: true, explanation: "Correct participle clause showing completed prior action.", category: "daily" },
+  { text: "Walking down the main street, a beautiful painting caught my attention.", correct: false, explanation: "Dangling participle error. The painting was not walking down the street.", category: "daily" },
+  { text: "Realizing he was late for the lecture, he ran all the way to the campus.", correct: true, explanation: "Correct present participle clause expressing cause.", category: "daily" },
+  { text: "Built in the eighteenth century, the house requires significant renovation.", correct: true, explanation: "Correct past participle clause.", category: "daily" },
+  { text: "Having ate a heavy lunch, he felt drowsy during the afternoon workshop.", correct: false, explanation: "Incorrect participle form. Use 'Having eaten'.", category: "daily" },
+  { text: "Looking out of the hotel window, the mountains looked breathtaking.", correct: false, explanation: "Dangling participle error. The mountains were not looking out of the window.", category: "daily" },
+
+  // 10. Dependent Prepositions & Adjective Patterns (4 Work / 6 Daily)
+  { text: "Our team is capable of handling complex multinational projects.", correct: true, explanation: "Correct adjective + preposition pattern ('capable of' + gerund).", category: "work" },
+  { text: "The manager insisted to inspect the facility before signing the lease.", correct: false, explanation: "Incorrect preposition pattern. Use 'insisted on inspecting'.", category: "work" },
+  { text: "She is responsible for overseeing the daily administrative operations.", correct: true, explanation: "Correct pattern ('responsible for' + gerund).", category: "work" },
+  { text: "The executive board objected against the proposed organizational changes.", correct: false, explanation: "Incorrect preposition. Verb 'object' takes 'to' ('objected to').", category: "work" },
+  { text: "He is fully accustomed to working in a fast-paced environment.", correct: true, explanation: "Correct pattern ('accustomed to' + gerund).", category: "daily" },
+  { text: "My brother is very keen in learning how to sail a boat.", correct: false, explanation: "Incorrect preposition. Use 'keen on learning'.", category: "daily" },
+  { text: "She succeeded in obtaining a scholarship to study marine biology.", correct: true, explanation: "Correct verb pattern ('succeed in' + gerund).", category: "daily" },
+  { text: "They expressed their satisfaction with the services provided by the hotel.", correct: true, explanation: "Correct noun + preposition collocation ('satisfaction with').", category: "daily" },
+  { text: "He apologized about making a mistake in the reservation details.", correct: false, explanation: "Incorrect preposition. Use 'apologized for making'.", category: "daily" },
+  { text: "Are you aware of the new parking regulations in our neighborhood?", correct: true, explanation: "Correct adjective pattern ('aware of').", category: "daily" },
+
+  // 11. Quantifiers & Subject-Verb Agreement (4 Work / 6 Daily)
+  { text: "Neither of the applicants was suitable for the senior managerial role.", correct: true, explanation: "Correct singular agreement with 'Neither of' in formal English.", category: "work" },
+  { text: "Every members of the committee must vote on the proposed policy amendment.", correct: false, explanation: "Incorrect noun form. 'Every' must be followed by a singular noun ('Every member').", category: "work" },
+  { text: "A substantial amount of time was spent negotiating the contract terms.", correct: true, explanation: "Correct quantifier 'amount of' with uncountable noun 'time'.", category: "work" },
+  { text: "Each of the departments have submitted their quarterly financial forecasts.", correct: false, explanation: "Incorrect verb agreement. 'Each' requires singular verb 'has submitted'.", category: "work" },
+  { text: "Neither of the options seems ideal for our summer family holiday.", correct: true, explanation: "Correct singular subject-verb agreement.", category: "daily" },
+  { text: "There were very little people at the concert due to the heavy storm.", correct: false, explanation: "Incorrect quantifier. Use 'very few people' with countable nouns.", category: "daily" },
+  { text: "Each participant was given a certificate upon completing the training.", correct: true, explanation: "Correct singular agreement ('Each participant was').", category: "daily" },
+  { text: "A number of students has voiced concerns about the exam timetable.", correct: false, explanation: "Incorrect agreement. 'A number of + plural noun' takes a plural verb ('have voiced').", category: "daily" },
+  { text: "Hardly any information was provided regarding the schedule changes.", correct: true, explanation: "Correct singular agreement with uncountable 'information'.", category: "daily" },
+  { text: "Every passengers must show their boarding pass before entering the gate.", correct: false, explanation: "Incorrect noun form after 'every' ('Every passenger').", category: "daily" },
+
+  // 12. Cleft Sentences & Subjunctive / Emphatic Forms (4 Work / 6 Daily)
+  { text: "It is essential that every employee adhere to the corporate safety policy.", correct: true, explanation: "Correct formal subjunctive structure ('essential that + subject + base verb').", category: "work" },
+  { text: "What surprised the directors most were the rapid growth in regional sales.", correct: false, explanation: "Incorrect agreement in cleft sentence ('was the rapid growth').", category: "work" },
+  { text: "It was the marketing team that organized the successful product launch.", correct: true, explanation: "Correct 'It' cleft sentence for emphasis.", category: "work" },
+  { text: "The committee recommended that the proposal is rejected immediately.", correct: false, explanation: "Incorrect subjunctive form. Use base verb 'be rejected'.", category: "work" },
+  { text: "It is vital that he be informed about the family decision immediately.", correct: true, explanation: "Correct formal present subjunctive ('vital that he be informed').", category: "daily" },
+  { text: "What I enjoy most about the weekend is to spend time in nature.", correct: true, explanation: "Correct cleft sentence syntax.", category: "daily" },
+  { text: "It was only when I arrived home that I realized I had lost my keys.", correct: true, explanation: "Correct cleft sentence expressing time emphasis.", category: "daily" },
+  { text: "The teacher demanded that he writes his essay again.", correct: false, explanation: "Incorrect subjunctive form. Use base verb 'write' ('demanded that he write').", category: "daily" },
+  { text: "What surprised me about the museum were the interactive displays.", correct: true, explanation: "Correct cleft sentence with plural complement.", category: "daily" },
+  { text: "It is crucial that she arrives on time for the entrance examination.", correct: false, explanation: "Incorrect subjunctive form in formal grammar. Use base verb 'arrive'.", category: "daily" }
+];
+
+let selectedQuestions = [];
+let userAnswers = {};
+
+// Fisher-Yates Randomization Algorithm
+function fisherYatesShuffle(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+function startTest() {
+  document.getElementById('landing-screen').classList.add('hidden');
+  document.getElementById('quiz-screen').classList.remove('hidden');
+  
+  // Select strictly 8 work questions (40%) and 12 daily questions (60%) from 120-item pool
+  const workPool = fisherYatesShuffle(questionPool.filter(q => q.category === 'work')).slice(0, 8);
+  const dailyPool = fisherYatesShuffle(questionPool.filter(q => q.category === 'daily')).slice(0, 12);
+  
+  // Combine and shuffle final 20 items using Fisher-Yates
+  selectedQuestions = fisherYatesShuffle([...workPool, ...dailyPool]);
+  userAnswers = {};
+
+  renderQuestions();
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questions-container');
+  container.innerHTML = '';
+
+  selectedQuestions.forEach((q, index) => {
+    userAnswers[index] = { choice: null, wager: 1 };
+
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.innerHTML = `
+      <div class="question-header">
+        <span>SENTENCE EVALUATION ${index + 1} OF 20</span>
+        <span style="color: var(--primary);">${q.category === 'work' ? 'Work Context' : 'Daily Life Context'}</span>
+      </div>
+      <div class="sentence-text">"${q.text}"</div>
+      
+      <div class="options-grid">
+        <button type="button" class="choice-btn" id="btn-corr-${index}" onclick="selectChoice(${index}, true)">
+          ✓ Grammatically Correct
+        </button>
+        <button type="button" class="choice-btn" id="btn-incorr-${index}" onclick="selectChoice(${index}, false)">
+          ✗ Contains Error
+        </button>
+      </div>
+
+      <div class="wager-section">
+        <span class="wager-label">Confidence Wager:</span>
+        <div class="wager-options">
+          <button type="button" class="wager-btn selected" id="wager-${index}-1" onclick="selectWager(${index}, 1)">1 Pt (Low)</button>
+          <button type="button" class="wager-btn" id="wager-${index}-2" onclick="selectWager(${index}, 2)">2 Pts (Med)</button>
+          <button type="button" class="wager-btn" id="wager-${index}-3" onclick="selectWager(${index}, 3)">3 Pts (High)</button>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function selectChoice(qIndex, choice) {
+  userAnswers[qIndex].choice = choice;
+  
+  const corrBtn = document.getElementById(`btn-corr-${qIndex}`);
+  const incorrBtn = document.getElementById(`btn-incorr-${qIndex}`);
+
+  corrBtn.className = 'choice-btn' + (choice === true ? ' selected-correct' : '');
+  incorrBtn.className = 'choice-btn' + (choice === false ? ' selected-incorrect' : '');
+
+  document.getElementById('validation-error').classList.add('hidden');
+}
+
+function selectWager(qIndex, wager) {
+  userAnswers[qIndex].wager = wager;
+
+  [1, 2, 3].forEach(w => {
+    const btn = document.getElementById(`wager-${qIndex}-${w}`);
+    if (w === wager) {
+      btn.classList.add('selected');
+    } else {
+      btn.classList.remove('selected');
+    }
+  });
+}
+
+function submitQuiz() {
+  const allAnswered = Object.values(userAnswers).every(a => a.choice !== null);
+  if (!allAnswered) {
+    document.getElementById('validation-error').classList.remove('hidden');
+    return;
+  }
+
+  calculateResults();
+}
+
+function calculateResults() {
+  let score = 0;
+  const feedbackList = document.getElementById('feedback-list');
+  feedbackList.innerHTML = '';
+
+  selectedQuestions.forEach((q, i) => {
+    const userChoice = userAnswers[i].choice;
+    const wager = userAnswers[i].wager;
+    const isCorrect = userChoice === q.correct;
+
+    if (isCorrect) {
+      score += wager;
+    } else {
+      score -= wager;
+    }
+
+    const item = document.createElement('div');
+    item.className = `feedback-item ${isCorrect ? 'correct' : 'wrong'}`;
+    item.innerHTML = `
+      <div style="font-weight: 700; margin-bottom: 6px; display: flex; justify-content: space-between;">
+        <span>${i + 1}. "${q.text}"</span>
+        <span>${isCorrect ? `+${wager}` : `-${wager}`} Pts</span>
+      </div>
+      <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 6px;">
+        Your Answer: <strong>${userChoice ? 'Grammatically Correct' : 'Contains Error'}</strong> | 
+        Actual Status: <strong>${q.correct ? 'Grammatically Correct' : 'Contains Error'}</strong>
+      </div>
+      <div style="font-size: 0.92rem; font-weight: 500; color: #334155;">
+        ${q.explanation}
+      </div>
+    `;
+    feedbackList.appendChild(item);
+  });
+
+  const bandElement = document.getElementById('score-band');
+  const titleElement = document.getElementById('band-title');
+  const descElement = document.getElementById('band-desc');
+  document.getElementById('final-score-display').textContent = `${score} / 60 Points`;
+
+  // 4 Positive & Encouraging Performance Feedback Bands (-60 to +60 scale)
+  if (score >= 40) {
+    bandElement.style.backgroundColor = '#dcfce7';
+    bandElement.style.color = '#14532d';
+    titleElement.textContent = 'Band 4: High B2 Mastery & Excellent Calibration';
+    descElement.textContent = 'Outstanding achievement! You demonstrate exceptional control over complex B2 grammar structures—including inversion, mixed conditionals, and subjunctive forms—backed by accurate confidence calibration. Keep up the brilliant work!';
+  } else if (score >= 15) {
+    bandElement.style.backgroundColor = '#dbeafe';
+    bandElement.style.color = '#1e40af';
+    titleElement.textContent = 'Band 3: Strong Functional Competency & Growing Precision';
+    descElement.textContent = 'Impressive work! You possess a solid command of upper-intermediate B2 English structures. You navigated work and daily contexts very effectively. Review the explanations below to refine tricky nuances and boost your score even higher!';
+  } else if (score >= 0) {
+    bandElement.style.backgroundColor = '#fef3c7';
+    bandElement.style.color = '#92400e';
+    titleElement.textContent = 'Band 2: Developing Intermediate Skill & Active Progress';
+    descElement.textContent = 'Good effort! You show an encouraging understanding of many core grammar patterns. With targeted review of tricky structures like participle clauses and dependent prepositions, your confidence and score will continue to climb!';
+  } else {
+    bandElement.style.backgroundColor = '#fee2e2';
+    bandElement.style.color = '#991b1b';
+    titleElement.textContent = 'Band 1: Foundations for Growth & Positive Learning Step';
+    descElement.textContent = 'Great enthusiasm for taking on this challenging B2 test! Every mistake is a valuable step toward mastery. Take time to explore the detailed feedback below to build your accuracy and confidence for your next try!';
+  }
+
+  document.getElementById('quiz-screen').classList.add('hidden');
+  document.getElementById('results-screen').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+function restartTest() {
+  document.getElementById('results-screen').classList.add('hidden');
+  startTest();
+}
+</script>
+
+</body>
+</html>

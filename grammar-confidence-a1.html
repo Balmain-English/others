@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A1 English Grammar Self-Assessment</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg-slate: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --success: #16a34a;
+      --error: #dc2626;
+      --accent: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-slate);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      padding: 24px 16px;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 760px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+
+    .instruction-box {
+      background-color: #eff6ff;
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 4px;
+      margin: 20px 0;
+    }
+
+    .instruction-box h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .instruction-box ul {
+      list-style-type: disc;
+      margin-left: 20px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      display: block;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .question-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .sentence-text {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #0f172a;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .choice-btn {
+      background: white;
+      border: 2px solid var(--border-color);
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-main);
+    }
+
+    .choice-btn:hover {
+      border-color: var(--primary);
+      background-color: #f0f7ff;
+    }
+
+    .choice-btn.selected-correct {
+      background-color: #dcfce7;
+      border-color: var(--success);
+      color: #14532d;
+    }
+
+    .choice-btn.selected-incorrect {
+      background-color: #fee2e2;
+      border-color: var(--error);
+      color: #7f1d1d;
+    }
+
+    .wager-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-color);
+      font-size: 0.9rem;
+    }
+
+    .wager-options {
+      display: flex;
+      gap: 8px;
+    }
+
+    .wager-btn {
+      background: white;
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .wager-btn.selected {
+      background-color: var(--text-main);
+      color: white;
+      border-color: var(--text-main);
+    }
+
+    .results-band {
+      text-align: center;
+      padding: 24px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .feedback-item {
+      padding: 16px;
+      border-radius: 8px;
+      border-left: 4px solid var(--border-color);
+      margin-bottom: 12px;
+      background: #fafafa;
+    }
+
+    .feedback-item.correct { border-left-color: var(--success); }
+    .feedback-item.wrong { border-left-color: var(--error); }
+
+    .hidden { display: none !important; }
+
+    .error-msg {
+      color: var(--error);
+      text-align: center;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- SCREEN 1: LANDING PAGE -->
+  <div id="landing-screen" class="card">
+    <h1>A1 English Grammar Test</h1>
+    <p class="subtitle">Check your basic English grammar knowledge and confidence.</p>
+
+    <div class="instruction-box">
+      <h3>How to take the test:</h3>
+      <ul>
+        <li>You will read <strong>20 sentences</strong> about everyday adult life.</li>
+        <li>Decide if the sentence is <strong>Correct</strong> or has a <strong>Grammar Error</strong>.</li>
+        <li>Choose your confidence level for each sentence:
+          <ul>
+            <li><strong>1 Point:</strong> You are guessing or not sure.</li>
+            <li><strong>2 Points:</strong> You are moderately confident.</li>
+            <li><strong>3 Points:</strong> You are 100% sure.</li>
+          </ul>
+        </li>
+        <li><strong>Scoring:</strong> Correct choices gain points (+1, +2, or +3). Wrong choices lose points (-1, -2, or -3).</li>
+      </ul>
+    </div>
+
+    <button class="btn" onclick="startTest()">Start Test Now</button>
+  </div>
+
+  <!-- SCREEN 2: QUIZ SCREEN -->
+  <div id="quiz-screen" class="hidden">
+    <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="font-size: 1.25rem;">A1 Grammar Assessment</h2>
+      <span id="progress-indicator" style="font-size: 0.9rem; color: var(--text-muted);">20 Questions</span>
+    </div>
+
+    <div id="questions-container"></div>
+    <div id="validation-error" class="error-msg hidden">Please answer all questions before submitting.</div>
+    <button class="btn" onclick="submitQuiz()">Submit Answers</button>
+  </div>
+
+  <!-- SCREEN 3: RESULTS SCREEN -->
+  <div id="results-screen" class="hidden">
+    <div class="card">
+      <h1>Assessment Complete</h1>
+      <div id="score-band" class="results-band">
+        <h2 id="final-score-display" style="font-size: 2.2rem; margin-bottom: 8px;">0 Points</h2>
+        <h3 id="band-title" style="margin-bottom: 8px;">Band Title</h3>
+        <p id="band-desc" style="font-size: 0.95rem; line-height: 1.5;"></p>
+      </div>
+
+      <button class="btn" onclick="restartTest()" style="margin-bottom: 24px;">Take Test Again</button>
+
+      <h3>Detailed Question Feedback</h3>
+      <p class="subtitle" style="text-align: left; margin-bottom: 16px;">Review your choices and corrections below.</p>
+      <div id="feedback-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// 120 ROBUST & REALISTIC A1 GRAMMAR QUESTIONS FOR ADULTS
+const questionPool = [
+  // Present Simple & 'To Be'
+  { text: "She works in an international office near the center.", correct: true, explanation: "Correct. 'She works' uses correct third-person -s." },
+  { text: "He don't like coffee without milk.", correct: false, explanation: "Incorrect. Use 'doesn't' for he/she/it ('He doesn't like')." },
+  { text: "They are managers at a tech company.", correct: true, explanation: "Correct. Subject-verb agreement with 'To Be' is accurate." },
+  { text: "My brother live in Madrid with his wife.", correct: false, explanation: "Incorrect. Third-person singular requires 'lives'." },
+  { text: "Do you have time for a brief meeting today?", correct: true, explanation: "Correct. Question formation with 'Do' is correct." },
+  { text: "She doesn't has a passport for the trip.", correct: false, explanation: "Incorrect. Auxiliary 'doesn't' must be followed by base verb 'have'." },
+  { text: "We work from home every Friday.", correct: true, explanation: "Correct present simple usage for routine." },
+  { text: "He go to the gym before work every morning.", correct: false, explanation: "Incorrect. Third-person singular needs 'goes'." },
+  { text: "Is your supervisor in the office today?", correct: true, explanation: "Correct question structure with 'To Be'." },
+  { text: "I am agree with your proposal for the project.", correct: false, explanation: "Incorrect. Say 'I agree' (agree is a verb, not an adjective)." },
+  
+  // Present Continuous
+  { text: "Please be quiet, the Director is speaking.", correct: true, explanation: "Correct present continuous form ('is speaking')." },
+  { text: "Look! It is rain heavily outside.", correct: false, explanation: "Incorrect. Present continuous requires verb+ing ('is raining')." },
+  { text: "They are waiting for the bus right now.", correct: true, explanation: "Correct present continuous structure." },
+  { text: "I am study English for my new job.", correct: false, explanation: "Incorrect. Requires 'studying' ('I am studying')." },
+  { text: "We are organizing a dinner for our client.", correct: true, explanation: "Correct usage of present continuous." },
+  { text: "She is not work today because she is sick.", correct: false, explanation: "Incorrect. Say 'She is not working'." },
+  { text: "Are you listening to the news right now?", correct: true, explanation: "Correct question form in present continuous." },
+  { text: "He is write an email to his accountant.", correct: false, explanation: "Incorrect. Say 'He is writing'." },
+  { text: "They aren't coming to the conference this year.", correct: true, explanation: "Correct negative present continuous form." },
+  { text: "Why you are wearing a formal suit today?", correct: false, explanation: "Incorrect word order. Say 'Why are you wearing'." },
+
+  // Past Simple (Basic) & 'To Be' Past
+  { text: "I was at the train station at 8:00 AM.", correct: true, explanation: "Correct past form of 'To Be'." },
+  { text: "They was very tired after the long flight.", correct: false, explanation: "Incorrect. Plural past of 'To Be' is 'were'." },
+  { text: "She visited our office in London last week.", correct: true, explanation: "Correct regular past tense verb ('visited')." },
+  { text: "We didn't went to the restaurant yesterday.", correct: false, explanation: "Incorrect. Auxiliary 'didn't' needs base verb 'go'." },
+  { text: "Did you receive the invoice this morning?", correct: true, explanation: "Correct past simple question structure." },
+  { text: "He buyed a new suit for his job interview.", correct: false, explanation: "Incorrect. Irregular past tense of 'buy' is 'bought'." },
+  { text: "The presentation was clear and informative.", correct: true, explanation: "Correct past simple structure." },
+  { text: "Were you in the office yesterday afternoon?", correct: true, explanation: "Correct question format with past simple 'were'." },
+  { text: "I didn't saw the new schedule on the board.", correct: false, explanation: "Incorrect. Use base verb after didn't ('didn't see')." },
+  { text: "She lived in Paris for two years when she was young.", correct: true, explanation: "Correct regular past tense." },
+
+  // Articles & Nouns
+  { text: "He wants to buy an apartment in the city.", correct: true, explanation: "Correct article 'an' before vowel sound." },
+  { text: "She is a engineer at a software firm.", correct: false, explanation: "Incorrect. Use 'an engineer' before vowel sounds." },
+  { text: "I need to buy some paper for the printer.", correct: true, explanation: "Correct uncountable noun usage with 'some'." },
+  { text: "There are three childs in the waiting area.", correct: false, explanation: "Incorrect. Plural of 'child' is 'children'." },
+  { text: "We have two offices in Germany.", correct: true, explanation: "Correct plural noun formation." },
+  { text: "Can I have a water, please?", correct: false, explanation: "Incorrect/Imprecise. Uncountable; better: 'a glass of water' or 'some water'." },
+  { text: "He has a lot of experience in sales.", correct: true, explanation: "Correct use of 'a lot of' with uncountable noun." },
+  { text: "I saw two mans repairing the street lights.", correct: false, explanation: "Incorrect. Plural of 'man' is 'men'." },
+  { text: "This company produces good furniture.", correct: true, explanation: "Correct. 'Furniture' is uncountable (no 's')." },
+  { text: "She bought three informations at the desk.", correct: false, explanation: "Incorrect. 'Information' is uncountable (use 'some information')." },
+
+  // Pronouns & Possessives
+  { text: "This is my colleague, Sarah.", correct: true, explanation: "Correct possessive adjective." },
+  { text: "Him brother works as a doctor in London.", correct: false, explanation: "Incorrect. Use possessive pronoun 'His brother'." },
+  { text: "Give the documents to her after the meeting.", correct: true, explanation: "Correct object pronoun 'her'." },
+  { text: "Our car is old, but their is brand new.", correct: false, explanation: "Incorrect. Use possessive pronoun 'theirs'." },
+  { text: "They forgot their coats in the conference room.", correct: true, explanation: "Correct possessive adjective." },
+  { text: "Me and my manager discussed the contract.", correct: false, explanation: "Incorrect grammar in formal context; use 'My manager and I'." },
+  { text: "Is this notebook yours or mine?", correct: true, explanation: "Correct possessive pronouns." },
+  { text: "Her lives in an apartment downtown.", correct: false, explanation: "Incorrect. Use subject pronoun 'She'." },
+  { text: "We need to update our official address.", correct: true, explanation: "Correct possessive adjective 'our'." },
+  { text: "John lost he keys in the car park.", correct: false, explanation: "Incorrect. Use possessive adjective 'his'." },
+
+  // Prepositions (Time & Place)
+  { text: "The flight leaves at 6:00 PM.", correct: true, explanation: "Correct preposition 'at' for specific times." },
+  { text: "We always have team meetings in Monday morning.", correct: false, explanation: "Incorrect. Use 'on' for days ('on Monday morning')." },
+  { text: "My birthday is in May.", correct: true, explanation: "Correct preposition 'in' for months." },
+  { text: "He was born on 1985.", correct: false, explanation: "Incorrect. Use 'in' for years ('in 1985')." },
+  { text: "The keys are on the desk in my office.", correct: true, explanation: "Correct prepositions of place ('on', 'in')." },
+  { text: "She arrives to home at 7 PM every day.", correct: false, explanation: "Incorrect. Do not use preposition 'to' with 'home' ('arrives home')." },
+  { text: "We go on holiday in the summer.", correct: true, explanation: "Correct preposition 'in' for seasons." },
+  { text: "The bank is next of the supermarket.", correct: false, explanation: "Incorrect. Prepositional phrase is 'next to'." },
+  { text: "He lives at London.", correct: false, explanation: "Incorrect. Use 'in' for big cities ('in London')." },
+  { text: "The laptop is inside the black bag.", correct: true, explanation: "Correct preposition of location." },
+
+  // Modals & Ability (Can/Can't, Must/Have to)
+  { text: "She can speak three languages fluently.", correct: true, explanation: "Correct modal verb usage with base form." },
+  { text: "He can plays the piano very well.", correct: false, explanation: "Incorrect. Modal 'can' must be followed by base verb without '-s'." },
+  { text: "You must sign the contract before starting.", correct: true, explanation: "Correct usage of modal 'must'." },
+  { text: "I can't to open this file on my computer.", correct: false, explanation: "Incorrect. Do not use 'to' after 'can't'." },
+  { text: "Can you help me with this box?", correct: true, explanation: "Correct request using 'Can'." },
+  { text: "Employees must to wear security badges.", correct: false, explanation: "Incorrect. 'Must' is followed directly by base verb (no 'to')." },
+  { text: "We can meet tomorrow morning at nine.", correct: true, explanation: "Correct usage of 'can'." },
+  { text: "She can't coming to the phone right now.", correct: false, explanation: "Incorrect. Use base verb after 'can't' ('can't come')." },
+  { text: "You have to show your ID at the entrance.", correct: true, explanation: "Correct usage of 'have to'." },
+  { text: "I don't can understand this document.", correct: false, explanation: "Incorrect. Negative of 'can' is 'cannot' or 'can't'." },
+
+  // There is / There are & Quantifiers
+  { text: "There is a coffee machine in the break room.", correct: true, explanation: "Correct singular form 'There is'." },
+  { text: "There is three new emails in your inbox.", correct: false, explanation: "Incorrect. Use 'There are' for plural items." },
+  { text: "Are there any questions about the report?", correct: true, explanation: "Correct plural question form." },
+  { text: "There isn't many time left to finish.", correct: false, explanation: "Incorrect. Time is uncountable; use 'much' or 'a lot of'." },
+  { text: "There are some documents on your desk.", correct: true, explanation: "Correct plural form with 'some'." },
+  { text: "Is there any chairs available in room 2?", correct: false, explanation: "Incorrect. 'Chairs' is plural; use 'Are there'." },
+  { text: "There is no parking space near the office.", correct: true, explanation: "Correct singular negative form." },
+  { text: "We don't have some apples left.", correct: false, explanation: "Incorrect. Use 'any' in negative sentences ('don't have any')." },
+  { text: "How many employees work in your team?", correct: true, explanation: "Correct quantifier 'how many' for countable nouns." },
+  { text: "How much visitors are coming today?", correct: false, explanation: "Incorrect. Visitors are countable; use 'How many'." },
+
+  // Adjectives, Comparatives & Word Order
+  { text: "This project is more important than the last one.", correct: true, explanation: "Correct comparative form." },
+  { text: "She has a car red parked outside.", correct: false, explanation: "Incorrect word order. Adjectives go before nouns ('red car')." },
+  { text: "My new laptop is faster than my old one.", correct: true, explanation: "Correct comparative form." },
+  { text: "This office is more big than ours.", correct: false, explanation: "Incorrect. One-syllable adjective comparative is 'bigger'." },
+  { text: "He is a very careful driver.", correct: true, explanation: "Correct adjective placement." },
+  { text: "She is tall than her sister.", correct: false, explanation: "Incorrect. Use 'taller than'." },
+  { text: "Today is colder than yesterday.", correct: true, explanation: "Correct comparative adjective." },
+  { text: "It is an expensive city to live in.", correct: true, explanation: "Correct adjective position and article." },
+  { text: "He speaks English very good.", correct: false, explanation: "Incorrect. Modifying a verb requires adverb 'well' ('speaks English well')." },
+  { text: "This task is easier than I thought.", correct: true, explanation: "Correct comparative spelling (-y to -ier)." },
+
+  // Questions & Imperatives
+  { text: "Where do you work?", correct: true, explanation: "Correct question formation." },
+  { text: "Where she lives?", correct: false, explanation: "Incorrect. Needs auxiliary 'does' ('Where does she live?')." },
+  { text: "Please close the door when you leave.", correct: true, explanation: "Correct polite imperative." },
+  { text: "What time the train leaves?", correct: false, explanation: "Incorrect word order. Say 'What time does the train leave?'" },
+  { text: "Who is the manager of this department?", correct: true, explanation: "Correct question structure." },
+  { text: "Why you are late for the shift?", correct: false, explanation: "Incorrect word order. Say 'Why are you late?'" },
+  { text: "Do not touch the electrical wires.", correct: true, explanation: "Correct negative imperative command." },
+  { text: "How old are you?", correct: true, explanation: "Correct standard question form." },
+  { text: "When you finished the work?", correct: false, explanation: "Incorrect past question form. Say 'When did you finish...?'" },
+  { text: "Please send me the details by email.", correct: true, explanation: "Correct imperative request." },
+
+  // Demonstratives & Mixed Basic Structures
+  { text: "This contract is ready for signature.", correct: true, explanation: "Correct demonstrative pronoun." },
+  { text: "These shoes is very comfortable.", correct: false, explanation: "Incorrect plural agreement ('These shoes are...')." },
+  { text: "That building over there is the city hall.", correct: true, explanation: "Correct demonstrative for singular far object." },
+  { text: "Those documents on my desk needs filing.", correct: false, explanation: "Incorrect verb agreement ('documents... need')." },
+  { text: "I would like a cup of tea, please.", correct: true, explanation: "Correct polite request phrase." },
+  { text: "She don't have any meetings today.", correct: false, explanation: "Incorrect third person negative ('She doesn't')." },
+  { text: "Are they from Germany or Austria?", correct: true, explanation: "Correct question form with 'To Be'." },
+  { text: "He usually finish work at 5:00 PM.", correct: false, explanation: "Incorrect third person verb form ('finishes')." },
+  { text: "We are late for our appointment.", correct: true, explanation: "Correct subject-verb sentence." },
+  { text: "It is cold outside, take your coat.", correct: true, explanation: "Correct compound structure." },
+
+  // Final A1 Everyday Adult Scenarios
+  { text: "How much does this jacket cost?", correct: true, explanation: "Correct question for price." },
+  { text: "How much cost this shirt?", correct: false, explanation: "Incorrect question structure ('How much does this shirt cost?')." },
+  { text: "There aren't any tables available right now.", correct: true, explanation: "Correct negative plural statement." },
+  { text: "I am hungry, I want to eat lunch.", correct: true, explanation: "Correct structure." },
+  { text: "She can to type very fast.", correct: false, explanation: "Incorrect. Do not use 'to' after modal 'can'." },
+  { text: "My manager is always busy on Mondays.", correct: true, explanation: "Correct adverbs of frequency placement." },
+  { text: "They doesn't work on weekends.", correct: false, explanation: "Incorrect plural verb ('They don't work')." },
+  { text: "Do you like your current job?", correct: true, explanation: "Correct simple present question." },
+  { text: "He goes to work by train every day.", correct: true, explanation: "Correct preposition of transport ('by train')." },
+  { text: "She travel to London twice a month.", correct: false, explanation: "Incorrect third-person singular ('She travels')." },
+  { text: "We need three new computers for the office.", correct: true, explanation: "Correct plural count noun structure." },
+  { text: "Are you ready to order your food?", correct: true, explanation: "Correct question setup." },
+  { text: "I doesn't know the answer to this question.", correct: false, explanation: "Incorrect subject pronoun agreement ('I don't know')." },
+  { text: "The train station is near the hospital.", correct: true, explanation: "Correct preposition of place." },
+  { text: "He is a good employee who works hard.", correct: true, explanation: "Correct relative sentence structure." },
+  { text: "Her father work in a factory.", correct: false, explanation: "Incorrect subject-verb agreement ('Her father works')." },
+  { text: "Is there a pharmacy near here?", correct: true, explanation: "Correct question form." },
+  { text: "They are having lunch in the canteen.", correct: true, explanation: "Correct continuous action." },
+  { text: "I can't swimming in deep water.", correct: false, explanation: "Incorrect verb form after modal ('can't swim')." },
+  { text: "Welcome to our new office building.", correct: true, explanation: "Correct standard phrase." }
+];
+
+let selectedQuestions = [];
+let userAnswers = {};
+
+// Fisher-Yates Shuffle Algorithm
+function fisherYatesShuffle(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+function startTest() {
+  document.getElementById('landing-screen').classList.add('hidden');
+  document.getElementById('quiz-screen').classList.remove('hidden');
+  
+  // Pick 20 questions randomly using Fisher-Yates
+  selectedQuestions = fisherYatesShuffle(questionPool).slice(0, 20);
+  userAnswers = {};
+
+  renderQuestions();
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questions-container');
+  container.innerHTML = '';
+
+  selectedQuestions.forEach((q, index) => {
+    userAnswers[index] = { choice: null, wager: 1 }; // Default wager 1
+
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.innerHTML = `
+      <div class="question-header">
+        <span>QUESTION ${index + 1} OF 20</span>
+      </div>
+      <div class="sentence-text">"${q.text}"</div>
+      
+      <div class="options-grid">
+        <button type="button" class="choice-btn" id="btn-corr-${index}" onclick="selectChoice(${index}, true)">
+          ✓ Correct
+        </button>
+        <button type="button" class="choice-btn" id="btn-incorr-${index}" onclick="selectChoice(${index}, false)">
+          ✗ Has Error
+        </button>
+      </div>
+
+      <div class="wager-section">
+        <span>Confidence Bet:</span>
+        <div class="wager-options">
+          <button type="button" class="wager-btn selected" id="wager-${index}-1" onclick="selectWager(${index}, 1)">1 Pt</button>
+          <button type="button" class="wager-btn" id="wager-${index}-2" onclick="selectWager(${index}, 2)">2 Pts</button>
+          <button type="button" class="wager-btn" id="wager-${index}-3" onclick="selectWager(${index}, 3)">3 Pts</button>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function selectChoice(qIndex, choice) {
+  userAnswers[qIndex].choice = choice;
+  
+  const corrBtn = document.getElementById(`btn-corr-${qIndex}`);
+  const incorrBtn = document.getElementById(`btn-incorr-${qIndex}`);
+
+  corrBtn.className = 'choice-btn' + (choice === true ? ' selected-correct' : '');
+  incorrBtn.className = 'choice-btn' + (choice === false ? ' selected-incorrect' : '');
+
+  document.getElementById('validation-error').classList.add('hidden');
+}
+
+function selectWager(qIndex, wager) {
+  userAnswers[qIndex].wager = wager;
+
+  [1, 2, 3].forEach(w => {
+    const btn = document.getElementById(`wager-${qIndex}-${w}`);
+    if (w === wager) {
+      btn.classList.add('selected');
+    } else {
+      btn.classList.remove('selected');
+    }
+  });
+}
+
+function submitQuiz() {
+  // Check if all answered
+  const allAnswered = Object.values(userAnswers).every(a => a.choice !== null);
+  if (!allAnswered) {
+    document.getElementById('validation-error').classList.remove('hidden');
+    return;
+  }
+
+  calculateResults();
+}
+
+function calculateResults() {
+  let score = 0;
+  const feedbackList = document.getElementById('feedback-list');
+  feedbackList.innerHTML = '';
+
+  selectedQuestions.forEach((q, i) => {
+    const userChoice = userAnswers[i].choice;
+    const wager = userAnswers[i].wager;
+    const isCorrect = userChoice === q.correct;
+
+    if (isCorrect) {
+      score += wager;
+    } else {
+      score -= wager;
+    }
+
+    // Generate feedback element
+    const item = document.createElement('div');
+    item.className = `feedback-item ${isCorrect ? 'correct' : 'wrong'}`;
+    item.innerHTML = `
+      <div style="font-weight: 700; margin-bottom: 4px; display: flex; justify-content: space-between;">
+        <span>${i + 1}. "${q.text}"</span>
+        <span>${isCorrect ? `+${wager}` : `-${wager}`} Pts</span>
+      </div>
+      <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 4px;">
+        Your Answer: <strong>${userChoice ? 'Correct' : 'Has Error'}</strong> | 
+        Actual Status: <strong>${q.correct ? 'Correct' : 'Has Error'}</strong>
+      </div>
+      <div style="font-size: 0.9rem; font-weight: 500;">
+        ${q.explanation}
+      </div>
+    `;
+    feedbackList.appendChild(item);
+  });
+
+  // Score Bands Logic (-60 to +60 max score range)
+  const bandElement = document.getElementById('score-band');
+  const titleElement = document.getElementById('band-title');
+  const descElement = document.getElementById('band-desc');
+  document.getElementById('final-score-display').textContent = `${score} / 60 Points`;
+
+  if (score >= 40) {
+    // Band 4
+    bandElement.style.backgroundColor = '#dcfce7';
+    bandElement.style.color = '#14532d';
+    titleElement.textContent = 'Band 4: Excellent A1 Mastery!';
+    descElement.textContent = 'Fantastic performance! You show strong command of basic English grammar forms and high confidence in your knowledge. You are ready to move on to A2 Level topics.';
+  } else if (score >= 15) {
+    // Band 3
+    bandElement.style.backgroundColor = '#dbeafe';
+    bandElement.style.color = '#1e40af';
+    titleElement.textContent = 'Band 3: Solid Competency';
+    descElement.textContent = 'Good work! You have a firm grasp of many basic structures. Review the items you missed below to polish your grammar accuracy.';
+  } else if (score >= 0) {
+    // Band 2
+    bandElement.style.backgroundColor = '#fef3c7';
+    bandElement.style.color = '#92400e';
+    titleElement.textContent = 'Band 2: Developing Foundation';
+    descElement.textContent = 'You recognize some basic grammar patterns, but your confidence or consistency needs work. Focus on third-person verbs, basic past tense, and simple question structures.';
+  } else {
+    // Band 1
+    bandElement.style.backgroundColor = '#fee2e2';
+    bandElement.style.color = '#991b1b';
+    titleElement.textContent = 'Band 1: Needs Fundamental Practice';
+    descElement.textContent = 'You experienced difficulty with basic grammar forms or betting consistency. Don’t worry! Review essential rules like "to be", present simple verbs, and article usage, then try again.';
+  }
+
+  document.getElementById('quiz-screen').classList.add('hidden');
+  document.getElementById('results-screen').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+function restartTest() {
+  document.getElementById('results-screen').classList.add('hidden');
+  startTest();
+}
+</script>
+
+</body>
+</html>
