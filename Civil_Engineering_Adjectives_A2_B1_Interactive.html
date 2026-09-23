@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Civil Engineering English — Adjectives</title>
+<style>
+:root{
+  --navy:#18324a;--blue:#245b82;--light:#eef3f7;--border:#cbd5df;
+  --text:#1d2935;--muted:#61707d;--green:#176b45;--greenbg:#e8f5ee;
+  --red:#a33a32;--redbg:#fbeceb;--white:#fff;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#e9edf1;color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.4}
+.app{max-width:1050px;margin:28px auto;background:var(--white);box-shadow:0 8px 28px rgba(20,35,50,.12);min-height:700px}
+header{background:var(--navy);color:white;padding:24px 32px}
+header h1{margin:0;font-size:25px;font-weight:600}
+header p{margin:6px 0 0;color:#dce6ed;font-size:14px}
+main{padding:26px 32px 30px}
+.page{display:none}
+.page.active{display:block}
+h2{font-size:20px;margin:0 0 7px;color:var(--navy)}
+.intro{color:var(--muted);margin:0 0 20px}
+.vocab{display:grid;grid-template-columns:repeat(2,1fr);gap:9px 22px}
+.word{border:1px solid var(--border);padding:9px 11px;background:#fafcfd}
+.word b{color:var(--blue)}
+.example{font-size:13px;color:var(--muted);margin-top:3px}
+.note{margin-top:18px;padding:12px 14px;background:var(--light);border-left:4px solid var(--blue);font-size:14px}
+.progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px;color:var(--muted);font-size:13px}
+.progressbar{height:6px;background:#dce3e9;margin-bottom:24px}
+.progressbar span{display:block;height:100%;background:var(--blue);transition:width .2s}
+.question{border:1px solid var(--border);padding:17px;margin-bottom:14px;background:#fff}
+.qhead{font-size:13px;font-weight:bold;color:var(--blue);margin-bottom:7px}
+.prompt{font-size:16px;margin-bottom:12px}
+.options{display:grid;gap:7px}
+.option{border:1px solid var(--border);background:#f8fafb;padding:10px 12px;text-align:left;cursor:pointer;font-size:14px}
+.option:hover{background:#eef3f7}
+.option.selected{border-color:var(--blue);background:#eaf2f8}
+.option.correct{border-color:var(--green);background:var(--greenbg)}
+.option.incorrect{border-color:var(--red);background:var(--redbg)}
+.feedback{display:none;margin-top:10px;padding:9px 11px;font-size:13px}
+.feedback.show{display:block}
+.feedback.ok{background:var(--greenbg);color:var(--green)}
+.feedback.no{background:var(--redbg);color:var(--red)}
+button{font:inherit}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:22px;padding-top:18px;border-top:1px solid var(--border)}
+.nav button,.check{border:0;padding:11px 18px;cursor:pointer;font-weight:bold}
+.primary{background:var(--navy);color:#fff}
+.primary:disabled{opacity:.45;cursor:not-allowed}
+.secondary{background:#e8edf1;color:var(--navy)}
+.check{background:var(--blue);color:#fff;margin-top:8px}
+.drag-area{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.words{border:1px dashed #9eabb6;padding:12px;background:#fafcfd;min-height:90px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{padding:8px 10px;background:#e7edf2;border:1px solid #b9c5ce;cursor:grab;font-weight:bold;font-size:13px}
+.dropzone{min-height:44px;border:2px dashed #aebbc6;padding:9px;background:#fff;margin-top:8px}
+.dropzone.over{background:#eef5f9;border-color:var(--blue)}
+.dropzone.filled{border-style:solid;background:#f5f8fa}
+.tf{display:flex;gap:8px}
+.tf button{flex:1}
+.score{font-size:15px;font-weight:bold;color:var(--navy)}
+@media(max-width:700px){
+ main{padding:20px 16px}.app{margin:0;min-height:100vh}
+ .vocab,.drag-area{grid-template-columns:1fr}
+ header{padding:20px 18px}
+ .question{padding:14px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <h1>Civil Engineering English</h1>
+  <p>Useful adjectives • CEFR A2–B1 • Vocabulary practice</p>
+</header>
+<main>
+
+<section class="page active" id="page1">
+<h2>20 useful adjectives for civil engineers</h2>
+<p class="intro">Learn the meaning and see how each adjective is used in a professional engineering context.</p>
+<div class="vocab" id="vocab"></div>
+<div class="note"><b>Tip:</b> Learn the adjective with the noun: <i>strong material, stable foundations, durable structure, reliable supplier</i>.</div>
+<div class="nav"><span></span><button class="primary" id="startBtn">Start the 36-question exercise →</button></div>
+</section>
+
+<section class="page" id="exercisePage">
+<div class="progress"><span id="sectionLabel">Multiple choice</span><span id="score">0 / 36 correct</span></div>
+<div class="progressbar"><span id="bar"></span></div>
+<div id="questions"></div>
+<div class="nav">
+  <button class="secondary" id="backBtn">← Previous</button>
+  <button class="primary" id="nextBtn" disabled>Continue →</button>
+</div>
+</section>
+
+<section class="page" id="finishPage">
+<h2>Exercise complete</h2>
+<p class="intro">You have completed all 36 questions.</p>
+<div class="question">
+  <div class="score" id="finalScore"></div>
+  <p id="finalMessage"></p>
+</div>
+<div class="nav"><button class="secondary" id="restartBtn">Restart exercise</button><span></span></div>
+</section>
+
+</main>
+</div>
+
+<script>
+"use strict";
+
+const vocabulary = [
+["strong","able to resist force","This material is very strong."],
+["weak","not strong; easily damaged","This part of the structure is weak."],
+["heavy","having a lot of weight","The concrete blocks are heavy."],
+["light","not heavy","We need a light material."],
+["safe","not dangerous","The structure is safe."],
+["dangerous","likely to cause harm","Working at this height can be dangerous."],
+["stable","not likely to move or fall","The foundations are stable."],
+["unstable","likely to move or fall","The ground is unstable here."],
+["durable","able to last a long time","We need a durable material."],
+["flexible","able to bend or change shape","This material is more flexible."],
+["rigid","not able to bend easily","Steel is strong and rigid."],
+["solid","firm and strong","The foundations are solid."],
+["efficient","working well without wasting time, energy or materials","This system is very efficient."],
+["reliable","working correctly and consistently","We need a reliable supplier."],
+["expensive","costing a lot of money","This solution is too expensive."],
+["cheap","costing little money","It is a cheap solution, but is it durable?"],
+["suitable","right for a particular purpose","This material is suitable for outdoor use."],
+["practical","easy and realistic to use","This is a practical solution."],
+["complex","complicated; with many parts or steps","It is a complex project."],
+["temporary","designed to be used for a limited time","We need a temporary structure."]
+];
+
+const mc = [
+["A material that can resist a lot of force is…","strong"],
+["If a building is not likely to move or fall, it is…","stable"],
+["A material that lasts for many years is…","durable"],
+["If equipment weighs a lot, it is…","heavy"],
+["A solution that is realistic and easy to use is…","practical"],
+["A supplier that usually does what it promises is…","reliable"],
+["A structure designed only for a short period is…","temporary"],
+["A material that bends easily is…","flexible"],
+["A system that works well without wasting energy is…","efficient"],
+["A project with many difficult parts is…","complex"],
+["A material that does not bend easily is…","rigid"],
+["A solution that costs a lot of money is…","expensive"]
+];
+
+const drag = [
+["The engineer needs a ______ solution that can actually be built on site.","practical"],
+["The foundations must be ______ before construction continues.","stable"],
+["We need a ______ material because the structure must last for decades.","durable"],
+["The crane is very ______ and needs special transport.","heavy"],
+["This is a ______ structure; it will be removed after the project.","temporary"],
+["The new process is more ______ and uses less energy.","efficient"],
+["The ground is ______ after the heavy rain.","unstable"],
+["Steel is strong and ______, so it does not bend easily.","rigid"],
+["The company needs a ______ supplier who can deliver on time.","reliable"],
+["This material is ______ for use in outdoor conditions.","suitable"],
+["The new design is more ______ and can bend without breaking.","flexible"],
+["The proposed system is too ______ for this project's budget.","expensive"]
+];
+
+const tf = [
+["A weak structure is very strong.","False"],
+["A light material does not weigh much.","True"],
+["A dangerous situation has no risk.","False"],
+["A solid foundation is firm and strong.","True"],
+["A cheap solution costs a lot of money.","False"],
+["A suitable material is right for a particular purpose.","True"],
+["An unstable structure is unlikely to move or fall.","False"],
+["A rigid material can bend very easily.","False"],
+["An efficient system avoids unnecessary waste.","True"],
+["A complex project can have many difficult parts.","True"],
+["A reliable supplier works consistently.","True"],
+["A temporary structure is normally designed to stay forever.","False"]
+];
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+const vocabEl=document.getElementById("vocab");
+vocabulary.forEach(v=>{
+  const d=document.createElement("div");
+  d.className="word";
+  d.innerHTML="<b>"+v[0]+"</b> — "+v[1]+"<div class='example'>"+v[2]+"</div>";
+  vocabEl.appendChild(d);
+});
+
+let sections=[];
+let currentSection=0;
+let sectionAnswers=[];
+let totalCorrect=0;
+
+function makeMC(){
+ return mc.map(x=>({type:"mc",prompt:x[0],answer:x[1]}));
+}
+function makeDrag(){
+ return drag.map(x=>({type:"drag",prompt:x[0],answer:x[1]}));
+}
+function makeTF(){
+ return tf.map(x=>({type:"tf",prompt:x[0],answer:x[1]}));
+}
+
+function buildQuestions(){
+  sections=[makeMC(),makeDrag(),makeTF()];
+  sections.forEach(s=>shuffle(s));
+  sectionAnswers=sections.map(()=>Array(12).fill(null));
+  totalCorrect=0;
+}
+
+function showPage(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ window.scrollTo(0,0);
+}
+
+function renderSection(){
+ const data=sections[currentSection];
+ const container=document.getElementById("questions");
+ container.innerHTML="";
+ const labels=["Multiple choice","Drag and drop","True / False"];
+ document.getElementById("sectionLabel").textContent=labels[currentSection]+" • 12 questions";
+ document.getElementById("bar").style.width=((currentSection+1)/3*100)+"%";
+ document.getElementById("nextBtn").disabled=sectionAnswers[currentSection].some(x=>x===null);
+
+ data.forEach((q,i)=>{
+  const box=document.createElement("div");
+  box.className="question";
+  box.dataset.index=i;
+  const head=document.createElement("div");
+  head.className="qhead";
+  head.textContent=(i+1)+" / 12";
+  const prompt=document.createElement("div");
+  prompt.className="prompt";
+  prompt.textContent=q.prompt;
+  box.append(head,prompt);
+
+  if(q.type==="mc"){
+    const opts=document.createElement("div"); opts.className="options";
+    const choices=shuffle([q.answer,...vocabulary.filter(v=>v[0]!==q.answer).map(v=>v[0]).slice(0,3)]);
+    choices.forEach(c=>{
+      const b=document.createElement("button"); b.type="button"; b.className="option"; b.textContent=c;
+      b.addEventListener("click",()=>answerMC(i,c,box));
+      opts.appendChild(b);
+    });
+    box.appendChild(opts);
+  } else if(q.type==="drag"){
+    const words=document.createElement("div"); words.className="words";
+    const chips=document.createElement("div"); chips.className="chips";
+    const choices=shuffle([q.answer,...vocabulary.filter(v=>v[0]!==q.answer).map(v=>v[0]).slice(0,2)]);
+    choices.forEach(c=>{
+      const chip=document.createElement("button"); chip.type="button"; chip.className="chip"; chip.textContent=c;
+      chip.draggable=true; chip.dataset.word=c;
+      chip.addEventListener("dragstart",e=>e.dataTransfer.setData("text/plain",c));
+      chip.addEventListener("click",()=>selectChip(chip,box,i));
+      chips.appendChild(chip);
+    });
+    words.appendChild(chips); box.appendChild(words);
+    const dz=document.createElement("div"); dz.className="dropzone"; dz.textContent="Drop the correct adjective here";
+    dz.addEventListener("dragover",e=>{e.preventDefault();dz.classList.add("over")});
+    dz.addEventListener("dragleave",()=>dz.classList.remove("over"));
+    dz.addEventListener("drop",e=>{e.preventDefault();dz.classList.remove("over");placeDrag(e.dataTransfer.getData("text/plain"),box,i)});
+    box.appendChild(dz);
+  } else {
+    const tfbox=document.createElement("div"); tfbox.className="tf";
+    ["True","False"].forEach(c=>{
+      const b=document.createElement("button"); b.type="button"; b.className="option"; b.textContent=c;
+      b.addEventListener("click",()=>answerTF(i,c,box));
+      tfbox.appendChild(b);
+    });
+    box.appendChild(tfbox);
+  }
+  const fb=document.createElement("div"); fb.className="feedback"; box.appendChild(fb);
+  container.appendChild(box);
+  restoreAnswer(box,i,q);
+ });
+}
+
+function feedback(box,ok,q){
+ const fb=box.querySelector(".feedback");
+ fb.className="feedback show "+(ok?"ok":"no");
+ fb.textContent=ok?"Correct.":"Not quite. Correct answer: "+q.answer;
+}
+
+function record(i,answer,box){
+ const q=sections[currentSection][i];
+ const old=sectionAnswers[currentSection][i];
+ if(old===answer)return;
+ if(old!==null && old===q.answer) totalCorrect--;
+ sectionAnswers[currentSection][i]=answer;
+ if(answer===q.answer) totalCorrect++;
+ document.getElementById("score").textContent=totalCorrect+" / 36 correct";
+ document.getElementById("nextBtn").disabled=sectionAnswers[currentSection].some(x=>x===null);
+ feedback(box,answer===q.answer,q);
+}
+
+function answerMC(i,c,box){
+ box.querySelectorAll(".option").forEach(b=>b.classList.remove("selected","correct","incorrect"));
+ const chosen=[...box.querySelectorAll(".option")].find(b=>b.textContent===c);
+ chosen.classList.add("selected",c===sections[currentSection][i].answer?"correct":"incorrect");
+ record(i,c,box);
+}
+function answerTF(i,c,box){
+ box.querySelectorAll(".option").forEach(b=>b.classList.remove("selected","correct","incorrect"));
+ const chosen=[...box.querySelectorAll(".option")].find(b=>b.textContent===c);
+ chosen.classList.add("selected",c===sections[currentSection][i].answer?"correct":"incorrect");
+ record(i,c,box);
+}
+function selectChip(chip,box,i){placeDrag(chip.dataset.word,box,i)}
+function placeDrag(word,box,i){
+ const dz=box.querySelector(".dropzone");
+ dz.textContent=word; dz.classList.add("filled");
+ record(i,word,box);
+}
+function restoreAnswer(box,i,q){
+ const a=sectionAnswers[currentSection][i];
+ if(a===null)return;
+ if(q.type==="drag"){box.querySelector(".dropzone").textContent=a;box.querySelector(".dropzone").classList.add("filled")}
+ else {
+   box.querySelectorAll(".option").forEach(b=>{
+     if(b.textContent===a)b.classList.add("selected",a===q.answer?"correct":"incorrect");
+   });
+ }
+ feedback(box,a===q.answer,q);
+}
+
+document.getElementById("startBtn").addEventListener("click",()=>{
+ buildQuestions(); currentSection=0; renderSection(); showPage("exercisePage");
+});
+document.getElementById("backBtn").addEventListener("click",()=>{
+ if(currentSection>0){currentSection--;renderSection();window.scrollTo(0,0)}
+ else showPage("page1");
+});
+document.getElementById("nextBtn").addEventListener("click",()=>{
+ if(sectionAnswers[currentSection].some(x=>x===null))return;
+ if(currentSection<2){currentSection++;renderSection();window.scrollTo(0,0)}
+ else{
+  document.getElementById("finalScore").textContent="Final score: "+totalCorrect+" / 36";
+  document.getElementById("finalMessage").textContent=totalCorrect>=32?"Excellent work.":totalCorrect>=26?"Good work. Review the adjectives you missed.":"Review the vocabulary presentation and try the exercise again.";
+  showPage("finishPage");
+ }
+});
+document.getElementById("restartBtn").addEventListener("click",()=>{
+ buildQuestions();currentSection=0;renderSection();showPage("exercisePage");
+});
+</script>
+</body>
+</html>
