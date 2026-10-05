@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics & Transport - English Worksheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        
+        /* Drag and Drop Styles */
+        .draggable {
+            cursor: grab;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .draggable:active {
+            cursor: grabbing;
+            transform: scale(0.98);
+        }
+        .draggable.selected {
+            ring: 2px solid #3b82f6;
+            background-color: #dbeafe;
+        }
+        .drop-zone {
+            min-height: 2.5rem;
+            min-width: 8rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .drop-zone.dragover {
+            background-color: #e2e8f0;
+            border-color: #64748b;
+            border-style: solid;
+        }
+        
+        /* Input Print/Download Hiding */
+        @media print {
+            .no-print { display: none !important; }
+            .print-border { border: 1px solid #cbd5e1 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-20">
+
+    <header class="bg-slate-800 text-white py-8 shadow-md">
+        <div class="max-w-4xl mx-auto px-4 md:px-6">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">Logistics & Transport</h1>
+            <p class="text-slate-300 text-lg">English Worksheet - CEFR Level A2</p>
+            <div class="mt-4 inline-block bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded-full">
+                Department: Logistics
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 md:px-6 py-8 space-y-12" id="worksheet-container">
+        
+        <section class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
+            <div class="mb-6 border-b border-slate-200 pb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Part 1: Vocabulary Matching</h2>
+                <p class="text-slate-600 mt-2">Drag and drop (or click to select and place) the professional logistics terms into the correct boxes next to their definitions.</p>
+            </div>
+
+            <!-- Word Pool -->
+            <div id="word-pool" class="flex flex-wrap gap-3 mb-8 p-4 bg-slate-50 border border-slate-200 rounded-lg min-h-[4rem]">
+                <div draggable="true" id="word-1" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="Cargo">Cargo</div>
+                <div draggable="true" id="word-2" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="Vessel">Vessel</div>
+                <div draggable="true" id="word-3" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="Route">Route</div>
+                <div draggable="true" id="word-4" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="HGV">HGV</div>
+                <div draggable="true" id="word-5" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="Transit time">Transit time</div>
+                <div draggable="true" id="word-6" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="Customs">Customs</div>
+                <div draggable="true" id="word-7" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="Warehouse">Warehouse</div>
+                <div draggable="true" id="word-8" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="Shipment">Shipment</div>
+                <div draggable="true" id="word-9" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="Freight train">Freight train</div>
+                <div draggable="true" id="word-10" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="Cargo plane">Cargo plane</div>
+                <div draggable="true" id="word-11" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="Container">Container</div>
+                <div draggable="true" id="word-12" class="draggable bg-white border border-slate-300 shadow-sm px-4 py-2 rounded font-medium text-slate-700 hover:bg-slate-50" data-word="Port">Port</div>
+            </div>
+
+            <!-- Definitions -->
+            <div class="space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="Route"></div>
+                    <span class="text-slate-700">1. The specific path or way chosen to transport goods from origin to destination.</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="Container"></div>
+                    <span class="text-slate-700">2. A standard-sized metal box used to move goods efficiently across different transport modes.</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="Cargo"></div>
+                    <span class="text-slate-700">3. The goods carried by a ship, aircraft, or other large vehicle.</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="Vessel"></div>
+                    <span class="text-slate-700">4. A large ship or boat used for ocean transport.</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="Customs"></div>
+                    <span class="text-slate-700">5. The official department that collects taxes and inspects goods entering or leaving a country.</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="Shipment"></div>
+                    <span class="text-slate-700">6. A specific quantity of goods sent together to a customer or distributor.</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="Warehouse"></div>
+                    <span class="text-slate-700">7. A large commercial building used for storing goods before distribution.</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="HGV"></div>
+                    <span class="text-slate-700">8. A large, heavy vehicle used for transporting goods by road (Heavy Goods Vehicle).</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="Transit time"></div>
+                    <span class="text-slate-700">9. The total amount of time it takes for goods to travel from the sender to the receiver.</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="Freight train"></div>
+                    <span class="text-slate-700">10. A series of railway cars used exclusively to transport goods over land.</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="Cargo plane"></div>
+                    <span class="text-slate-700">11. An aircraft specifically designed to carry goods rather than passengers.</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="drop-zone border-2 border-dashed border-slate-300 rounded flex-shrink-0 bg-slate-50 flex items-center justify-center p-1" data-expected="Port"></div>
+                    <span class="text-slate-700">12. A maritime facility where ships load and unload their goods.</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
+            <div class="mb-6 border-b border-slate-200 pb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Part 2: Sentence Completion</h2>
+                <p class="text-slate-600 mt-2">Type the exact words from Part 1 into the gaps to complete the sentences based on an electrical appliance manufacturer's logistics.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <p class="leading-loose text-slate-700">1. We need to load the refrigerators into the standard 40-foot <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="Container"> for sea transport.</p>
+                <p class="leading-loose text-slate-700">2. The <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="Vessel"> from Shanghai will arrive at the European docks next Monday.</p>
+                <p class="leading-loose text-slate-700">3. Due to bad weather at sea, the total <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="Transit time"> will increase by three days.</p>
+                <p class="leading-loose text-slate-700">4. We hired a large <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="HGV"> to deliver the washing machines directly to the supermarket by road.</p>
+                <p class="leading-loose text-slate-700">5. Our main distribution <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="Warehouse"> in Germany holds over 20,000 electrical appliances.</p>
+                <p class="leading-loose text-slate-700">6. The border officers at <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="Customs"> must inspect our paperwork before the goods enter Switzerland.</p>
+                <p class="leading-loose text-slate-700">7. Please plan a new delivery <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="Route"> to avoid the heavy traffic on the main motorway.</p>
+                <p class="leading-loose text-slate-700">8. The urgent <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="Shipment"> of microwaves was successfully delivered to the wholesaler this morning.</p>
+                <p class="leading-loose text-slate-700">9. A large <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="Cargo plane"> is the fastest way to transport expensive microchips from Asia.</p>
+                <p class="leading-loose text-slate-700">10. The heavy <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="Cargo"> was carefully lifted off the ship using two massive cranes.</p>
+                <p class="leading-loose text-slate-700">11. Sending goods by <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="Freight train"> across Europe is more environmentally friendly than using trucks.</p>
+                <p class="leading-loose text-slate-700">12. Rotterdam is the busiest maritime <input type="text" class="text-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-32 text-center text-blue-700 font-medium" data-expected="Port"> in Europe for unloading international goods.</p>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
+            <div class="mb-6 border-b border-slate-200 pb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Part 3: True or False</h2>
+                <p class="text-slate-600 mt-2">Read the statements comparing European and intercontinental transport, and choose True or False.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 hover:bg-slate-50 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">1. Sea transport is generally cheaper than air transport for heavy goods.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="True">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">2. A cargo plane can carry more goods than a large ocean vessel.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="False">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 hover:bg-slate-50 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">3. Rail transport is highly affected by weekend road traffic jams.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="False">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">4. Road transport allows for flexible door-to-door delivery.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="True">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 hover:bg-slate-50 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">5. Intercontinental transport by ship is the fastest delivery method.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="False">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">6. Customs procedures are only required for domestic transport within the same country.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="False">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 hover:bg-slate-50 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">7. Transporting goods by train is generally slower than flying them.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="True">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">8. Inland waterways and rivers cannot be used for commercial logistics.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="False">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 hover:bg-slate-50 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">9. Ocean freight is ideal for urgent, next-day intercontinental deliveries.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="False">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">10. A combination of train and truck transport is common within Europe.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="True">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 hover:bg-slate-50 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">11. Bad weather at sea never causes delays for international shipping.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="False">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between md:items-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg">
+                    <span class="text-slate-700 mb-2 md:mb-0 pr-4">12. Air freight is the most expensive method for transporting heavy washing machines.</span>
+                    <select class="tf-select border border-slate-300 rounded px-3 py-1 bg-white focus:outline-none focus:border-blue-500" data-expected="True">
+                        <option value="">Select...</option>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
+            <div class="mb-6 border-b border-slate-200 pb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Part 4: Comparatives and Superlatives</h2>
+                <p class="text-slate-600 mt-2">Complete the two emails. Use the <strong>comparative</strong> (e.g., faster) or <strong>superlative</strong> (e.g., fastest) form of the adjectives in brackets. <em>Do not type "the" in your answer if it is already in the text.</em></p>
+                <div class="mt-4 p-3 bg-blue-50 rounded text-blue-900 border border-blue-100 text-sm font-medium">
+                    Word list: fast, expensive, cheap, slow, heavy, good, safe, easy, late, bad, long, big
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Email 1 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-lg overflow-hidden">
+                    <div class="bg-slate-200 px-4 py-2 border-b border-slate-300 font-medium text-slate-700 flex justify-between items-center">
+                        <span>New Message</span>
+                    </div>
+                    <div class="p-5 text-slate-800 leading-relaxed">
+                        <p class="mb-4">Dear Mr. Smith,</p>
+                        <p class="mb-4">
+                            Thank you for your order of 500 televisions. We are planning the transport now. Sending them by air is the 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-28 text-center text-blue-700 font-medium bg-transparent" data-expected="fastest"> (fast) way, but it is also the 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-40 text-center text-blue-700 font-medium bg-transparent" data-expected="most expensive"> (expensive) option. Sea transport is 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-28 text-center text-blue-700 font-medium bg-transparent" data-expected="cheaper"> (cheap) than air, but it is much 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-28 text-center text-blue-700 font-medium bg-transparent" data-expected="slower"> (slow).
+                        </p>
+                        <p class="mb-4">
+                            Because this order is 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-28 text-center text-blue-700 font-medium bg-transparent" data-expected="heavier"> (heavy) than your last one, we think rail is the 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-24 text-center text-blue-700 font-medium bg-transparent" data-expected="best"> (good) choice. A train is 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-24 text-center text-blue-700 font-medium bg-transparent" data-expected="safer"> (safe) than a truck on winter roads, and it is 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-24 text-center text-blue-700 font-medium bg-transparent" data-expected="easier"> (easy) to track.
+                        </p>
+                        <p class="mb-4">Please let me know what you prefer.</p>
+                        <p>Regards,<br>Logistics Team</p>
+                    </div>
+                </div>
+
+                <!-- Email 2 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-lg overflow-hidden">
+                    <div class="bg-slate-200 px-4 py-2 border-b border-slate-300 font-medium text-slate-700 flex justify-between items-center">
+                        <span>Reply: New Message</span>
+                    </div>
+                    <div class="p-5 text-slate-800 leading-relaxed">
+                        <p class="mb-4">Dear Logistics Team,</p>
+                        <p class="mb-4">
+                            Thank you for your email.
+                        </p>
+                        <p class="mb-4">
+                            Our customers are angry because the last delivery was the 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-28 text-center text-blue-700 font-medium bg-transparent" data-expected="latest"> (late) one this year. The 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-24 text-center text-blue-700 font-medium bg-transparent" data-expected="worst"> (bad) thing for our business is angry customers!
+                        </p>
+                        <p class="mb-4">
+                            I agree that trains are good, but we need these TVs quickly. A train journey is 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-28 text-center text-blue-700 font-medium bg-transparent" data-expected="longer"> (long) than a truck journey within Europe. Can we use the 
+                            <input type="text" class="comp-input border-b-2 border-slate-400 focus:border-blue-500 outline-none px-2 w-28 text-center text-blue-700 font-medium bg-transparent" data-expected="biggest"> (big) trucks you have instead? It will save us some time.
+                        </p>
+                        <p>Thank you,<br>Mr. Smith</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-300 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] no-print z-50">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <button id="check-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded shadow transition-colors">
+                    Check Answers
+                </button>
+                <div id="score-display" class="hidden text-lg font-bold text-slate-700">
+                    Score: <span id="score-value" class="text-blue-600">0</span> / 48
+                </div>
+            </div>
+            <button id="download-btn" class="bg-slate-600 hover:bg-slate-700 text-white font-semibold py-2 px-6 rounded shadow transition-colors flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download Worksheet
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Drag and Drop Logic (with Click-to-place fallback) ---
+            const draggables = document.querySelectorAll('.draggable');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            const wordPool = document.getElementById('word-pool');
+            let selectedDraggable = null;
+
+            draggables.forEach(draggable => {
+                // Standard Drag
+                draggable.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', draggable.id);
+                    draggable.classList.add('opacity-50');
+                });
+                
+                draggable.addEventListener('dragend', () => {
+                    draggable.classList.remove('opacity-50');
+                });
+
+                // Click-to-select fallback
+                draggable.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // If already selected, unselect
+                    if (selectedDraggable === draggable) {
+                        draggable.classList.remove('ring', 'ring-blue-500', 'bg-blue-50');
+                        selectedDraggable = null;
+                    } else {
+                        // Unselect previous
+                        if (selectedDraggable) {
+                            selectedDraggable.classList.remove('ring', 'ring-blue-500', 'bg-blue-50');
+                        }
+                        // Select new
+                        draggable.classList.add('ring', 'ring-blue-500', 'bg-blue-50');
+                        selectedDraggable = draggable;
+                    }
+                    
+                    // If clicked inside a dropzone while another is selected (should swap or ignore)
+                    // Simplified: if clicked while in a dropzone, move back to pool
+                    if(draggable.parentElement.classList.contains('drop-zone') && !selectedDraggable) {
+                         wordPool.appendChild(draggable);
+                    }
+                });
+            });
+
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    zone.classList.add('dragover');
+                });
+
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('dragover');
+                });
+
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    zone.classList.remove('dragover');
+                    const id = e.dataTransfer.getData('text/plain');
+                    const draggableElement = document.getElementById(id);
+                    
+                    if (draggableElement) {
+                        handleDrop(zone, draggableElement);
+                    }
+                });
+
+                // Click-to-place fallback handling
+                zone.addEventListener('click', () => {
+                    if (selectedDraggable) {
+                        handleDrop(zone, selectedDraggable);
+                        selectedDraggable.classList.remove('ring', 'ring-blue-500', 'bg-blue-50');
+                        selectedDraggable = null;
+                    } else if (zone.children.length > 0) {
+                        // Click empty drop zone with item to return to pool
+                        wordPool.appendChild(zone.children[0]);
+                    }
+                });
+            });
+
+            function handleDrop(zone, element) {
+                // If zone already has an item, return existing to pool
+                if (zone.children.length > 0) {
+                    wordPool.appendChild(zone.children[0]);
+                }
+                zone.appendChild(element);
+                // Clear any previous validation styling when moved
+                zone.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500');
+            }
+
+
+            // --- Check Answers Logic ---
+            const checkBtn = document.getElementById('check-btn');
+            const scoreDisplay = document.getElementById('score-display');
+            const scoreValue = document.getElementById('score-value');
+
+            checkBtn.addEventListener('click', () => {
+                let score = 0;
+                const totalQuestions = 48; // 12 + 12 + 12 + 12
+
+                // Check Part 1 (Drop Zones)
+                dropZones.forEach(zone => {
+                    const expected = zone.getAttribute('data-expected');
+                    zone.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500');
+                    
+                    if (zone.children.length > 0) {
+                        const actual = zone.children[0].getAttribute('data-word');
+                        if (actual === expected) {
+                            score++;
+                            zone.classList.add('bg-green-100', 'border-green-500');
+                        } else {
+                            zone.classList.add('bg-red-100', 'border-red-500');
+                        }
+                    } else {
+                        zone.classList.add('bg-red-100', 'border-red-500'); // Empty is wrong
+                    }
+                });
+
+                // Check Part 2 & Part 4 (Text Inputs)
+                const textInputs = document.querySelectorAll('.text-input, .comp-input');
+                textInputs.forEach(input => {
+                    const expected = input.getAttribute('data-expected').toLowerCase();
+                    const actual = input.value.trim().toLowerCase();
+                    input.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500', 'text-blue-700', 'text-green-700', 'text-red-700');
+                    
+                    if (actual === expected) {
+                        score++;
+                        input.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
+                    } else {
+                        input.classList.add('bg-red-100', 'border-red-500', 'text-red-700');
+                    }
+                });
+
+                // Check Part 3 (Selects / T/F)
+                const selects = document.querySelectorAll('.tf-select');
+                selects.forEach(select => {
+                    const expected = select.getAttribute('data-expected');
+                    const actual = select.value;
+                    select.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500', 'text-green-700', 'text-red-700');
+                    
+                    if (actual === expected) {
+                        score++;
+                        select.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
+                    } else if (actual !== "") {
+                        select.classList.add('bg-red-100', 'border-red-500', 'text-red-700');
+                    } else {
+                        select.classList.add('bg-red-100', 'border-red-500'); // Empty is wrong
+                    }
+                });
+
+                // Update UI
+                scoreValue.textContent = score;
+                scoreDisplay.classList.remove('hidden');
+                
+                // Provide visual feedback mechanism in lieu of alert
+                const originalText = checkBtn.textContent;
+                checkBtn.textContent = "Checked!";
+                checkBtn.classList.add('bg-green-600');
+                checkBtn.classList.remove('bg-blue-600');
+                setTimeout(() => {
+                    checkBtn.textContent = originalText;
+                    checkBtn.classList.add('bg-blue-600');
+                    checkBtn.classList.remove('bg-green-600');
+                }, 2000);
+            });
+
+            // --- Download Logic ---
+            const downloadBtn = document.getElementById('download-btn');
+            
+            downloadBtn.addEventListener('click', () => {
+                // Clone the document to clean up user inputs for a fresh download
+                const cloneDoc = document.cloneNode(true);
+                
+                // Clean Inputs in clone
+                cloneDoc.querySelectorAll('.text-input, .comp-input').forEach(input => {
+                    input.setAttribute('value', ''); 
+                    input.value = '';
+                    input.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500', 'text-green-700', 'text-red-700');
+                    input.classList.add('text-blue-700');
+                });
+                
+                // Clean Selects in clone
+                cloneDoc.querySelectorAll('.tf-select').forEach(select => {
+                    select.querySelectorAll('option').forEach(opt => opt.removeAttribute('selected'));
+                    select.selectedIndex = 0;
+                    select.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500', 'text-green-700', 'text-red-700');
+                });
+
+                // Clean Drag and Drop in clone
+                const clonePool = cloneDoc.getElementById('word-pool');
+                cloneDoc.querySelectorAll('.drop-zone').forEach(zone => {
+                    zone.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500');
+                    while (zone.firstChild) {
+                        // Move elements back to pool in the clone
+                        const el = zone.firstChild;
+                        el.classList.remove('ring', 'ring-blue-500', 'bg-blue-50');
+                        clonePool.appendChild(el);
+                    }
+                });
+                
+                // Hide score in clone
+                cloneDoc.getElementById('score-display').classList.add('hidden');
+
+                // Generate HTML String
+                const htmlContent = "<!DOCTYPE html>\n" + cloneDoc.documentElement.outerHTML;
+                
+                // Create Blob and Download
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Logistics_English_Worksheet.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        });
+    </script>
+</body>
+</html>
