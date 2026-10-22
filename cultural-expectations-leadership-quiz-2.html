@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leading Across Cultures — Decision Challenge</title>
+<style>
+:root{--ink:#172b3a;--muted:#536675;--paper:#f5f7f8;--card:#fff;--line:#d8e1e7;--accent:#176b68;--accent2:#e3f3f0;--gold:#e8b75a;--shadow:0 14px 40px rgba(23,43,58,.09)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:#122d3a;color:#fff;padding:18px max(22px,calc((100vw - 980px)/2));display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:#b9d8d7;font-weight:750}.topnote{font-size:.88rem;color:#d6e4e8}
+main{max-width:900px;margin:34px auto;padding:0 20px 60px}.hero{background:linear-gradient(125deg,#153744,#176b68);color:white;padding:clamp(26px,5vw,52px);border-radius:22px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;width:230px;height:230px;border:1px solid #ffffff2a;border-radius:50%;right:-45px;top:-70px;box-shadow:0 0 0 28px #ffffff0a,0 0 0 58px #ffffff08}
+.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:.75rem;font-weight:800;color:#bde6dc}.hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.08;max-width:650px;margin:12px 0 16px}.hero p{max-width:650px;color:#e1eeee;font-size:1.06rem}.hero .actions{margin-top:24px}
+button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:12px 18px;font-weight:750;transition:transform .12s,background .12s}button:hover{transform:translateY(-1px)}button:focus-visible,.choice:focus-visible{outline:3px solid #e8b75a;outline-offset:3px}
+.primary{background:#f0c56b;color:#182d38}.primary:hover{background:#ffda8d}.secondary{background:#e8efef;color:#173541}.ghost{background:transparent;color:inherit;border:1px solid currentColor}
+.intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 26px}.info{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}.info strong{display:block;font-size:1.04rem;margin-bottom:4px}.info span{font-size:.92rem;color:var(--muted)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,34px);box-shadow:var(--shadow)}.hidden{display:none!important}
+.progressline{display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--muted);font-size:.9rem;font-weight:700}.track{height:7px;background:#e5ebee;border-radius:99px;margin:12px 0 26px;overflow:hidden}.track span{display:block;height:100%;background:var(--accent);width:0;transition:width .25s}
+.tag{display:inline-block;background:var(--accent2);color:#145c59;padding:5px 10px;border-radius:99px;font-size:.78rem;font-weight:800;letter-spacing:.03em}
+h2{font-size:clamp(1.5rem,3vw,2.15rem);line-height:1.2;margin:14px 0}.context{color:var(--muted);font-size:1.02rem;margin-bottom:22px}.question{font-size:1.12rem;font-weight:750;margin:18px 0 14px}
+.choices{display:grid;gap:11px}.choice{display:flex;gap:13px;text-align:left;width:100%;background:#fff;border:1.5px solid var(--line);padding:15px;border-radius:13px;color:var(--ink);font-weight:500;line-height:1.45}.choice:hover{border-color:#6da8a4;background:#f8fcfb}.letter{flex:0 0 30px;height:30px;border-radius:8px;display:grid;place-items:center;background:#eaf0f2;font-weight:850;color:#34515d}.choice.selected{border-color:var(--accent);background:#eef8f6}.choice.selected .letter{background:var(--accent);color:white}
+.feedback{margin-top:20px;border-radius:14px;padding:18px 20px;background:#edf5f4;border-left:4px solid var(--accent)}.feedback h3{margin:0 0 5px;font-size:1.02rem}.feedback p{margin:0}.feedback .quality{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:#176b68;font-weight:850;margin-bottom:7px}
+.navrow{display:flex;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap}.navrow .right{display:flex;gap:10px;margin-left:auto}
+.summary-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.stat{padding:17px;background:#f1f6f6;border-radius:12px;text-align:center}.stat strong{display:block;font-size:1.6rem}.stat span{font-size:.85rem;color:var(--muted)}
+.debrief-list{display:grid;gap:12px;margin:18px 0}.debrief-q{border:1px solid var(--line);border-radius:13px;padding:16px;background:white}.debrief-q strong{display:block;margin-bottom:6px}.debrief-q p{margin:0;color:var(--muted);font-size:.94rem}
+textarea{width:100%;min-height:95px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit;color:var(--ink);margin-top:10px}
+.small{font-size:.88rem;color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:22px}
+@media(max-width:650px){.intro-grid{grid-template-columns:1fr}.summary-stats{grid-template-columns:1fr}.navrow{align-items:stretch}.navrow button{flex:1}.hero{border-radius:16px}header{align-items:flex-start;flex-direction:column;gap:4px}}
+@media print{header,.hero .actions,.navrow,button{display:none!important}body{background:white}.panel,.hero{box-shadow:none}.hidden{display:block!important}main{max-width:none;margin:0}}
+</style>
+</head>
+<body>
+<header><div class="brand">Workplace English · B1–B2</div><div class="topnote">Decision-making across cultures</div></header>
+<main>
+<section id="landing">
+  <div class="hero">
+    <div class="eyebrow">Interactive decision challenge</div>
+    <h1>Leading across cultures</h1>
+    <p>Six realistic workplace dilemmas about authority, initiative, feedback and cultural expectations. Choose the response you would use, then examine its likely impact.</p>
+    <div class="actions"><button class="primary" id="startBtn">Start the challenge →</button></div>
+  </div>
+  <div class="intro-grid">
+    <div class="info"><strong>6 dilemmas</strong><span>Meet different leadership challenges, one at a time.</span></div>
+    <div class="info"><strong>4 responses each</strong><span>Choose one. Responses range from strong to less effective.</span></div>
+    <div class="info"><strong>Learn and discuss</strong><span>Get feedback after every decision and finish with a debrief.</span></div>
+  </div>
+  <section class="panel">
+    <h2>How to play</h2>
+    <ol>
+      <li>Read the situation and consider what each person may expect from a manager.</li>
+      <li>Choose the response you would take in that situation. There is no score for simply guessing a “perfect” answer.</li>
+      <li>Read the feedback, which explains the likely benefits and risks of your choice.</li>
+      <li>Complete the debriefing questions alone or with a partner.</li>
+    </ol>
+    <p class="small">The situations explore cultural expectations, not fixed rules about nationalities. Individuals and organisations vary, even within the same country.</p>
+  </section>
+</section>
+
+<section id="quiz" class="panel hidden" aria-live="polite">
+  <div class="progressline"><span id="counter">Dilemma 1 of 6</span><span id="doneCount">0 answered</span></div>
+  <div class="track"><span id="progress"></span></div>
+  <div id="dilemmaContent"></div>
+  <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+  <div class="navrow">
+    <button class="secondary" id="quitBtn">Exit to start</button>
+    <div class="right"><button class="secondary hidden" id="prevBtn">← Previous</button><button class="primary" id="nextBtn" disabled>Choose a response</button></div>
+  </div>
+</section>
+
+<section id="debrief" class="panel hidden">
+  <span class="tag">Debriefing</span>
+  <h2>Reflect, compare and discuss</h2>
+  <p class="context">There is no single leadership style that works in every situation. Use these questions to explain your reasoning and compare different approaches.</p>
+  <div class="summary-stats">
+    <div class="stat"><strong id="answeredStat">6/6</strong><span>Dilemmas answered</span></div>
+    <div class="stat"><strong id="strongStat">—</strong><span>Most constructive choices</span></div>
+    <div class="stat"><strong id="styleStat">—</strong><span>Choices to reconsider</span></div>
+  </div>
+  <div class="debrief-list">
+    <div class="debrief-q"><strong>1. What should a manager do when a team openly questions a decision?</strong><p>When is debate useful, and when must a manager make the final decision?</p><textarea aria-label="Your answer to discussion question 1" placeholder="Make notes here…"></textarea></div>
+    <div class="debrief-q"><strong>2. How can a manager show authority without limiting initiative?</strong><p>Think about clear goals, boundaries, trust and responsibility.</p><textarea aria-label="Your answer to discussion question 2" placeholder="Make notes here…"></textarea></div>
+    <div class="debrief-q"><strong>3. What can cause a cultural misunderstanding at work?</strong><p>Give an example of how the same behaviour might be interpreted in two different ways.</p><textarea aria-label="Your answer to discussion question 3" placeholder="Make notes here…"></textarea></div>
+    <div class="debrief-q"><strong>4. Should a manager adapt their style to the team?</strong><p>What should remain consistent, even when the manager changes their approach?</p><textarea aria-label="Your answer to discussion question 4" placeholder="Make notes here…"></textarea></div>
+    <div class="debrief-q"><strong>5. Which response did you choose differently from your partner?</strong><p>Explain your reasons and identify one possible advantage or risk in each approach.</p><textarea aria-label="Your answer to discussion question 5" placeholder="Make notes here…"></textarea></div>
+  </div>
+  <div class="navrow"><button class="secondary" id="reviewBtn">Review your decisions</button><div class="right"><button class="secondary" id="printBtn">Print / save notes</button><button class="primary" id="restartBtn">Play again ↻</button></div></div>
+</section>
+<footer>Based on the theme of the British Council B2 reading “Cultural expectations and leadership”. This is an original practice activity, not an official British Council quiz.</footer>
+</main>
+<script>
+const dilemmas = [
+{title:"A decision is challenged in a meeting",theme:"Authority and open discussion",context:"You manage a project team in a new country. After you announce a decision, two experienced colleagues challenge it in front of everyone and suggest another method. You feel they are undermining your authority.",question:"What is the most useful response?",choices:[
+{text:"Ask them to explain the risks they see, then decide whether the evidence justifies changing the plan.",level:"Strong",feedback:"You invite useful challenge without giving up your responsibility. Asking for evidence keeps discussion professional and makes it clear that the final decision still needs to be made."},
+{text:"Tell the team the decision is final and that questions should be raised privately next time.",level:"Ordinary",feedback:"This can stop a meeting becoming unproductive, but it may discourage people from sharing valuable concerns. Explain when debate is welcome and when a decision is closed."},
+{text:"Change the decision immediately so the team can see that you value their opinions.",level:"Mixed",feedback:"Showing openness can build trust, but changing direction without examining the reasons may weaken confidence. Listen carefully first, then explain why you accept or reject the alternative."},
+{text:"Remind the colleagues that you are the manager and expect them to follow instructions.",level:"Weak",feedback:"This asserts formal authority but treats disagreement as disrespect. It can create resentment and hide useful information. Focus on the quality of the proposal, not the status of the person."}
+]},
+{title:"Your team completes tasks differently",theme:"Instructions and initiative",context:"You give a colleague detailed instructions for a report. They deliver it on time, but use a different method and format from the one you described. The result is accurate and useful.",question:"How do you respond?",choices:[
+{text:"Tell them to follow your instructions exactly next time, even if the result is good.",level:"Weak",feedback:"Strict compliance may be necessary for safety or legal requirements, but here it risks limiting initiative. First clarify which requirements are essential and where the team can choose its method."},
+{text:"Ask why they changed the method, discuss the result, and agree which requirements are essential for future reports.",level:"Strong",feedback:"This separates the required outcome from personal preference. You learn why the colleague acted independently and create clearer expectations about where initiative is welcome and where consistency matters."},
+{text:"Say nothing because the report is good, and assume the colleague now understands what you want.",level:"Ordinary",feedback:"Ignoring a successful result avoids unnecessary criticism, but expectations remain unclear. A short conversation can recognise good work while confirming which details matter for future tasks."},
+{text:"Praise their initiative and tell everyone they can change any instructions if they think they have a better idea.",level:"Mixed",feedback:"Recognising initiative encourages ownership, but unlimited freedom can create inconsistent results or serious risks. Define boundaries, such as budget, deadlines, quality standards and changes that need approval."}
+]},
+{title:"A colleague expects you to solve the problem",theme:"Coaching and support",context:"A capable team member tells you that a project is behind schedule and asks you to tell them exactly what to do. You believe they understand the work well enough to suggest solutions.",question:"What should you do first?",choices:[
+{text:"Ask what they have tried, help them compare possible solutions, and agree on the next action together.",level:"Strong",feedback:"This combines support with responsibility. The colleague contributes their expertise, while you provide structure and remove obstacles. Agreeing on a next step prevents coaching from becoming vague or passive."},
+{text:"Tell them to use their initiative and come back when they have solved it.",level:"Weak",feedback:"This encourages independence in theory but offers little practical support. The employee may feel abandoned, especially if expectations are unclear. Ask for options and coach them towards a workable decision."},
+{text:"Give them a complete step-by-step plan because the deadline is approaching.",level:"Mixed",feedback:"A direct plan may be appropriate in a genuine emergency, but it can make the employee dependent on you. Check the urgency first and involve them where time allows."},
+{text:"Take over the project yourself to make sure it gets back on schedule.",level:"Ordinary",feedback:"Taking control may produce short-term progress, but it removes ownership and increases your workload. Identify the main obstacle, agree responsibilities and set a brief checkpoint to monitor progress."}
+]},
+{title:"Feedback is interpreted as disrespect",theme:"Feedback and perception",context:"During a review, you explain that a team member's work needs improvement. They become defensive and say your comments show that you do not trust their professional ability.",question:"What is the best next step?",choices:[
+{text:"Explain that feedback is part of the job and they should not take it personally.",level:"Ordinary",feedback:"Your point may be reasonable, but this wording dismisses the colleague's reaction. Give specific examples, explain the impact on the work and ask how your feedback was understood."},
+{text:"Avoid giving critical feedback in future so you can maintain a good relationship.",level:"Weak",feedback:"Avoiding difficult conversations may feel polite, but problems are likely to continue and trust may fall further. Respectful, specific feedback helps people understand expectations and improve their work."},
+{text:"Ask how they understood your comments, clarify your intention, and agree on specific actions for improvement.",level:"Strong",feedback:"You check perception instead of assuming your message was understood. Clarifying intent and agreeing practical actions protects the relationship while keeping performance expectations clear and measurable."},
+{text:"Repeat your criticism more firmly so they understand that you are serious.",level:"Weak",feedback:"A firmer tone may communicate urgency, but it can also increase defensiveness and resentment. Focus on observable behaviour, concrete examples and a shared plan rather than stronger personal judgement."}
+]},
+{title:"A team member makes a decision without approval",theme:"Boundaries and accountability",context:"A team member changes a supplier's delivery arrangements without asking you. The change saves time, but it creates a small extra cost and the finance team was not informed.",question:"How should you handle it?",choices:[
+{text:"Thank them for spotting an opportunity, then clarify approval limits and require prompt reporting of cost or schedule changes.",level:"Strong",feedback:"You recognise initiative while addressing accountability. Clear approval limits let people act independently within agreed boundaries and reduce the chance that a useful change creates unexpected costs or coordination problems."},
+{text:"Praise the result and tell the team to make similar decisions independently in future.",level:"Mixed",feedback:"The initiative deserves recognition, but this response ignores the extra cost and missing communication. Define which decisions employees can make alone and which require approval or notification."},
+{text:"Give the team member a formal warning because they did not follow the reporting process.",level:"Ordinary",feedback:"A formal warning may be justified for repeated or serious breaches, but it may be disproportionate for a first small mistake. Establish the facts and clarify the process before deciding on consequences."},
+{text:"Reverse the change immediately to show that nobody can make decisions without you.",level:"Weak",feedback:"Reversing a beneficial change purely to assert control can waste time and damage trust. Assess the actual cost and risk, then set clear rules for future decisions and communication."}
+]},
+{title:"Your manager gives you an unclear answer",theme:"Managing upwards",context:"You explain a team conflict to your manager. Instead of telling you what to do, they ask whether the team is meeting its targets and what you think might improve collaboration. You find this response vague and unhelpful.",question:"What is the most productive response?",choices:[
+{text:"Ask your manager to make the decision because resolving team conflict is their responsibility.",level:"Ordinary",feedback:"Escalation can be necessary when a conflict is serious, but asking the manager to take over may miss an opportunity to develop your own solution. Explain what support you need specifically."},
+{text:"Answer their questions, suggest a practical approach, and ask for feedback or clear limits on what you can decide yourself.",level:"Strong",feedback:"You treat the questions as coaching while making your support needs explicit. Proposing an approach shows initiative, and agreeing decision boundaries gives you confidence to act without guessing."},
+{text:"Assume your manager does not care about the problem and stop raising it.",level:"Weak",feedback:"The response may feel disappointing, but assuming indifference can close down useful support. Your manager may be testing your judgement. Explain the impact and ask for a specific kind of help."},
+{text:"Ask for a written list of instructions before taking any action.",level:"Mixed",feedback:"Written guidance can help when responsibilities or risks are unclear, but demanding full instructions may delay a manageable problem. Offer your own proposal and ask your manager to confirm key boundaries."}
+]}
+];
+
+const $ = id => document.getElementById(id);
+let order=[], current=0, answers={}, selectedChoice=null;
+function shuffle(array){ // Fisher–Yates: unbiased in-place shuffle
+  for(let i=array.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[array[i],array[j]]=[array[j],array[i]];}
+  return array;
+}
+function start(){
+  order=shuffle(dilemmas.map((_,i)=>i)); current=0; answers={}; selectedChoice=null;
+  $("landing").classList.add("hidden"); $("debrief").classList.add("hidden"); $("quiz").classList.remove("hidden");
+  render();
+}
+function render(){
+  const d=dilemmas[order[current]], prior=answers[order[current]];
+  $("counter").textContent=`Dilemma ${current+1} of ${dilemmas.length}`;
+  $("doneCount").textContent=`${Object.keys(answers).length} answered`;
+  $("progress").style.width=`${(current/dilemmas.length)*100}%`;
+  $("prevBtn").classList.toggle("hidden",current===0);
+  $("feedback").classList.add("hidden");
+  selectedChoice=prior?prior.choice:null;
+  const choiceOrder=shuffle(d.choices.map((_,i)=>i));
+  $("dilemmaContent").innerHTML=`<span class="tag">${d.theme}</span><h2>${d.title}</h2><p class="context">${d.context}</p><p class="question">${d.question}</p><div class="choices" id="choices"></div>`;
+  const holder=$("choices");
+  choiceOrder.forEach((choiceIndex,displayIndex)=>{
+    const c=d.choices[choiceIndex], b=document.createElement("button");
+    b.type="button"; b.className="choice"; b.dataset.choice=choiceIndex;
+    b.innerHTML=`<span class="letter">${String.fromCharCode(65+displayIndex)}</span><span>${c.text}</span>`;
+    b.addEventListener("click",()=>choose(choiceIndex)); holder.appendChild(b);
+  });
+  if(prior){showFeedback(prior.choice);$("nextBtn").textContent=current===dilemmas.length-1?"Go to debrief →":"Next dilemma →";$("nextBtn").disabled=false;}
+  else {$("nextBtn").textContent="Choose a response";$("nextBtn").disabled=true;}
+  $("progress").style.width=`${(Object.keys(answers).length/dilemmas.length)*100}%`;
+}
+function choose(index){
+  const d=dilemmas[order[current]];
+  answers[order[current]]={choice:index};
+  document.querySelectorAll(".choice").forEach(el=>el.classList.toggle("selected",Number(el.dataset.choice)===index));
+  showFeedback(index);
+  $("doneCount").textContent=`${Object.keys(answers).length} answered`;
+  $("progress").style.width=`${(Object.keys(answers).length/dilemmas.length)*100}%`;
+  $("nextBtn").disabled=false;
+  $("nextBtn").textContent=current===dilemmas.length-1?"Go to debrief →":"Next dilemma →";
+}
+function showFeedback(index){
+  const d=dilemmas[order[current]], c=d.choices[index], f=$("feedback");
+  f.innerHTML=`<div class="quality">${c.level} response · feedback</div><h3>Your choice: ${c.level==="Strong"?"A constructive approach":c.level==="Mixed"?"Potential benefits and risks":c.level==="Ordinary"?"A workable but limited approach":"A response to reconsider"}</h3><p>${c.feedback}</p>`;
+  f.classList.remove("hidden");
+}
+function next(){
+  if(!answers[order[current]])return;
+  if(current<dilemmas.length-1){current++;render();}
+  else showDebrief();
+}
+function showDebrief(){
+  $("quiz").classList.add("hidden");$("debrief").classList.remove("hidden");
+  const vals=Object.values(answers), strong=vals.filter(a=>dilemmas[order[vals.indexOf(a)]]?.choices[a.choice]?.level==="Strong").length;
+  // Calculate against the original dilemma keys, not display order.
+  const strongCount=Object.entries(answers).filter(([key,a])=>dilemmas[Number(key)].choices[a.choice].level==="Strong").length;
+  const reconsider=Object.entries(answers).filter(([key,a])=>dilemmas[Number(key)].choices[a.choice].level==="Weak").length;
+  $("answeredStat").textContent=`${vals.length}/6`; $("strongStat").textContent=`${strongCount}/6`; $("styleStat").textContent=`${reconsider}/6`;
+}
+$("startBtn").addEventListener("click",start);
+$("nextBtn").addEventListener("click",next);
+$("prevBtn").addEventListener("click",()=>{if(current>0){current--;render();}});
+$("quitBtn").addEventListener("click",()=>{if(confirm("Return to the landing page? Your current answers will be lost.")){ $("quiz").classList.add("hidden");$("landing").classList.remove("hidden");}});
+$("reviewBtn").addEventListener("click",()=>{$("debrief").classList.add("hidden");$("quiz").classList.remove("hidden");current=0;render();});
+$("restartBtn").addEventListener("click",()=>{if(confirm("Start a new attempt? The dilemmas and response options will be shuffled again.")){document.querySelectorAll("textarea").forEach(t=>t.value="");start();}});
+$("printBtn").addEventListener("click",()=>window.print());
+</script>
+</body>
+</html>

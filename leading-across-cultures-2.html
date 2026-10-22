@@ -1,0 +1,390 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Leading Across Cultures</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:wght@600;700&display=swap">
+<style>
+/* Layout: one calm column. Landing -> six dilemmas -> debriefing. A "power distance" scale (high to low) is the recurring motif. */
+:root{
+  --bg:#EEF2F7; --surface:#FFFFFF; --surface2:#E6ECF4; --ink:#14213D; --muted:#4B5A76; --line:#C9D4E3;
+  --accent:#0B5FA5; --accent-ink:#FFFFFF; --warm:#F2B134;
+  --r3:#1B7F52; --r2:#1F6FB0; --r1:#9A6600; --r0:#A8402F;
+  --r3bg:#DDF2E7; --r2bg:#DCEBF8; --r1bg:#FBEFCF; --r0bg:#F8E1DC;
+  --font-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1626; --surface:#172238; --surface2:#1F2E4A; --ink:#E9EEF7; --muted:#A3B1CA; --line:#2E4166;
+  --accent:#7DBCF4; --accent-ink:#0E1626; --warm:#F2B134;
+  --r3:#58CA92; --r2:#7DBCF4; --r1:#EDBE55; --r0:#F09388;
+  --r3bg:#173A2D; --r2bg:#17314B; --r1bg:#3A3015; --r0bg:#3F2220; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1626; --surface:#172238; --surface2:#1F2E4A; --ink:#E9EEF7; --muted:#A3B1CA; --line:#2E4166;
+  --accent:#7DBCF4; --accent-ink:#0E1626; --warm:#F2B134;
+  --r3:#58CA92; --r2:#7DBCF4; --r1:#EDBE55; --r0:#F09388;
+  --r3bg:#173A2D; --r2bg:#17314B; --r1bg:#3A3015; --r0bg:#3F2220; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.55;
+  padding-block:20px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--font-display);line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,6.4vw,3rem)}
+h2{font-size:clamp(1.35rem,4.2vw,1.8rem)}
+h3{font-size:1.1rem}
+p{margin:0}
+a{color:var(--accent)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+.top strong{font-family:var(--font-display);color:var(--ink);font-size:1rem}
+.label{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;font-weight:700;color:var(--muted)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:13px 22px;font-weight:700;font-size:1rem;min-height:48px}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.btn.ghost:hover{border-color:var(--accent)}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+
+/* landing */
+.hero{display:flex;flex-direction:column;gap:16px}
+.hero p.lead{font-size:1.15rem;max-width:60ch}
+.scale{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.bar{height:10px;border-radius:99px;background:linear-gradient(90deg,var(--r0),var(--warm),var(--r2));position:relative;margin:26px 0 8px}
+.pin{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--surface);border:4px solid var(--ink);transform:translate(-50%,-50%)}
+.pin span{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.8rem;font-weight:700;color:var(--ink)}
+.ends{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ends div{min-width:0}
+.ends b{display:block;font-family:var(--font-display)}
+.ends small{color:var(--muted);font-size:.9rem;line-height:1.4;display:block}
+.ends div:last-child{text-align:right}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;list-style:none;padding:0;margin:0}
+.steps li{border-top:3px solid var(--ink);padding-top:10px;min-width:0}
+.steps b{font-family:var(--font-display);display:block}
+.steps span{color:var(--muted);font-size:.95rem}
+.glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px;margin:0}
+.glossary div{min-width:0}
+.glossary dt{font-weight:700}
+.glossary dd{margin:0;color:var(--muted);font-size:.95rem}
+.sec{display:flex;flex-direction:column;gap:12px}
+.src{font-size:.88rem;color:var(--muted)}
+
+/* quiz */
+.prog{display:flex;flex-direction:column;gap:8px}
+.segs{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.seg{height:8px;border-radius:99px;background:var(--line)}
+.seg.done{background:var(--accent)}
+.seg.now{background:var(--warm)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.tag{align-self:flex-start;background:var(--surface2);border-radius:99px;padding:3px 12px;font-size:.82rem;font-weight:700}
+.q{font-family:var(--font-display);font-size:1.25rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.opt{width:100%;text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:13px 14px;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt .k{flex:none;width:30px;height:30px;border-radius:50%;background:var(--surface2);display:grid;place-items:center;font-weight:700;font-size:.9rem}
+.opt:disabled{cursor:default;color:var(--ink)}
+.opt.faded{opacity:.55}
+.opt.picked.s3{border-color:var(--r3);background:var(--r3bg)}
+.opt.picked.s2{border-color:var(--r2);background:var(--r2bg)}
+.opt.picked.s1{border-color:var(--r1);background:var(--r1bg)}
+.opt.picked.s0{border-color:var(--r0);background:var(--r0bg)}
+.fb{border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.fb.s3{background:var(--r3bg)}.fb.s2{background:var(--r2bg)}.fb.s1{background:var(--r1bg)}.fb.s0{background:var(--r0bg)}
+.badge{align-self:flex-start;font-weight:700;font-size:.9rem;border-radius:99px;padding:3px 12px;border:2px solid currentColor}
+.s3 .badge{color:var(--r3)}.s2 .badge{color:var(--r2)}.s1 .badge{color:var(--r1)}.s0 .badge{color:var(--r0)}
+.talk{border-top:1px dashed var(--line);padding-top:10px;font-size:.97rem}
+.talk b{font-family:var(--font-display)}
+
+/* debrief */
+.score{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.num{font-family:var(--font-display);font-weight:700;font-size:clamp(3.4rem,14vw,5.5rem);line-height:1;font-variant-numeric:tabular-nums}
+.num small{font-size:.4em;color:var(--muted)}
+.meter{height:12px;border-radius:99px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--warm),var(--r3))}
+.take{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.take li{display:flex;gap:12px}
+.take li:before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--warm);margin-top:.5em}
+.review{display:flex;flex-direction:column;margin:0;padding:0;list-style:none}
+.review>li{padding:18px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.review>li:first-child{border-top:0;padding-top:0}
+.pair{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.97rem}
+.pair b{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding-top:.2em}
+.mini{display:inline-block;font-weight:700;font-size:.8rem;border:2px solid currentColor;border-radius:99px;padding:0 9px;margin-right:6px}
+.mini.s3{color:var(--r3)}.mini.s2{color:var(--r2)}.mini.s1{color:var(--r1)}.mini.s0{color:var(--r0)}
+
+@media (max-width:560px){
+  .steps{grid-template-columns:1fr}
+  .glossary{grid-template-columns:1fr}
+  .card{padding:16px}
+  .pin span{font-size:.72rem}
+}
+@media (prefers-reduced-motion:no-preference){
+  .screen{animation:rise .35s ease both}
+  @keyframes rise{from{opacity:.001;transform:translateY(8px)}to{opacity:1;transform:none}}
+}
+</style>
+
+<div class="wrap">
+  <div class="top"><strong>Leading Across Cultures</strong><span>B2 reading follow-up · about 10 minutes</span></div>
+
+  <!-- LANDING -->
+  <main id="landing" class="screen" style="display:flex;flex-direction:column;gap:28px">
+    <section class="hero">
+      <span class="label">Dilemma exercise</span>
+      <h1>What would a good leader do?</h1>
+      <p class="lead">Gabriela is a successful project manager from Brazil. She moves to Sweden to lead a new team. The team is friendly, but they question her proposals in meetings and keep giving opinions after she makes a decision. Why? And what should she do?</p>
+      <p class="lead">Solve six leadership dilemmas, get feedback on your choices, and discuss them with a partner or your class.</p>
+      <div class="row"><button class="btn" id="start" type="button">Start the exercise</button></div>
+    </section>
+
+    <section class="scale" aria-label="The power distance scale">
+      <span class="label">The idea behind the exercise</span>
+      <p>Psychologist Geert Hofstede uses the term <b>power distance</b> to describe how much people in a culture accept that power is not shared equally.</p>
+      <div class="bar" role="img" aria-label="A scale from high power distance on the left to low power distance on the right. Gabriela's team in Brazil is near the left. Her Swedish team is near the right.">
+        <div class="pin" style="left:12%"><span style="left:30%">Brazil team</span></div>
+        <div class="pin" style="left:88%"><span style="left:70%">Swedish team</span></div>
+      </div>
+      <div class="ends">
+        <div><b>High power distance</b><small>Leaders make the big decisions and are not often challenged.</small></div>
+        <div><b>Low power distance</b><small>Leaders act as coaches and expect to be challenged.</small></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><b>Read</b><span>Each dilemma describes a real workplace situation.</span></li>
+        <li><b>Choose</b><span>Pick one of four possible responses. You cannot change it.</span></li>
+        <li><b>Learn</b><span>Read short feedback, then talk about the discussion question.</span></li>
+      </ol>
+      <p class="src">The dilemmas and the answer options appear in a new random order every time you play.</p>
+    </section>
+
+    <section class="sec">
+      <h2>Useful words</h2>
+      <dl class="glossary">
+        <div><dt>hierarchy</dt><dd>a system with levels of power, from boss to staff</dd></div>
+        <div><dt>flat hierarchy</dt><dd>few levels; bosses and staff work closely together</dd></div>
+        <div><dt>directive</dt><dd>giving clear orders about what to do and how</dd></div>
+        <div><dt>coach</dt><dd>a leader who helps people find their own solutions</dd></div>
+        <div><dt>subordinate</dt><dd>a person who works under a manager</dd></div>
+        <div><dt>take the initiative</dt><dd>to act first, without waiting to be told</dd></div>
+      </dl>
+    </section>
+
+    <p class="src">Based on the British Council LearnEnglish reading <a href="https://learnenglish.britishcouncil.org/free-resources/reading/b2/cultural-expectations-leadership" target="_blank" rel="noopener">Cultural expectations and leadership</a> (B2). Read the article first if you have not yet.</p>
+  </main>
+
+  <!-- QUIZ -->
+  <main id="quiz" class="screen" hidden style="display:flex;flex-direction:column;gap:20px">
+    <div class="prog">
+      <div class="label" id="count" aria-live="polite"></div>
+      <div class="segs" id="segs" aria-hidden="true"></div>
+    </div>
+    <article class="card">
+      <span class="tag" id="tag"></span>
+      <p id="scenario"></p>
+      <h2 class="q" id="question"></h2>
+      <ul class="opts" id="opts"></ul>
+      <div id="fb" tabindex="-1" aria-live="polite"></div>
+      <div class="row"><button class="btn" id="next" type="button" hidden></button></div>
+    </article>
+  </main>
+
+  <!-- DEBRIEF -->
+  <main id="debrief" class="screen" hidden style="display:flex;flex-direction:column;gap:28px">
+    <section class="sec">
+      <span class="label">Debriefing</span>
+      <div class="score"><div class="num"><span id="pts"></span><small> / 18</small></div><div style="flex:1;min-width:200px;display:flex;flex-direction:column;gap:8px"><h1 id="band" style="font-size:clamp(1.5rem,5vw,2.1rem)"></h1><div class="meter" aria-hidden="true"><i id="meter"></i></div></div></div>
+      <p id="bandtext"></p>
+    </section>
+
+    <section class="sec">
+      <h2>Three ideas to remember</h2>
+      <ul class="take">
+        <li><span><b>Culture shapes expectations.</b> Gabriela's Brazilian team and her Swedish team both wanted to work well. They simply expected different things from a leader.</span></li>
+        <li><span><b>Neither style is wrong.</b> A directive style worked in Brazil. A coaching style worked in Sweden. A good leader reads the situation.</span></li>
+        <li><span><b>Talk about it openly.</b> Gabriela's team improved when she asked for their views, explained her own, and everyone adapted.</span></li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <h2>Your choices, dilemma by dilemma</h2>
+      <ol class="review" id="review"></ol>
+    </section>
+
+    <section class="sec">
+      <h2>Final discussion</h2>
+      <p>What do you think the role of a manager should be? Give two reasons and one example from your own experience. Does your answer change in different countries or companies?</p>
+      <div class="row"><button class="btn" id="again" type="button">Play again in a new order</button><button class="btn ghost" id="home" type="button">Back to start</button></div>
+    </section>
+  </main>
+</div>
+
+<script>
+/*DATA*/
+const DATA=[
+{tag:"Open challenge",
+ scenario:"You are a project manager from a high power distance culture. You have just joined a team in a low power distance culture. In your first meeting you present your plan, and several team members question it openly.",
+ question:"What do you do?",
+ talk:"Is it normal to challenge your boss openly in your country? When is it acceptable?",
+ options:[
+  {t:"Ask them to explain their concerns, listen carefully, and decide together which changes would improve the plan.",s:3,f:"Listening first shows respect for their independent thinking. Deciding together fits a low power distance culture and keeps you in charge of the process, not just the result."},
+  {t:"Thank them, write down their ideas, and promise to send an improved plan the next day.",s:2,f:"Thanking them shows you value their input. But replying a day later may feel distant; discussing it openly in the room would build more trust."},
+  {t:"Explain your reasons for the plan again so that they fully understand it.",s:1,f:"Explaining your reasons helps, but repeating the plan treats their questions as a misunderstanding. In a flat hierarchy, people expect to challenge ideas and share the decision."},
+  {t:"Say that the plan is final and ask them to keep their questions for later.",s:0,f:"This is a high power distance reaction. It tells the team their opinions are not welcome, so they may feel disrespected and stop trusting you as a leader."}]},
+{tag:"Different methods",
+ scenario:"You give a team member clear instructions for a task. Later you find out that he did it in his own way, without checking with you. The result is good.",
+ question:"How do you react?",
+ talk:"Do you prefer exact instructions or the freedom to choose your own method? Why?",
+ options:[
+  {t:"Ask how he did it and what he learned. Agree on the goal and let him choose the method next time.",s:3,f:"Curiosity turns a possible conflict into learning. Agreeing on the goal and letting people choose the method shows trust, which this team values highly."},
+  {t:"Accept the result this time, but ask him to check the method with you before starting next time.",s:2,f:"Accepting a good result is positive. But asking them to check the method first still limits their freedom, and they may feel you do not trust their judgement."},
+  {t:"Say nothing, but give much more detailed instructions next time so it does not happen again.",s:1,f:"Silence avoids conflict, but nobody learns anything. Giving more detailed instructions suggests you do not trust the team, which is exactly what they dislike in a flatter hierarchy."},
+  {t:"Tell him in front of the team that he should have followed your instructions.",s:0,f:"Criticising someone in public damages respect, whatever the culture. It also ignores the fact that the result was good, so people may stop trying new ideas."}]},
+{tag:"Coaching manager",
+ scenario:"You have a problem with your team, so you email your manager. He does not give you instructions. He asks whether the team is still performing and what you think would help.",
+ question:"What is your next step?",
+ talk:"Would you like a manager who answers with questions? When is that helpful, and when is it frustrating?",
+ options:[
+  {t:"Think about his questions, prepare your own solution, and ask for his opinion on it.",s:3,f:"You treat the questions as coaching. Coming back with your own proposal shows initiative, and asking for his opinion is the kind of collaboration a coaching manager expects."},
+  {t:"Answer his questions honestly and ask what support he can give you.",s:2,f:"Answering honestly is a good start. You could go further by suggesting your own solutions, because a coaching manager wants you to think independently."},
+  {t:"Write again and ask him to tell you exactly what to do.",s:1,f:"Asking for clear orders is natural in a high power distance culture. Here it may make your manager feel you avoid responsibility, and it does not build your confidence."},
+  {t:"Decide that he is a weak manager and stop telling him about problems.",s:0,f:"Judging your manager too quickly closes the door. If you stop sharing problems, you lose support and miss a chance to understand how he works."}]},
+{tag:"Team conversation",
+ scenario:"After several weeks you feel frustrated. Your team seems friendly but does not follow your style of leadership. You suspect that a cultural difference is the cause.",
+ question:"What do you do?",
+ talk:"How can a team talk about cultural differences without offending anyone?",
+ options:[
+  {t:"Invite the team to an open conversation about how everyone likes to work, and share your own expectations.",s:3,f:"An open conversation is the strongest move. Sharing expectations on both sides helps everyone understand the reasons behind each other's behaviour and then adapt together, as Gabriela's team did."},
+  {t:"Meet each person privately to ask how they feel about your leadership, then share what you learned.",s:2,f:"Private conversations are a respectful way to listen, and you will learn useful things. A group discussion would go further, because the team can hear each other's views too."},
+  {t:"Ask your company for a course on the local culture and wait to see if things improve.",s:1,f:"Training can help, but waiting for results while saying nothing leaves the problem unsolved. Cultural understanding needs a real conversation with the people involved, not only a course."},
+  {t:"Keep working in the same way and hope the team slowly adapts to you.",s:0,f:"Hoping the team will change is not a plan. Without a conversation, both sides keep guessing why the other behaves that way, and the frustration usually grows."}]},
+{tag:"Final decisions",
+ scenario:"You announce a decision about the project. The team continues to give their opinions as if the topic were still open.",
+ question:"How do you respond?",
+ talk:"How can a leader show that a discussion is finished and a decision is final?",
+ options:[
+  {t:"Ask for opinions before the next decision, and say clearly when discussion ends and the decision is final.",s:3,f:"Gathering opinions before deciding, then marking the end of the discussion clearly, respects the team's need to contribute while keeping decisions clear for everyone."},
+  {t:"Listen to the opinions, then explain which parts can change, which cannot, and why.",s:2,f:"Listening and explaining what can and cannot change is helpful and honest. It would work even better if you had asked for their ideas before announcing the decision."},
+  {t:"Repeat the decision more firmly and ask them to stop giving opinions.",s:1,f:"Repeating the decision more strongly is a directive reaction. It may stop the opinions, but the team will probably feel ignored and become less willing to share ideas."},
+  {t:"Change the decision each time someone disagrees so that nobody is unhappy.",s:0,f:"Changing your mind every time someone disagrees avoids conflict but weakens your leadership. Teams in flat hierarchies still need clear decisions, and nobody knows what is final."}]},
+{tag:"The opposite case",
+ scenario:"Now the situation is reversed. You are a manager from a low power distance culture, leading a new team in a high power distance culture. The team stays silent in meetings and waits for your orders.",
+ question:"What is your approach?",
+ talk:"What can a manager do to help quiet team members share their ideas?",
+ options:[
+  {t:"Talk about expectations with the team. Give clear direction at first, then invite ideas in ways they find comfortable, such as small groups.",s:3,f:"Understanding expectations first is wise. Starting with clear direction and slowly inviting ideas in comfortable ways, like small groups, respects the team's culture while helping it grow."},
+  {t:"Give clear instructions for now and slowly ask for ideas while you watch how people react.",s:2,f:"Clear instructions match what the team expects, and slow change is sensible. However, you would learn more by discussing expectations openly instead of only watching how people react."},
+  {t:"Tell everyone that they must share ideas in every meeting, starting immediately.",s:1,f:"Demanding ideas in public puts people in an uncomfortable position. In a high power distance culture, speaking against a leader can feel disrespectful, so you may get silence instead."},
+  {t:"Decide that they are not motivated and give them only simple tasks.",s:0,f:"Silence is not always a lack of motivation. The team is probably following the rules of respect they know, and giving only simple tasks wastes their talent."}]}
+];
+const LABEL={3:"Excellent choice",2:"Good choice",1:"Fair choice",0:"Less effective choice"};
+const BANDS=[
+ {min:15,name:"Cultural bridge-builder",text:"You listen, ask questions and adapt. You understand that different expectations are not good or bad, and you know how to start the right conversation."},
+ {min:11,name:"Flexible leader in progress",text:"You made many strong choices. Look again at the dilemmas where you scored lower and ask what the team might expect in that culture."},
+ {min:6,name:"Starting to notice",text:"You are beginning to see how culture shapes leadership. Read the feedback again and try the exercise a second time. The questions will be in a new order."},
+ {min:0,name:"Time to look again",text:"Many of your choices came from one style of leadership. Read the article once more and think about how a team from a different culture might feel."}
+];
+/*END*/
+
+/* Fisher-Yates shuffle (returns a shuffled copy) */
+function shuffle(arr){
+  const a=arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    const tmp=a[i];a[i]=a[j];a[j]=tmp;
+  }
+  return a;
+}
+
+const $=id=>document.getElementById(id);
+const screens={landing:$("landing"),quiz:$("quiz"),debrief:$("debrief")};
+let order=[],idx=0,answers=[];
+
+function show(name){
+  for(const k in screens){screens[k].hidden=(k!==name)}
+  window.scrollTo(0,0);
+}
+
+function begin(){
+  order=shuffle(DATA).map(d=>({d:d,opts:shuffle(d.options)}));
+  idx=0;answers=[];
+  show("quiz");
+  renderQ();
+}
+
+function renderQ(){
+  const item=order[idx],d=item.d;
+  $("count").textContent="Dilemma "+(idx+1)+" of "+order.length;
+  $("segs").innerHTML=order.map((_,i)=>'<div class="seg '+(i<idx?"done":i===idx?"now":"")+'"></div>').join("");
+  $("tag").textContent=d.tag;
+  $("scenario").textContent=d.scenario;
+  $("question").textContent=d.question;
+  $("fb").innerHTML="";
+  $("next").hidden=true;
+  const ul=$("opts");ul.innerHTML="";
+  item.opts.forEach((o,i)=>{
+    const li=document.createElement("li");
+    const b=document.createElement("button");
+    b.type="button";b.className="opt";
+    b.innerHTML='<span class="k">'+"ABCD"[i]+'</span><span></span>';
+    b.lastChild.textContent=o.t;
+    b.addEventListener("click",()=>choose(i));
+    li.appendChild(b);ul.appendChild(li);
+  });
+}
+
+function choose(i){
+  const item=order[idx],o=item.opts[i];
+  answers.push({d:item.d,chosen:o,best:item.d.options.find(x=>x.s===3)});
+  const btns=$("opts").querySelectorAll("button");
+  btns.forEach((b,k)=>{
+    b.disabled=true;
+    if(k===i){b.classList.add("picked","s"+o.s)}else{b.classList.add("faded")}
+  });
+  $("fb").innerHTML='<div class="fb s'+o.s+'"><span class="badge">'+LABEL[o.s]+'</span><p></p><p class="talk"><b>Talk about it:</b> <span></span></p></div>';
+  $("fb").querySelector("p").textContent=o.f;
+  $("fb").querySelector(".talk span").textContent=item.d.talk;
+  const n=$("next");
+  n.textContent=idx===order.length-1?"See my debriefing":"Next dilemma";
+  n.hidden=false;
+  n.focus({preventScroll:true});
+  n.scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+
+function next(){
+  if(idx<order.length-1){idx++;renderQ();window.scrollTo(0,0)}
+  else{renderDebrief()}
+}
+
+function renderDebrief(){
+  const total=answers.reduce((s,a)=>s+a.chosen.s,0);
+  const band=BANDS.find(b=>total>=b.min);
+  $("pts").textContent=total;
+  $("band").textContent=band.name;
+  $("bandtext").textContent=band.text;
+  $("meter").style.width=Math.round(total/18*100)+"%";
+  $("review").innerHTML=answers.map((a,n)=>{
+    const same=a.chosen.s===3;
+    return '<li><h3>'+(n+1)+'. '+a.d.tag+'</h3>'+
+      '<div class="pair"><b>You chose</b><span><span class="mini s'+a.chosen.s+'">'+LABEL[a.chosen.s]+'</span><span class="t1"></span></span>'+
+      (same?'':'<b>Best answer</b><span class="t2"></span>')+
+      '<b>Discuss</b><span class="t3"></span></div></li>';
+  }).join("");
+  const lis=$("review").children;
+  answers.forEach((a,n)=>{
+    lis[n].querySelector(".t1").textContent=a.chosen.t;
+    const t2=lis[n].querySelector(".t2");if(t2)t2.textContent=a.best.t;
+    lis[n].querySelector(".t3").textContent=a.d.talk;
+  });
+  show("debrief");
+}
+
+$("start").addEventListener("click",begin);
+$("next").addEventListener("click",next);
+$("again").addEventListener("click",begin);
+$("home").addEventListener("click",()=>show("landing"));
+</script>
+
+</body></html>
