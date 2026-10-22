@@ -14,6 +14,8 @@
             --jet-silver: #bdc3c7;
             --warning-red: #e74c3c;
             --upgrade-green: #2ecc71;
+            --wing-gray: #dfe6e9;
+            --plane-shadow: rgba(0, 0, 0, 0.18);
         }
 
         body {
@@ -40,7 +42,6 @@
         .screen { display: none; }
         .active { display: block; }
 
-        /* Status Alerts */
         #alert-overlay {
             position: absolute;
             top: 50%;
@@ -90,15 +91,135 @@
             position: absolute;
             bottom: 80px;
             left: 50px;
-            width: 90px;
-            height: 25px;
+            width: 180px;
+            height: 72px;
             transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 10;
+            filter: drop-shadow(0 8px 12px var(--plane-shadow));
         }
 
-        .jet-body { width: 100%; height: 100%; background: var(--jet-silver); border-radius: 20% 80% 60% 30%; position: relative; border-bottom: 3px solid #7f8c8d; }
-        .jet-wing { position: absolute; width: 40px; height: 15px; background: #ecf0f1; top: 15px; left: 20px; transform: skewX(-30deg); border-radius: 2px; }
-        .jet-tail { position: absolute; width: 20px; height: 20px; background: var(--jet-silver); top: -12px; left: 0; clip-path: polygon(0 0, 100% 100%, 0 100%); }
+        .plane-assembly {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .plane-body {
+            position: absolute;
+            left: 40px;
+            top: 18px;
+            width: 110px;
+            height: 34px;
+            background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 40%, #95a5a6 100%);
+            border-radius: 35% 45% 42% 28%;
+            border: 3px solid #7f8c8d;
+            overflow: hidden;
+        }
+
+        .plane-body::before {
+            content: "";
+            position: absolute;
+            left: 12px;
+            right: 12px;
+            top: 8px;
+            bottom: 8px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.18);
+        }
+
+        .plane-window-row {
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            top: 10px;
+            height: 12px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 2;
+        }
+
+        .plane-window {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            border: 2px solid rgba(255,255,255,0.8);
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);
+        }
+
+        .plane-nose {
+            position: absolute;
+            left: 134px;
+            top: 24px;
+            width: 34px;
+            height: 22px;
+            background: linear-gradient(135deg, #dfe6e9, #b2bec3);
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+            border-top: 3px solid #7f8c8d;
+            border-bottom: 3px solid #7f8c8d;
+        }
+
+        .plane-tail {
+            position: absolute;
+            left: 12px;
+            top: 16px;
+            width: 28px;
+            height: 24px;
+            background: linear-gradient(135deg, #dfe6e9, #b2bec3);
+            clip-path: polygon(0 50%, 100% 0, 100% 100%);
+            border-top: 3px solid #7f8c8d;
+            border-bottom: 3px solid #7f8c8d;
+        }
+
+        .plane-wing {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), var(--wing-gray));
+            border: 2px solid #7f8c8d;
+            border-radius: 6px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+        }
+
+        .wing-main {
+            left: 62px;
+            top: 28px;
+            width: 62px;
+            height: 18px;
+            transform: skewX(-28deg);
+        }
+
+        .wing-small {
+            left: 90px;
+            top: 12px;
+            width: 26px;
+            height: 12px;
+            transform: skewX(-30deg);
+            border-radius: 4px;
+        }
+
+        .plane-engine {
+            position: absolute;
+            top: 31px;
+            width: 22px;
+            height: 18px;
+            background: linear-gradient(135deg, #2d3436, #636e72);
+            border: 2px solid #4b4b4b;
+            border-radius: 10px;
+            z-index: 1;
+        }
+
+        .engine-left { left: 26px; }
+        .engine-right { left: 146px; }
+
+        .plane-engine::before {
+            content: "";
+            position: absolute;
+            left: 4px;
+            right: 4px;
+            top: 3px;
+            bottom: 3px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, #b2bec3, #636e72);
+        }
 
         .cabin-status {
             font-weight: bold;
@@ -162,14 +283,31 @@
         </div>
 
         <div class="cabin-status">
-            <span>💺 CLASS: <span id="stat-cabin">Business Class</span></span>
+            <span>💺 CLASS: <span id="stat-cabin">Premium Economy</span></span>
             <span id="lounge-pass-display">🏆 GOLD LOUNGE MEMBER</span>
         </div>
 
         <div id="sky-view">
             <div id="city-start" class="city"></div>
             <div id="city-end" class="city"></div>
-            <div id="plane"><div class="jet-tail"></div><div class="jet-wing"></div><div class="jet-body"></div></div>
+            <div id="plane" aria-label="airplane">
+                <div class="plane-assembly">
+                    <div class="plane-tail"></div>
+                    <div class="plane-body">
+                        <div class="plane-window-row">
+                            <div class="plane-window"></div>
+                            <div class="plane-window"></div>
+                            <div class="plane-window"></div>
+                            <div class="plane-window"></div>
+                        </div>
+                    </div>
+                    <div class="plane-wing wing-main"></div>
+                    <div class="plane-wing wing-small"></div>
+                    <div class="plane-engine engine-left"></div>
+                    <div class="plane-engine engine-right"></div>
+                    <div class="plane-nose"></div>
+                </div>
+            </div>
         </div>
 
         <div id="sentence-display"></div>
@@ -239,7 +377,7 @@
         ]
     };
 
-    const cabins = ["Business Class", "Premium Economy", "Economy", "Luggage Hold"];
+    const cabins = ["First Class", "Business Class", "Premium Economy", "Economy"];
 
     let state = {
         round: 1,
@@ -249,7 +387,7 @@
         currentQ: null,
         isGameOver: false,
         usedIds: new Set(),
-        cabinIndex: 0, 
+        cabinIndex: 2,
         streak: 0,
         hasLoungePass: false
     };
@@ -258,7 +396,7 @@
         state.round = 1;
         state.isGameOver = false;
         state.usedIds.clear();
-        state.cabinIndex = 0;
+        state.cabinIndex = 2;
         state.hasLoungePass = false;
         showScreen('screen-game');
         setupRound();
@@ -285,7 +423,7 @@
         overlay.innerText = text;
         overlay.style.color = color;
         overlay.classList.remove('animate-alert');
-        void overlay.offsetWidth; 
+        void overlay.offsetWidth;
         overlay.classList.add('animate-alert');
     }
 
@@ -299,28 +437,16 @@
             state.points++;
             state.streak++;
             feedback.className = 'feedback-correct';
-            
-            // LOGIC UPDATE: Show the fix even if they are correct about identifying a mistake
+
             let msg = "✅ Correct! Great job.";
             if (val === false && state.currentQ.fix) {
                 msg = `✅ Correct! The fix: "${state.currentQ.fix}"`;
             }
             feedback.innerText = msg;
-            
-            if (state.streak === 3 && state.cabinIndex > 0) {
-                state.cabinIndex--;
-                state.streak = 0;
-                triggerAlert("UPGRADED! 🔼", "var(--upgrade-green)");
-            }
         } else {
             state.streak = 0;
             state.mistakesInRound++;
             state.chances--;
-            
-            if (state.cabinIndex < 3) {
-                state.cabinIndex++;
-                triggerAlert("DOWNGRADED! 🔽", "var(--warning-red)");
-            }
 
             feedback.className = 'feedback-wrong';
             let correctionText = state.currentQ.c ? "Actually, this sentence was Correct." : `Incorrect. Correction: ${state.currentQ.fix}`;
@@ -334,35 +460,56 @@
         refreshDisplay();
     }
 
-    function proceedAfterReview() {
-        if (state.isGameOver || state.chances <= 0) {
-            endGame(false);
-        } else if (state.points >= 10) {
-            if (state.mistakesInRound === 0) {
-                state.hasLoungePass = true;
-                triggerAlert("✨ GOLD LOUNGE PASS EARNED ✨", "var(--cabin-gold)");
-                setTimeout(() => { advanceRound(); }, 1600);
-            } else {
-                advanceRound();
-            }
-        } else {
-            nextQuestion();
+    function evaluateLegProgression() {
+        if (state.mistakesInRound >= 3) {
+            state.cabinIndex = Math.min(cabins.length - 1, state.cabinIndex + 1);
+            triggerAlert("DOWNGRADED! 🔽", "var(--warning-red)");
+            return;
+        }
+
+        if (state.mistakesInRound === 0) {
+            state.cabinIndex = Math.max(0, state.cabinIndex - 1);
+            triggerAlert("UPGRADED! 🔼", "var(--upgrade-green)");
         }
     }
 
+    function proceedAfterReview() {
+        if (state.isGameOver || state.chances <= 0) {
+            evaluateLegProgression();
+            endGame(false);
+            return;
+        }
+
+        if (state.points >= 10) {
+            evaluateLegProgression();
+
+            if (state.mistakesInRound === 0) {
+                state.hasLoungePass = true;
+                triggerAlert("✨ GOLD LOUNGE PASS EARNED ✨", "var(--cabin-gold)");
+            }
+
+            setTimeout(() => {
+                advanceRound();
+            }, 1600);
+            return;
+        }
+
+        nextQuestion();
+    }
+
     function advanceRound() {
-        if (state.round < 3) { 
-            state.round++; 
-            setupRound(); 
-        } else { 
-            endGame(true); 
+        if (state.round < 3) {
+            state.round++;
+            setupRound();
+        } else {
+            endGame(true);
         }
     }
 
     function nextQuestion() {
         let pool = state.round === 1 ? masterPool.r1 : (state.round === 2 ? masterPool.r2 : masterPool.r3);
         let available = pool.filter(q => !state.usedIds.has(q.s));
-        
+
         if (available.length === 0) {
             alert("Fuel shortage: No more unique questions!");
             endGame(false);
@@ -371,7 +518,7 @@
 
         state.currentQ = available[Math.floor(Math.random() * available.length)];
         state.usedIds.add(state.currentQ.s);
-        
+
         document.getElementById('sentence-display').innerText = state.currentQ.s;
         document.getElementById('feedback-area').style.display = 'none';
         document.getElementById('choice-buttons').style.display = 'block';
@@ -384,7 +531,7 @@
         document.getElementById('stat-score').innerText = state.points;
         document.getElementById('stat-cabin').innerText = cabins[state.cabinIndex];
         document.getElementById('lounge-pass-display').style.display = state.hasLoungePass ? 'block' : 'none';
-        
+
         if (!state.isGameOver) {
             document.getElementById('plane').style.left = (50 + (700 * (state.points / 10))) + "px";
         }
