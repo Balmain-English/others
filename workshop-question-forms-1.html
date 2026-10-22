@@ -1,0 +1,500 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Workshop Question Forms</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+/* Layout: one narrow "job card" column. Hazard stripe on top, four step tabs, one section on screen at a time. */
+:root{
+  --bg:#eceff2; --surface:#ffffff; --ink:#18232e; --muted:#566573; --line:#cdd5dc;
+  --accent:#1d4f7c; --on-accent:#ffffff;
+  --signal:#f5b700; --on-signal:#18232e; --stripe-b:#18232e; --sel:#fff2c2;
+  --ok:#1b7a45; --on-ok:#ffffff; --ok-bg:#e1f3e7;
+  --bad:#b3261e; --on-bad:#ffffff; --bad-bg:#fbe6e3;
+  --font-display:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --font-body:'Barlow',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#11171d; --surface:#1a232c; --ink:#e8edf1; --muted:#9aa8b5; --line:#2f3b46;
+    --accent:#86b8e6; --on-accent:#0e1a25;
+    --signal:#f5b700; --on-signal:#18232e; --stripe-b:#080b0e; --sel:#3a3210;
+    --ok:#5fd08c; --on-ok:#0d2216; --ok-bg:#16301f;
+    --bad:#ff8a80; --on-bad:#3a0d0a; --bad-bg:#3a1c1a;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11171d; --surface:#1a232c; --ink:#e8edf1; --muted:#9aa8b5; --line:#2f3b46;
+  --accent:#86b8e6; --on-accent:#0e1a25;
+  --signal:#f5b700; --on-signal:#18232e; --stripe-b:#080b0e; --sel:#3a3210;
+  --ok:#5fd08c; --on-ok:#0d2216; --ok-bg:#16301f;
+  --bad:#ff8a80; --on-bad:#3a0d0a; --bad-bg:#3a1c1a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.5 var(--font-body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+body.dragging{cursor:grabbing;user-select:none;-webkit-user-select:none}
+.hazard{height:10px;background:repeating-linear-gradient(-45deg,var(--signal) 0 12px,var(--stripe-b) 12px 24px)}
+.wrap{max-width:780px;margin:0 auto;padding-block:28px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow,.job,.bank-label,.lab,.step .k,.cue b{font-family:var(--font-display);font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.eyebrow{margin:0 0 4px;color:var(--muted);font-size:1rem}
+h1{margin:0;font:700 clamp(2.3rem,7vw,3.4rem)/1 var(--font-display);text-transform:uppercase;letter-spacing:.02em;text-wrap:balance}
+.lede{margin:12px 0 0;max-width:60ch;color:var(--muted)}
+button{font-family:inherit}
+
+/* step tabs */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:24px 0 22px}
+.step{appearance:none;text-align:left;cursor:pointer;min-width:0;padding:9px 10px 7px;border:1px solid var(--line);border-bottom:4px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+.step[aria-current="step"]{border-color:var(--accent);border-bottom-color:var(--signal)}
+.step .k{display:block;font-size:.78rem;color:var(--muted)}
+.step .n{display:block;font:700 1.3rem/1.1 var(--font-display);overflow-wrap:anywhere}
+.step .s{display:block;font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.step.done .s{color:var(--ok);font-weight:600}
+.step:disabled{opacity:.55;cursor:not-allowed}
+.step:focus-visible,.btn:focus-visible,.chip:focus-visible,.gap:focus-visible,.gapin:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+
+/* section head */
+.sec-head{margin-bottom:16px}
+.job{margin:0;color:var(--muted);font-size:.95rem}
+h2{margin:2px 0 6px;font:700 clamp(1.7rem,5vw,2.2rem)/1.1 var(--font-display);text-wrap:balance}
+.sec-head p:last-child{margin:0;max-width:60ch}
+
+/* items */
+.items{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.item{display:grid;gap:8px;padding:14px 16px;background:var(--surface);border:1.5px solid var(--line);border-radius:8px}
+.item.correct{border-color:var(--ok)}
+.item.incorrect{border-color:var(--bad)}
+.qline{display:flex;gap:12px;align-items:baseline}
+.num{flex:none;width:24px;font:700 1.25rem/1 var(--font-display);color:var(--muted);font-variant-numeric:tabular-nums}
+.qtext{margin:0;min-width:0;font-size:1.18rem;font-weight:500;line-height:1.9}
+.cue{margin:0 0 0 36px;color:var(--muted);font-size:.97rem}
+.cue b{margin-right:6px;font-size:.82rem;color:var(--ink)}
+.fb{display:flex;gap:8px;align-items:flex-start;margin:0 0 0 36px;padding:8px 10px;border-radius:6px;font-size:.96rem}
+.fb svg{flex:none;margin-top:3px}
+.fb.ok{background:var(--ok-bg)} .fb.ok svg{color:var(--ok)}
+.fb.bad{background:var(--bad-bg)} .fb.bad svg{color:var(--bad)}
+
+/* section 1 */
+.blank{display:inline-block;min-width:4.6em;margin-inline:.1em;padding:0 .35em;border-bottom:2px solid var(--ink);text-align:center;font-weight:600;color:var(--accent);line-height:1.5}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-left:36px}
+.opt{position:relative;display:block}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span{display:inline-block;min-height:44px;padding:9px 16px;border:1.5px solid var(--line);border-radius:6px;background:var(--surface);font-weight:500;cursor:pointer}
+.opt input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.opt input:focus-visible+span{outline:3px solid var(--signal);outline-offset:2px}
+.opt input:disabled+span{cursor:default}
+.item.correct .opt input:checked+span{background:var(--ok);border-color:var(--ok);color:var(--on-ok)}
+.item.incorrect .opt input:checked+span{background:var(--bad);border-color:var(--bad);color:var(--on-bad)}
+.opt.is-right span{border-color:var(--ok);box-shadow:inset 0 0 0 2px var(--ok)}
+
+/* section 2 */
+.bank{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin-bottom:14px;padding:10px 0 12px;background:var(--bg);border-bottom:1px solid var(--line)}
+.bank-label{margin:0 0 8px;font-size:.9rem;color:var(--muted)}
+.bank-label span{margin-left:8px;font-family:var(--font-body);font-weight:400;letter-spacing:0;text-transform:none;font-size:.92rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.slot{display:inline-flex;min-width:4.4em;min-height:44px;border:2px dashed var(--line);border-radius:6px}
+.slot.used .chip{visibility:hidden}
+.chip{appearance:none;border:0;border-radius:5px;min-width:4.4em;padding:8px 16px;background:var(--signal);color:var(--on-signal);font:700 1.25rem/1.2 var(--font-display);letter-spacing:.02em;box-shadow:0 2px 0 rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.chip[aria-pressed="true"]{outline:3px solid var(--ink);outline-offset:2px}
+.ghost{position:fixed;left:0;top:0;z-index:60;pointer-events:none;box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.gap{appearance:none;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;min-width:5em;min-height:44px;margin-right:.4em;padding:0 .7em;border:2px dashed var(--muted);border-radius:6px;background:transparent;color:var(--ink);font:700 1.2rem/1 var(--font-display);letter-spacing:.02em;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}
+.selecting .gap:not(.filled){border-color:var(--accent);background:var(--sel)}
+.gap.filled{border:2px solid transparent;background:var(--signal);color:var(--on-signal);box-shadow:0 2px 0 rgba(0,0,0,.3)}
+.gap.over{border-color:var(--ink);background:var(--sel);box-shadow:0 0 0 3px var(--signal)}
+.gap.correct{background:var(--ok);color:var(--on-ok);box-shadow:none}
+.gap.incorrect{background:var(--bad);color:var(--on-bad);box-shadow:none}
+
+/* section 3 */
+.gapin{width:calc(var(--n,6)*1ch + 1.6rem);min-width:5rem;max-width:100%;min-height:44px;padding:0 .5em;border:2px solid var(--muted);border-radius:6px;background:var(--surface);color:var(--ink);font:600 1.1rem var(--font-body);text-align:center;vertical-align:middle;margin-right:.35em}
+.gapin:focus{border-color:var(--accent)}
+.gapin.correct{border-color:var(--ok);background:var(--ok-bg)}
+.gapin.incorrect{border-color:var(--bad);background:var(--bad-bg)}
+
+/* action bar, result */
+.actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
+.progress{display:flex;align-items:center;gap:12px;min-width:0}
+.count{color:var(--muted);font-variant-numeric:tabular-nums}
+.meter{display:inline-block;width:110px;height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.btn{appearance:none;min-height:44px;padding:9px 18px;border:2px solid var(--accent);border-radius:6px;background:transparent;color:var(--accent);font:600 1rem var(--font-body);cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.result{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 22px;margin-bottom:16px;padding:18px;background:var(--surface);border:1.5px solid var(--ink);border-radius:8px}
+.result:focus{outline:none}
+.score{display:flex;align-items:baseline;gap:6px;font-family:var(--font-display);font-weight:700;line-height:1}
+.big{font-size:4.2rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.of{font-size:1.6rem;color:var(--muted)}
+.rtext h3{margin:0 0 2px;font:700 1.7rem/1.1 var(--font-display)}
+.rtext p{margin:4px 0 0}
+.review{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.lab{font-size:.82rem;color:var(--muted);margin-right:4px}
+.tag{display:inline-block;padding:2px 12px;border:1px solid var(--line);border-radius:999px;background:var(--sel);font-weight:600}
+.rbtns{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.totals{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:14px}
+.totals li{display:grid;gap:6px}
+.totals .row{display:flex;justify-content:space-between;gap:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+
+@media (max-width:520px){
+  .result{grid-template-columns:minmax(0,1fr)}
+  .item{padding:12px}
+  .steps{gap:6px}
+  .step{padding:8px 8px 6px}
+  .step .n{font-size:1.1rem}
+}
+@media (prefers-reduced-motion:reduce){.meter i{transition:none}}
+</style>
+
+<div class="hazard" aria-hidden="true"></div>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">English A2 &middot; Question forms review</p>
+    <h1>Workshop Question Forms</h1>
+    <p class="lede">24 questions about work on trucks, buses and coaches. There are three sections. You get feedback after each one.</p>
+  </header>
+  <nav class="steps" aria-label="Sections">
+    <button type="button" class="step" data-go="0"><span class="k">Section 1</span><span class="n">Choose</span><span class="s">To do</span></button>
+    <button type="button" class="step" data-go="1"><span class="k">Section 2</span><span class="n">Drag</span><span class="s">To do</span></button>
+    <button type="button" class="step" data-go="2"><span class="k">Section 3</span><span class="n">Type</span><span class="s">To do</span></button>
+    <button type="button" class="step" data-go="3"><span class="k">Total</span><span class="n">Score</span><span class="s">Locked</span></button>
+  </nav>
+  <main>
+    <section class="panel" id="p0"></section>
+    <section class="panel" id="p1" hidden></section>
+    <section class="panel" id="p2" hidden></section>
+    <section class="panel" id="p3" hidden></section>
+  </main>
+</div>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var full=function(q,w){var s=q.replace('___',w);return s.charAt(0).toUpperCase()+s.slice(1)};
+var ICON_OK='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>';
+var ICON_BAD='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+var SMOOTH=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+
+/* ---------- content ---------- */
+var S1=[
+ {q:'___ do we keep the spare parts?',cue:'In the store room, next to the paint booth.',opts:['Who','Where','Why'],a:1,why:'Where asks about a place.'},
+ {q:'___ bus is ready, the white one or the green one?',cue:'The green one.',opts:['Which','Who','How'],a:0,why:'Which asks about a choice between things.'},
+ {q:'___ does the new engine arrive?',cue:'On Friday morning.',opts:['Whose','How many','When'],a:2,why:'When asks about time.'},
+ {q:'___ coaches are in the workshop this week?',cue:'Six.',opts:['How long','How many','How much'],a:1,why:'How many asks about a number of things you can count.'},
+ {q:'___ does it take to change a tyre on a truck?',cue:'About twenty minutes.',opts:['Who','Where','How long'],a:2,why:'How long asks about the time something takes.'},
+ {q:'___ do you check the brakes?',cue:'Every week.',opts:['Why','How often','Where'],a:1,why:'How often asks about frequency: every day, every week.'},
+ {q:'___ is the paint booth closed today?',cue:'Because the filter is dirty.',opts:['Who','Which','Why'],a:2,why:'Why asks for a reason.'},
+ {q:'___ toolbox is this?',cue:'It is Marc’s.',opts:['Whose','Who','Where'],a:0,why:'Whose asks who owns something.'}
+];
+var BANK=['Did','Who','Is','Can','Does','What','Are','Do'];
+var S2=[
+ {q:'___ the engine noisy?',cue:'Yes, it is. It is very loud.',a:'Is',why:'Is + one thing: Is the engine noisy?'},
+ {q:'___ the brake pads new?',cue:'No, they aren’t.',a:'Are',why:'Are + more than one thing: Are the brake pads new?'},
+ {q:'___ you use this machine every day?',cue:'Yes, I do.',a:'Do',why:'Do + you in the present simple.'},
+ {q:'___ the welder work on Saturdays?',cue:'No, he doesn’t.',a:'Does',why:'Does + he, she or it in the present simple.'},
+ {q:'___ you finish the chassis yesterday?',cue:'Yes, I did.',a:'Did',why:'Did + past simple. Yesterday is in the past.'},
+ {q:'___ you help me with this door panel?',cue:'Yes, I can.',a:'Can',why:'Can asks about ability or makes a request.'},
+ {q:'___ is the team leader on the night shift?',cue:'Mr Garcia.',a:'Who',why:'Who asks about a person.'},
+ {q:'___ do you need for this job?',cue:'A 17 mm spanner.',a:'What',why:'What asks about a thing.'}
+];
+var S3=[
+ {q:'___ do you work?',cue:'At the bus assembly line.',ans:['where'],w:'1 word',why:'Where asks about a place.'},
+ {q:'___ does this machine cost?',cue:'About 40,000 euros.',ans:['how much'],w:'2 words',why:'How much asks about price or an amount.'},
+ {q:'___ you have a break at ten o’clock?',cue:'Yes, we do.',ans:['do'],w:'1 word',why:'Do + you in the present simple. The short answer uses do too.'},
+ {q:'What time ___ the shift finish?',cue:'At two o’clock.',ans:['does'],w:'1 word',why:'Does + the shift (it) in the present simple.'},
+ {q:'Who ___ driving the forklift today?',cue:'Pierre is.',ans:['is'],w:'1 word',why:'Who + is + -ing: one person doing something now.'},
+ {q:'___ trucks do you build each month?',cue:'About thirty.',ans:['how many'],w:'2 words',why:'How many + more than one thing you can count.'},
+ {q:'How ___ is this bus?',cue:'Twelve metres.',ans:['long'],w:'1 word',why:'How long asks about length.'},
+ {q:'Why ___ you wearing ear protection?',cue:'Because the machine is very loud.',ans:['are'],w:'1 word',why:'Why + are + you + -ing: the reason for an action now.'}
+];
+
+/* ---------- state ---------- */
+var st;
+function fresh(){return{cur:0,
+  s1:{ans:[-1,-1,-1,-1,-1,-1,-1,-1],done:false,score:0},
+  s2:{placed:[null,null,null,null,null,null,null,null],sel:null,done:false,score:0},
+  s3:{ans:['','','','','','','',''],done:false,score:0}}}
+function total(){return st.s1.score+st.s2.score+st.s3.score}
+function allDone(){return st.s1.done&&st.s2.done&&st.s3.done}
+
+/* ---------- shared pieces ---------- */
+function head(n,title,text){return '<div class="sec-head"><p class="job">Job '+n+' of 3</p><h2>'+title+'</h2><p>'+text+'</p></div>'}
+function actions(){return '<div class="actions"><div class="progress"><span class="count" aria-live="polite"></span><span class="meter"><i></i></span></div><button type="button" class="btn primary" data-check disabled>Check my answers</button></div>'}
+function setProgress(p,n){
+  $('.count',p).textContent=n+' of 8 answered';
+  $('.meter i',p).style.width=(n/8*100)+'%';
+  $('[data-check]',p).disabled=(n<8);
+}
+function fb(li,ok,sentence,why){
+  var f=$('.fb',li);f.hidden=false;f.className='fb '+(ok?'ok':'bad');
+  f.innerHTML=(ok?ICON_OK:ICON_BAD)+'<span>'+(ok?'<b>Correct.</b> ':'<b>Not quite.</b> The answer is: <b>'+esc(sentence)+'</b> ')+esc(why)+'</span>';
+}
+function updateSteps(){
+  var done=[st.s1.done,st.s2.done,st.s3.done],sc=[st.s1,st.s2,st.s3];
+  $$('.step').forEach(function(b,i){
+    var s=$('.s',b);
+    if(i===st.cur)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');
+    if(i<3){b.classList.toggle('done',done[i]);s.textContent=done[i]?sc[i].score+' / 8':'To do';b.disabled=false}
+    else{b.classList.toggle('done',allDone());s.textContent=allDone()?total()+' / 24':'Locked';b.disabled=!allDone()}
+  });
+}
+function finish(idx,score,missed){
+  var p=$('#p'+idx),r=$('.result',p),last=idx===2,t;
+  if(score===8)t=['Excellent','All eight answers are correct.'];
+  else if(score>=6)t=['Very good','You have most of them. Read the notes under the red questions.'];
+  else if(score>=4)t=['Good start','Read the notes under each question, then try this section again.'];
+  else t=['Keep practising','Read the notes under each question, then try this section again. Take your time.'];
+  r.innerHTML='<div class="score" aria-hidden="true"><span class="big">'+score+'</span><span class="of">/ 8</span></div>'+
+   '<div class="rtext"><h3>Section '+(idx+1)+': '+t[0]+'. You scored '+score+' out of 8.</h3><p>'+t[1]+'</p>'+
+   (missed.length?'<p class="review"><span class="lab">To review</span>'+missed.map(function(m){return '<span class="tag">'+esc(m)+'</span>'}).join('')+'</p>':'')+'</div>'+
+   '<div class="rbtns"><button type="button" class="btn" data-act="retry">Try this section again</button><button type="button" class="btn primary" data-act="next">'+(last?'See my total score':'Go to section '+(idx+2))+'</button></div>';
+  r.hidden=false;r.setAttribute('tabindex','-1');
+  $('.actions',p).hidden=true;
+  updateSteps();
+  r.scrollIntoView({behavior:SMOOTH,block:'start'});
+  r.focus({preventScroll:true});
+}
+
+/* ---------- section 1 ---------- */
+function build1(){
+  var p=$('#p0');
+  p.innerHTML=head(1,'Choose the question word','Read the answer under each question. Then choose the correct question word.')+
+   '<div class="result" hidden></div><ol class="items">'+S1.map(function(it,i){
+     var parts=it.q.split('___');
+     return '<li class="item" data-i="'+i+'"><div class="qline"><span class="num">'+(i+1)+'</span><p class="qtext">'+esc(parts[0])+'<span class="blank" id="b1-'+i+'"></span>'+esc(parts[1])+'</p></div>'+
+      '<p class="cue"><b>Answer</b>'+esc(it.cue)+'</p>'+
+      '<div class="opts" role="radiogroup" aria-label="Question '+(i+1)+'">'+it.opts.map(function(o,k){return '<label class="opt"><input type="radio" id="r1-'+i+'-'+k+'" name="q1-'+i+'" value="'+k+'"><span>'+esc(o)+'</span></label>'}).join('')+'</div>'+
+      '<div class="fb" hidden></div></li>';
+   }).join('')+'</ol>'+actions();
+  setProgress(p,0);
+}
+function check1(){
+  var s=st.s1,score=0,missed=[];
+  S1.forEach(function(it,i){
+    var li=$('#p0 .item[data-i="'+i+'"]'),ok=s.ans[i]===it.a;
+    if(ok)score++;else missed.push(it.opts[it.a]);
+    li.classList.add(ok?'correct':'incorrect');
+    $$('.opt',li).forEach(function(lab,k){$('input',lab).disabled=true;if(k===it.a)lab.classList.add('is-right')});
+    fb(li,ok,full(it.q,it.opts[it.a]),it.why);
+  });
+  s.done=true;s.score=score;finish(0,score,missed);
+}
+
+/* ---------- section 2 ---------- */
+function build2(){
+  var p=$('#p1');
+  p.innerHTML=head(2,'Drag the words into the gaps','Each word is used once. Drag a word into a gap, or tap a word and then tap a gap. Read the answer under each question to help you.')+
+   '<div class="bank" id="bank"><p class="bank-label">Word bank<span>Tap a gap to take a word back.</span></p><div class="chips">'+
+   BANK.map(function(w,i){return '<span class="slot" data-slot="'+i+'"><button type="button" class="chip" data-chip="'+i+'" aria-pressed="false">'+w+'</button></span>'}).join('')+
+   '</div></div><div class="result" hidden></div><ol class="items">'+S2.map(function(it,i){
+     return '<li class="item" data-i="'+i+'"><div class="qline"><span class="num">'+(i+1)+'</span><p class="qtext"><button type="button" class="gap" data-gap="'+i+'" aria-label="Question '+(i+1)+' gap, empty"></button>'+esc(it.q.split('___')[1])+'</p></div>'+
+      '<p class="cue"><b>Answer</b>'+esc(it.cue)+'</p><div class="fb" hidden></div></li>';
+   }).join('')+'</ol>'+actions();
+  render2();
+}
+function render2(){
+  var s=st.s2,p=$('#p1'),used={},n=0;
+  s.placed.forEach(function(c){if(c!==null){used[c]=true;n++}});
+  $$('.slot',p).forEach(function(sl){
+    var i=+sl.dataset.slot,c=$('.chip',sl),u=!!used[i];
+    sl.classList.toggle('used',u);
+    c.setAttribute('aria-pressed',s.sel===i?'true':'false');
+    c.tabIndex=u?-1:0;c.setAttribute('aria-hidden',u?'true':'false');
+  });
+  $$('.gap',p).forEach(function(g){
+    var i=+g.dataset.gap,c=s.placed[i];
+    g.textContent=c===null?'':BANK[c];
+    g.classList.toggle('filled',c!==null);
+    g.setAttribute('aria-label','Question '+(i+1)+' gap, '+(c===null?'empty':BANK[c]));
+  });
+  p.classList.toggle('selecting',s.sel!==null);
+  setProgress(p,n);
+}
+function place(chip,gi,src){
+  var pl=st.s2.placed,prev=pl[gi];
+  if(src.t==='gap')pl[src.i]=null;
+  pl[gi]=chip;
+  if(src.t==='gap'&&prev!==null&&src.i!==gi)pl[src.i]=prev;
+}
+function click2(cur){
+  var s=st.s2;
+  if(cur.src.t==='bank'){s.sel=(s.sel===cur.chip)?null:cur.chip}
+  else{
+    var i=cur.src.i;
+    if(s.sel!==null){place(s.sel,i,{t:'bank'});s.sel=null}
+    else if(s.placed[i]!==null){s.placed[i]=null}
+  }
+  render2();
+}
+function check2(){
+  var s=st.s2,score=0,missed=[];
+  S2.forEach(function(it,i){
+    var li=$('#p1 .item[data-i="'+i+'"]'),g=$('.gap',li),ok=s.placed[i]===BANK.indexOf(it.a);
+    if(ok)score++;else missed.push(it.a);
+    li.classList.add(ok?'correct':'incorrect');
+    g.classList.remove('over');g.classList.add(ok?'correct':'incorrect');g.disabled=true;
+    fb(li,ok,full(it.q,it.a),it.why);
+  });
+  s.done=true;s.sel=null;s.score=score;
+  $('#bank').hidden=true;
+  finish(1,score,missed);
+}
+(function initDrag(){
+  var p=$('#p1'),d=null,ghost=null;
+  function pt(e){return {x:e.clientX,y:e.clientY-(d&&d.type==='touch'?40:0)}}
+  function cleanup(){
+    if(ghost){ghost.remove();ghost=null}
+    document.body.classList.remove('dragging');
+    $$('.gap.over').forEach(function(g){g.classList.remove('over')});
+  }
+  p.addEventListener('pointerdown',function(e){
+    if(st.s2.done||(e.button&&e.button>0))return;
+    var c=e.target.closest('.chip'),g=e.target.closest('.gap');
+    if(c){d={chip:+c.dataset.chip,src:{t:'bank'}}}
+    else if(g){var i=+g.dataset.gap;d={chip:st.s2.placed[i],src:{t:'gap',i:i}}}
+    else return;
+    d.x=e.clientX;d.y=e.clientY;d.on=false;d.id=e.pointerId;d.type=e.pointerType;
+  });
+  document.addEventListener('pointermove',function(e){
+    if(!d||e.pointerId!==d.id)return;
+    if(!d.on){
+      if(d.chip===null||Math.hypot(e.clientX-d.x,e.clientY-d.y)<6)return;
+      d.on=true;
+      ghost=document.createElement('div');ghost.className='chip ghost';ghost.textContent=BANK[d.chip];
+      document.body.appendChild(ghost);document.body.classList.add('dragging');
+    }
+    var q=pt(e);
+    ghost.style.transform='translate('+(q.x-ghost.offsetWidth/2)+'px,'+(q.y-ghost.offsetHeight/2)+'px)';
+    $$('.gap.over').forEach(function(g){g.classList.remove('over')});
+    var t=document.elementFromPoint(q.x,q.y),g=t&&t.closest?t.closest('.gap'):null;
+    if(g&&p.contains(g))g.classList.add('over');
+    var bank=$('#bank'),top=bank&&!bank.hidden?bank.getBoundingClientRect().bottom+30:30;
+    if(e.clientY>window.innerHeight-60)window.scrollBy(0,14);
+    else if(e.clientY<top)window.scrollBy(0,-14);
+  });
+  document.addEventListener('pointerup',function(e){
+    if(!d||e.pointerId!==d.id)return;
+    var cur=d;
+    if(cur.on){
+      var q=pt(e);cleanup();d=null;
+      var t=document.elementFromPoint(q.x,q.y),g=t&&t.closest?t.closest('.gap'):null;
+      if(g&&p.contains(g))place(cur.chip,+g.dataset.gap,cur.src);
+      else if(cur.src.t==='gap')st.s2.placed[cur.src.i]=null;
+      st.s2.sel=null;render2();
+    }else{d=null;click2(cur)}
+  });
+  document.addEventListener('pointercancel',function(){if(d){cleanup();d=null}});
+  /* keyboard activation (click without a pointer) */
+  p.addEventListener('click',function(e){
+    if(e.detail!==0||st.s2.done)return;
+    var c=e.target.closest('.chip'),g=e.target.closest('.gap');
+    if(c)click2({chip:+c.dataset.chip,src:{t:'bank'}});
+    else if(g){var i=+g.dataset.gap;click2({chip:st.s2.placed[i],src:{t:'gap',i:i}})}
+  });
+})();
+
+/* ---------- section 3 ---------- */
+var norm=function(v){return v.toLowerCase().replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim()};
+function build3(){
+  var p=$('#p2');
+  p.innerHTML=head(3,'Type the missing words','Read the answer under each question. Then type the missing word or words in the gap.')+
+   '<div class="result" hidden></div><ol class="items">'+S3.map(function(it,i){
+     var parts=it.q.split('___'),n=Math.max.apply(null,it.ans.map(function(a){return a.length}))+2;
+     return '<li class="item" data-i="'+i+'"><div class="qline"><span class="num">'+(i+1)+'</span><p class="qtext">'+esc(parts[0])+
+      '<input class="gapin" id="g3-'+i+'" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Question '+(i+1)+', missing word" style="--n:'+n+'">'+esc(parts[1])+'</p></div>'+
+      '<p class="cue"><b>Answer</b>'+esc(it.cue)+' <span>('+it.w+' missing)</span></p><div class="fb" hidden></div></li>';
+   }).join('')+'</ol>'+actions();
+  setProgress(p,0);
+}
+function count3(){return st.s3.ans.filter(function(v){return norm(v)!==''}).length}
+function check3(){
+  var s=st.s3,score=0,missed=[];
+  S3.forEach(function(it,i){
+    var li=$('#p2 .item[data-i="'+i+'"]'),inp=$('.gapin',li),ok=it.ans.indexOf(norm(s.ans[i]))>-1;
+    if(ok)score++;else missed.push(it.ans[0].charAt(0).toUpperCase()+it.ans[0].slice(1));
+    li.classList.add(ok?'correct':'incorrect');
+    inp.readOnly=true;inp.classList.add(ok?'correct':'incorrect');
+    fb(li,ok,full(it.q,it.ans[0]),it.why);
+  });
+  s.done=true;s.score=score;finish(2,score,missed);
+}
+
+/* ---------- total ---------- */
+function buildTotal(){
+  var p=$('#p3'),t=total(),msg,rows=[['Section 1: Choose',st.s1.score],['Section 2: Drag',st.s2.score],['Section 3: Type',st.s3.score]];
+  if(t>=22)msg='Excellent. Your question forms are very secure.';
+  else if(t>=18)msg='Very good. A little more practice and you will make very few mistakes.';
+  else if(t>=12)msg='Good progress. Do the weaker sections again and read the notes.';
+  else msg='Keep going. Repeat each section and read the notes under each question.';
+  var low=0;rows.forEach(function(r,i){if(r[1]<rows[low][1])low=i});
+  var hint=rows[low][1]<8?'<p>Your lowest score is in <b>'+rows[low][0].split(':')[0].toLowerCase()+'</b>. <button type="button" class="btn" data-goto="'+low+'">Go to section '+(low+1)+'</button></p>':'';
+  p.innerHTML=head(3,'Your total score','Three sections, 24 questions.')+
+   '<div class="result"><div class="score" aria-hidden="true"><span class="big">'+t+'</span><span class="of">/ 24</span></div><div class="rtext"><h3>'+msg+'</h3>'+hint+'</div>'+
+   '<ul class="totals" style="grid-column:1/-1">'+rows.map(function(r){return '<li><div class="row"><span>'+r[0]+'</span><span>'+r[1]+' / 8</span></div><div class="bar" aria-hidden="true"><i style="width:'+(r[1]/8*100)+'%"></i></div></li>'}).join('')+'</ul>'+
+   '<div class="rbtns"><button type="button" class="btn primary" data-act="restart">Start again</button></div></div>';
+  $('.job',p).textContent='All sections finished';
+}
+
+/* ---------- navigation ---------- */
+function go(i,scroll){
+  st.cur=i;
+  $$('.panel').forEach(function(pn,k){pn.hidden=(k!==i)});
+  if(i===3)buildTotal();
+  updateSteps();
+  if(scroll)$('.steps').scrollIntoView({behavior:SMOOTH,block:'start'});
+}
+function resetSection(idx){
+  if(idx===0){st.s1=fresh().s1;build1()}
+  if(idx===1){st.s2=fresh().s2;build2()}
+  if(idx===2){st.s3=fresh().s3;build3()}
+  updateSteps();
+  $('.steps').scrollIntoView({behavior:SMOOTH,block:'start'});
+}
+function restart(sc){st=fresh();build1();build2();build3();go(0,!!sc)}
+
+/* ---------- wiring (once) ---------- */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-go]');if(b&&!b.disabled){go(+b.dataset.go,true);return}
+  b=e.target.closest('[data-goto]');if(b){go(+b.dataset.goto,true);return}
+  b=e.target.closest('[data-act]');
+  if(b){
+    var pn=b.closest('.panel'),idx=pn?+pn.id.slice(1):-1,a=b.dataset.act;
+    if(a==='retry')resetSection(idx);
+    else if(a==='next')go(idx+1,true);
+    else if(a==='restart')restart(true);
+    return;
+  }
+  b=e.target.closest('[data-check]');
+  if(b&&!b.disabled){var id=b.closest('.panel').id;if(id==='p0')check1();else if(id==='p1')check2();else if(id==='p2')check3()}
+});
+$('#p0').addEventListener('change',function(e){
+  var t=e.target;if(!t.matches('input[type=radio]'))return;
+  var i=+t.name.split('-')[1];
+  st.s1.ans[i]=+t.value;
+  $('#b1-'+i).textContent=S1[i].opts[+t.value];
+  setProgress($('#p0'),st.s1.ans.filter(function(v){return v>-1}).length);
+});
+$('#p2').addEventListener('input',function(e){
+  var t=e.target;if(!t.classList.contains('gapin'))return;
+  st.s3.ans[+t.id.split('-')[1]]=t.value;
+  setProgress($('#p2'),count3());
+});
+$('#p2').addEventListener('keydown',function(e){
+  var t=e.target;if(e.key!=='Enter'||!t.classList.contains('gapin'))return;
+  e.preventDefault();
+  var i=+t.id.split('-')[1],nx=$('#g3-'+(i+1));
+  if(nx)nx.focus();else{var c=$('#p2 [data-check]');if(c&&!c.disabled)c.focus()}
+});
+
+restart();
+window.scrollTo(0,0);
+})();
+</script>
+
+</body></html>
