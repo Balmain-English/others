@@ -91,8 +91,8 @@
             position: absolute;
             bottom: 80px;
             left: 50px;
-            width: 180px;
-            height: 72px;
+            width: 200px;
+            height: 100px;
             transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 10;
             filter: drop-shadow(0 8px 12px var(--plane-shadow));
@@ -104,43 +104,57 @@
             height: 100%;
         }
 
+        .plane-assembly::before {
+            content: "";
+            position: absolute;
+            left: 32px;
+            top: 56px;
+            width: 136px;
+            height: 26px;
+            background: rgba(255,255,255,0.16);
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
         .plane-body {
             position: absolute;
-            left: 40px;
+            left: 24px;
             top: 18px;
-            width: 110px;
-            height: 34px;
-            background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 40%, #95a5a6 100%);
-            border-radius: 35% 45% 42% 28%;
+            width: 150px;
+            height: 62px;
+            background: linear-gradient(135deg, #edf3f7 0%, #c4ced5 32%, #9aa8af 100%);
+            border-radius: 50% 50% 48% 48% / 58% 58% 42% 42%;
             border: 3px solid #7f8c8d;
+            box-shadow: inset 0 -8px 12px rgba(0,0,0,0.12), inset 0 8px 12px rgba(255,255,255,0.35);
             overflow: hidden;
         }
 
         .plane-body::before {
             content: "";
             position: absolute;
-            left: 12px;
-            right: 12px;
+            left: 20px;
+            right: 20px;
             top: 8px;
-            bottom: 8px;
-            border-radius: 30px;
-            background: rgba(255,255,255,0.18);
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.42);
+            box-shadow: inset 0 -4px 8px rgba(255,255,255,0.22);
         }
 
         .plane-window-row {
             position: absolute;
-            left: 18px;
-            right: 18px;
-            top: 10px;
-            height: 12px;
+            left: 22px;
+            right: 22px;
+            top: 26px;
+            height: 14px;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             z-index: 2;
         }
 
         .plane-window {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: linear-gradient(135deg, #74b9ff, #0984e3);
             border: 2px solid rgba(255,255,255,0.8);
@@ -149,75 +163,81 @@
 
         .plane-nose {
             position: absolute;
-            left: 134px;
-            top: 24px;
-            width: 34px;
-            height: 22px;
-            background: linear-gradient(135deg, #dfe6e9, #b2bec3);
-            clip-path: polygon(0 0, 100% 50%, 0 100%);
+            left: 152px;
+            top: 33px;
+            width: 32px;
+            height: 24px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(189,195,199,0.85));
+            clip-path: polygon(0 50%, 100% 0, 100% 100%);
             border-top: 3px solid #7f8c8d;
             border-bottom: 3px solid #7f8c8d;
+            opacity: 0.35;
+            transform: scaleX(0.8);
         }
 
         .plane-tail {
             position: absolute;
-            left: 12px;
-            top: 16px;
-            width: 28px;
+            left: 10px;
+            top: 31px;
+            width: 30px;
             height: 24px;
-            background: linear-gradient(135deg, #dfe6e9, #b2bec3);
+            background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(189,195,199,0.85));
             clip-path: polygon(0 50%, 100% 0, 100% 100%);
             border-top: 3px solid #7f8c8d;
             border-bottom: 3px solid #7f8c8d;
+            opacity: 0.35;
+            transform: scaleX(0.8) scaleY(1.1);
         }
 
         .plane-wing {
             position: absolute;
             background: linear-gradient(135deg, rgba(255,255,255,0.9), var(--wing-gray));
             border: 2px solid #7f8c8d;
-            border-radius: 6px;
+            border-radius: 50%;
             box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
         }
 
         .wing-main {
-            left: 62px;
-            top: 28px;
-            width: 62px;
-            height: 18px;
-            transform: skewX(-28deg);
+            left: 44px;
+            top: 34px;
+            width: 118px;
+            height: 28px;
+            transform: skewX(-10deg);
+            box-shadow: 0 0 0 1px rgba(127,140,141,0.25), inset 0 0 0 1px rgba(255,255,255,0.4);
         }
 
         .wing-small {
-            left: 90px;
-            top: 12px;
+            left: 132px;
+            top: 24px;
             width: 26px;
-            height: 12px;
-            transform: skewX(-30deg);
-            border-radius: 4px;
+            height: 20px;
+            border-radius: 50%;
+            opacity: 0.7;
         }
 
         .plane-engine {
             position: absolute;
-            top: 31px;
-            width: 22px;
+            top: 43px;
+            width: 18px;
             height: 18px;
-            background: linear-gradient(135deg, #2d3436, #636e72);
+            background: radial-gradient(circle, #9aa7ae 0%, #53616b 42%, #2d3436 100%);
             border: 2px solid #4b4b4b;
-            border-radius: 10px;
+            border-radius: 50%;
             z-index: 1;
+            box-shadow: inset 0 0 8px rgba(255,255,255,0.4);
         }
 
         .engine-left { left: 26px; }
-        .engine-right { left: 146px; }
+        .engine-right { left: 158px; }
 
         .plane-engine::before {
             content: "";
             position: absolute;
-            left: 4px;
-            right: 4px;
+            left: 3px;
+            right: 3px;
             top: 3px;
             bottom: 3px;
-            border-radius: 9px;
+            border-radius: 50%;
             background: linear-gradient(135deg, #b2bec3, #636e72);
         }
 
@@ -373,7 +393,7 @@
             { s: "If he spoke English fluently, he would get a promotion.", c: true },
             { s: "If the company expands, it would create more job opportunities.", c: false, fix: "If the company EXPANDED..." },
             { s: "Would you invest in the company if you had enough money?", c: true },
-            { s: "If she doesn’t follow the guidelines, she would make mistakes.", c: false, fix: "If she DIDN'T follow..." }
+            { s: "If she doesn’t follow the guidelines, she would make mistakes.", c: false, fix: "If she DIDN’T follow..." }
         ]
     };
 
