@@ -91,11 +91,11 @@
             position: absolute;
             bottom: 78px;
             left: 50px;
-            width: 210px;
-            height: 110px;
+            width: 220px;
+            height: 120px;
             transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 10;
-            filter: drop-shadow(0 0 14px rgba(80, 220, 255, 0.9)) drop-shadow(0 18px 20px rgba(0,0,0,0.25));
+            filter: drop-shadow(0 0 10px rgba(255, 208, 0, 0.8)) drop-shadow(0 18px 22px rgba(0,0,0,0.22));
         }
 
         .plane-assembly {
@@ -104,40 +104,53 @@
             height: 100%;
         }
 
-        .plane-body {
+        .plane-assembly::before {
+            content: "";
             position: absolute;
             left: 24px;
+            top: 58px;
+            width: 150px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 185, 0, 0.26);
+            filter: blur(7px);
+            z-index: 0;
+        }
+
+        .plane-body {
+            position: absolute;
+            left: 28px;
             top: 18px;
             width: 170px;
-            height: 68px;
-            background: radial-gradient(circle at 30% 30%, rgba(240,255,255,0.95) 0%, rgba(127,255,255,0.7) 10%, rgba(76,136,255,0.85) 18%, rgba(24,51,114,0.9) 52%, rgba(5,12,20,0.96) 100%);
-            border-radius: 50% 50% 46% 46% / 58% 58% 42% 42%;
-            border: 3px solid rgba(127, 245, 255, 0.95);
-            box-shadow: inset 0 0 18px rgba(160, 245, 255, 0.65), inset 0 -10px 16px rgba(0,0,0,0.3), 0 0 18px rgba(76, 230, 255, 0.9), 0 0 30px rgba(123, 92, 255, 0.45);
+            height: 72px;
+            background: linear-gradient(180deg, #fff7c2 0%, #ffd84d 18%, #ff9f1c 32%, #ff5f6d 52%, #552f8c 78%, #1b1236 100%);
+            border-radius: 50% 50% 42% 42% / 58% 58% 40% 40%;
+            border: 4px solid #ffe082;
+            box-shadow: inset 0 0 16px rgba(255,255,255,0.55), inset 0 -10px 14px rgba(0,0,0,0.18), 0 0 14px rgba(255, 196, 0, 0.7);
             overflow: hidden;
         }
 
         .plane-body::before {
             content: "";
             position: absolute;
-            left: 20px;
-            right: 20px;
-            top: 10px;
-            height: 16px;
+            left: 18px;
+            right: 18px;
+            top: 12px;
+            height: 20px;
             border-radius: 50%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.08));
-            box-shadow: inset 0 -4px 8px rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.42);
+            box-shadow: inset 0 -4px 8px rgba(255,255,255,0.22);
         }
 
         .plane-body::after {
             content: "";
             position: absolute;
-            left: 38px;
-            right: 38px;
-            bottom: 10px;
-            height: 12px;
+            left: 32px;
+            right: 32px;
+            bottom: 12px;
+            height: 10px;
             border-radius: 50%;
-            background: rgba(0, 0, 0, 0.18);
+            background: rgba(0,0,0,0.18);
             filter: blur(4px);
         }
 
@@ -145,7 +158,7 @@
             position: absolute;
             left: 28px;
             right: 28px;
-            top: 29px;
+            top: 31px;
             height: 16px;
             display: flex;
             justify-content: space-around;
@@ -153,81 +166,81 @@
         }
 
         .plane-window {
-            width: 14px;
-            height: 14px;
+            width: 13px;
+            height: 13px;
             border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, #bff6ff 0%, #74e6ff 25%, #2bc8ff 45%, #0b4f8d 100%);
+            background: radial-gradient(circle at 35% 35%, #dff9ff 0%, #77d9ff 28%, #1ab7ff 52%, #0b2e7c 100%);
             border: 2px solid rgba(255,255,255,0.8);
-            box-shadow: 0 0 10px rgba(111, 233, 255, 0.9), inset 0 0 8px rgba(255,255,255,0.7);
+            box-shadow: 0 0 8px rgba(75, 214, 255, 0.9), inset 0 0 7px rgba(255,255,255,0.7);
         }
 
         .plane-nose {
             position: absolute;
-            left: 170px;
+            left: 175px;
             top: 35px;
-            width: 26px;
+            width: 28px;
             height: 24px;
-            background: linear-gradient(135deg, rgba(160, 245, 255, 0.8), rgba(81, 150, 255, 0.85));
+            background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255, 170, 0, 0.75));
             clip-path: polygon(0 50%, 100% 0, 100% 100%);
-            border-top: 3px solid rgba(127, 245, 255, 0.9);
-            border-bottom: 3px solid rgba(127, 245, 255, 0.9);
-            filter: drop-shadow(0 0 8px rgba(76, 230, 255, 0.9));
+            border-top: 3px solid #ffe082;
+            border-bottom: 3px solid #ffe082;
+            filter: drop-shadow(0 0 8px rgba(255, 196, 0, 0.9));
         }
 
         .plane-tail {
             position: absolute;
             left: 10px;
             top: 34px;
-            width: 28px;
+            width: 30px;
             height: 26px;
-            background: linear-gradient(135deg, rgba(160, 245, 255, 0.8), rgba(81, 150, 255, 0.85));
+            background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255, 170, 0, 0.75));
             clip-path: polygon(0 50%, 100% 0, 100% 100%);
-            border-top: 3px solid rgba(127, 245, 255, 0.9);
-            border-bottom: 3px solid rgba(127, 245, 255, 0.9);
+            border-top: 3px solid #ffe082;
+            border-bottom: 3px solid #ffe082;
             transform: scaleX(1.05) rotate(180deg);
-            filter: drop-shadow(0 0 8px rgba(76, 230, 255, 0.9));
+            filter: drop-shadow(0 0 8px rgba(255, 196, 0, 0.9));
         }
 
         .plane-wing {
             position: absolute;
-            background: linear-gradient(180deg, rgba(169,250,255,0.9), rgba(124,139,255,0.65));
-            border: 2px solid rgba(127, 245, 255, 0.9);
+            background: linear-gradient(180deg, rgba(255, 230, 120, 0.9), rgba(255, 138, 61, 0.7));
+            border: 2px solid #ffe082;
             border-radius: 50%;
-            box-shadow: 0 0 12px rgba(76, 230, 255, 0.8), inset 0 0 0 1px rgba(255,255,255,0.4);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4), 0 0 8px rgba(255, 196, 0, 0.8);
         }
 
         .wing-main {
-            left: 46px;
-            top: 42px;
-            width: 126px;
-            height: 30px;
-            transform: skewX(-8deg);
-            opacity: 0.9;
+            left: 52px;
+            top: 44px;
+            width: 118px;
+            height: 24px;
+            transform: skewX(-12deg);
+            opacity: 0.95;
         }
 
         .wing-small {
-            left: 138px;
-            top: 28px;
+            left: 142px;
+            top: 26px;
             width: 26px;
             height: 18px;
             border-radius: 50%;
-            opacity: 0.72;
+            opacity: 0.7;
         }
 
         .plane-engine {
             position: absolute;
-            top: 48px;
+            top: 49px;
             width: 18px;
             height: 18px;
-            background: radial-gradient(circle, rgba(224,255,255,0.9) 0%, rgba(88,122,168,0.9) 35%, rgba(7,10,18,1) 100%);
-            border: 2px solid rgba(127, 245, 255, 0.95);
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255, 212, 77, 0.9) 25%, rgba(70, 48, 110, 0.9) 58%, rgba(15, 9, 22, 1) 100%);
+            border: 2px solid #ffe082;
             border-radius: 50%;
             z-index: 1;
-            box-shadow: 0 0 12px rgba(76,230,255,0.95), inset 0 0 8px rgba(255,255,255,0.6);
+            box-shadow: 0 0 10px rgba(255, 196, 0, 0.8), inset 0 0 8px rgba(255,255,255,0.6);
         }
 
-        .engine-left { left: 26px; }
-        .engine-right { left: 164px; }
+        .engine-left { left: 28px; }
+        .engine-right { left: 166px; }
 
         .plane-engine::before {
             content: "";
@@ -237,7 +250,7 @@
             top: 3px;
             bottom: 3px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(87,103,121,0.8));
+            background: linear-gradient(135deg, rgba(255,255,255,0.75), rgba(120, 103, 145, 0.8));
         }
 
         .cabin-status {
