@@ -245,7 +245,7 @@
             </div>
 
             <!-- Story Navigation Tabs -->
-            <div class="flex border-b border-slate-200 space-x-2">
+            <div class="flex border-b border-slate-200 space-x-2 overflow-x-auto custom-scrollbar whitespace-nowrap">
                 <button onclick="switchStory(1)" id="story-tab-1" class="story-tab px-4 py-2.5 font-bold text-sm border-b-2 border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-lg transition">
                     <i class="fa-solid fa-mobile-screen mr-1.5"></i> Story 1: The Text Message Mishap
                 </button>
@@ -367,9 +367,9 @@
                             </div>
                             <span class="mt-3 text-xs font-extrabold text-amber-400 uppercase tracking-wider">Past Perfect</span>
                             <span class="text-[11px] text-slate-300 mt-0.5">had + V3</span>
-                            <div class="absolute top-16 bg-slate-800 border border-slate-700 text-slate-300 text-xs p-2.5 rounded-lg w-40 text-center shadow-xl">
+                            <div class="absolute top-24 bg-slate-800 border border-slate-700 text-slate-300 text-xs p-2.5 rounded-lg w-40 text-center shadow-xl">
                                 <strong>Earliest event</strong> before another past action.
-                                <em class="block text-amber-300 mt-1">"I had forgot..."</em>
+                                <em class="block text-amber-300 mt-1">"I had forgotten..."</em>
                             </div>
                         </div>
 
@@ -380,7 +380,7 @@
                             </div>
                             <span class="mt-3 text-xs font-extrabold text-purple-400 uppercase tracking-wider">Past Continuous</span>
                             <span class="text-[11px] text-slate-300 mt-0.5">was/were + -ing</span>
-                            <div class="absolute top-16 bg-slate-800 border border-slate-700 text-slate-300 text-xs p-2.5 rounded-lg w-40 text-center shadow-xl">
+                            <div class="absolute top-24 bg-slate-800 border border-slate-700 text-slate-300 text-xs p-2.5 rounded-lg w-40 text-center shadow-xl">
                                 <strong>Background action</strong> in progress in the past.
                                 <em class="block text-purple-300 mt-1">"While I was walking..."</em>
                             </div>
@@ -393,7 +393,7 @@
                             </div>
                             <span class="mt-3 text-xs font-extrabold text-emerald-400 uppercase tracking-wider">Past Simple</span>
                             <span class="text-[11px] text-slate-300 mt-0.5">verb-ed / V2</span>
-                            <div class="absolute top-16 bg-slate-800 border border-slate-700 text-slate-300 text-xs p-2.5 rounded-lg w-40 text-center shadow-xl">
+                            <div class="absolute top-24 bg-slate-800 border border-slate-700 text-slate-300 text-xs p-2.5 rounded-lg w-40 text-center shadow-xl">
                                 <strong>Main completed action</strong> or interruption.
                                 <em class="block text-emerald-300 mt-1">"...it started to rain."</em>
                             </div>
@@ -406,7 +406,7 @@
                             </div>
                             <span class="mt-3 text-xs font-extrabold text-blue-400 uppercase tracking-wider">Present Perfect</span>
                             <span class="text-[11px] text-slate-300 mt-0.5">have/has + V3</span>
-                            <div class="absolute top-16 bg-slate-800 border border-slate-700 text-slate-300 text-xs p-2.5 rounded-lg w-40 text-center shadow-xl">
+                            <div class="absolute top-24 bg-slate-800 border border-slate-700 text-slate-300 text-xs p-2.5 rounded-lg w-40 text-center shadow-xl">
                                 <strong>Life experience</strong> up to now (unspecified time).
                                 <em class="block text-blue-300 mt-1">"I have visited Rome."</em>
                             </div>
@@ -498,7 +498,7 @@
                     <div class="bg-amber-50 p-3 rounded-lg border border-amber-100 text-xs space-y-1">
                         <span class="font-bold text-amber-900 block">Examples:</span>
                         <p class="text-slate-700">✓ "When I arrived, the train <strong>had already left</strong>."</p>
-                        <p class="text-slate-700">✓ "I realized that I <strong>had forgot</strong> my wallet."</p>
+                        <p class="text-slate-700">✓ "I realized that I <strong>had forgotten</strong> my wallet."</p>
                     </div>
                 </div>
             </div>
@@ -581,7 +581,7 @@
         /* ========================================== */
 
         const DISCUSSION_CARDS = [
-            { id: 1, category: "travel", title: "Got lost in a strange place", text: "...got lost in a city or place you didn't know well?", followup: "Where were you trying to go? What were you doing when you realized you were lost?" },
+            { id: 1, category: "travel", title: "Got lost in a strange place", text: "...gotten lost in a city or place you didn't know well?", followup: "Where were you trying to go? What were you doing when you realized you were lost?" },
             { id: 2, category: "surprises", title: "Met a celebrity by accident", text: "...met a celebrity or someone famous by accident?", followup: "Who was it? What had you been doing right before you ran into them?" },
             { id: 3, category: "disasters", title: "Tried terrible-looking food", text: "...tried a food that looked terrible, but tasted delicious?", followup: "Where were you? Had anyone warned you about it beforehand?" },
             { id: 4, category: "mistakes", title: "Broken an expensive item", text: "...broken an expensive item in a store or at someone else's house?", followup: "How did it happen? What were you holding or doing at the time?" },
@@ -592,10 +592,10 @@
             { id: 9, category: "disasters", title: "Stayed up all night", text: "...stayed up all night to finish a book, show, or project?", followup: "What were you working on or watching? How did you feel the next day?" },
             { id: 10, category: "mistakes", title: "Cooking disaster", text: "...cooked a meal that went completely wrong?", followup: "What were you trying to make? What had gone wrong with the recipe?" },
             { id: 11, category: "mistakes", title: "Texted the wrong person", text: "...sent a text message or email to the wrong person by mistake?", followup: "Who was the message meant for? What had you written in it?" },
-            { id: 12, category: "mistakes", title: "Forgot a name instantly", text: "...forgot the name of someone who was standing right in front of you?", followup: "How did you handle the situation? Had you met them before?" },
+            { id: 12, category: "mistakes", title: "Forgot a name instantly", text: "...forgotten the name of someone who was standing right in front of you?", followup: "How did you handle the situation? Had you met them before?" },
             { id: 13, category: "surprises", title: "Wild animal encounter", text: "...had a funny or unusual encounter with a wild or strange animal?", followup: "Where were you? What were you doing when the animal appeared?" },
             { id: 14, category: "surprises", title: "Found money unexpectedly", text: "...found money on the street or inside an old coat pocket?", followup: "How much did you find? What were you doing when you spotted it?" },
-            { id: 15, category: "mistakes", title: "Worn mismatched clothes", text: "...worn two different shoes or clothes inside-out to work or school?", followup: "Who pointed it out to you? How long had you been wearing it before noticing?" },
+            { id: 15, category: "mistakes", title: "Worn mismatched clothes", text: "...worn mismatched shoes, or worn your clothes inside out, to work or school?", followup: "Who pointed it out to you? How long had you been wearing it before noticing?" },
             { id: 16, category: "travel", title: "Caught in extreme weather", text: "...been caught in extreme weather without an umbrella or jacket?", followup: "Where were you walking? What did you do to shelter yourself?" },
             { id: 17, category: "surprises", title: "Learned a surprising secret", text: "...learned a surprising secret about a friend or family member?", followup: "How did you find out? Had you suspected anything earlier?" },
             { id: 18, category: "disasters", title: "Public speaking scare", text: "...performed or spoken in front of a large group of people?", followup: "How did you feel beforehand? Had you practiced a lot before going on stage?" },
@@ -663,7 +663,7 @@
                     " vegetables, I ",
                     { id: "s3_g4", options: ["prepared", "was preparing", "had prepared", "have prepared"], correct: "was preparing", exp: "Past Continuous: Parallel background action happening at the same time." },
                     " the secret sauce. Everything was going smoothly until I noticed smoke coming from the oven. I ",
-                    { id: "s3_g5", options: ["forgot", "was forgetting", "had forgot, "have forgot"], correct: "had forgot", exp: "Past Perfect: Setting the timer was forgot earlier." },
+                    { id: "s3_g5", options: ["forgot", "was forgetting", "had forgotten", "have forgotten"], correct: "had forgotten", exp: "Past Perfect: Forgetting to set the timer happened BEFORE the smoke appeared." },
                     " to set the timer! When we opened the oven, the roast chicken ",
                     { id: "s3_g6", options: ["burned", "was burning", "had burned", "has burned"], correct: "was burning", exp: "Past Continuous: Action in progress at the exact moment of opening." },
                     " completely. Fortunately, our parents ",
@@ -735,6 +735,7 @@
         let activeStoryId = 1;
         let timerInterval = null;
         let timerSecondsLeft = 60;
+        let lastTimerDuration = 60;
         let timerIsRunning = false;
         let quizAnswers = Array(QUIZ_QUESTIONS.length).fill(null);
 
@@ -867,6 +868,7 @@
         }
 
         function setTimer(seconds) {
+            lastTimerDuration = seconds;
             clearInterval(timerInterval);
             timerIsRunning = false;
             timerSecondsLeft = seconds;
@@ -883,7 +885,7 @@
                 toggleBtn.innerHTML = `<i class="fa-solid fa-play mr-1"></i> Resume`;
                 toggleBtn.className = "px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded shadow transition";
             } else {
-                if (timerSecondsLeft <= 0) timerSecondsLeft = 60;
+                if (timerSecondsLeft <= 0) timerSecondsLeft = lastTimerDuration;
                 timerIsRunning = true;
                 toggleBtn.innerHTML = `<i class="fa-solid fa-pause mr-1"></i> Pause`;
                 toggleBtn.className = "px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded shadow transition";
@@ -902,7 +904,7 @@
         }
 
         function resetTimer() {
-            setTimer(60);
+            setTimer(lastTimerDuration);
         }
 
         function toggleFollowUpModal() {
